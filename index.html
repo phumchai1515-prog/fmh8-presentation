@@ -741,63 +741,88 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
   color:rgba(236,231,218,.55);font-weight:400;
 }
 /* ============================================================
-   SLIDE 7 · THANKS
+   SLIDE 7 · OVERVIEW — web-app flow + capabilities
    ============================================================ */
-.s-thanks .slide__in{padding-top:clamp(3.4rem,7vh,5.4rem)}
-.s-thanks .wrap{flex:1;display:flex;flex-direction:column}
+.s-overview .wrap{flex:1;display:flex;flex-direction:column}
 
-.tx__head{display:flex;flex-direction:column;gap:1.15rem}
-.tx__org b{display:block;font-size:clamp(.9rem,1.2vw,1.02rem);
-  font-weight:700;color:var(--ink-dark)}
-.tx__org span{font-size:clamp(.78rem,1vw,.9rem);color:var(--ink-dark-dim)}
-.tx__logo{
-  font-size:clamp(2.3rem,5vw,3.7rem);font-weight:700;
-  color:var(--green);letter-spacing:-.01em;line-height:1;
+.ov-head{margin-bottom:clamp(1.3rem,3vh,2rem)}
+.ov-title{
+  font-size:clamp(1.5rem,3.2vw,2.6rem);
+  font-weight:700;line-height:1.35;color:var(--ink-dark);max-width:26ch;
 }
-.tx__logo i{display:block;width:60px;height:3px;border-radius:2px;
-  background:var(--gold);margin-top:.7rem}
 
-.tx__center{
-  flex:1;display:flex;align-items:center;justify-content:center;
-  padding:clamp(1.4rem,5vh,3.4rem) 0;
+.ov-flow{
+  display:flex;align-items:stretch;flex-wrap:wrap;
+  gap:.4rem;margin-bottom:clamp(1.3rem,3vh,2rem);
 }
-.tx__thanks{
-  font-size:clamp(3.2rem,12vw,9rem);font-weight:700;
-  color:var(--ink-dark);line-height:1.18;letter-spacing:-.01em;
-  text-align:center;
+.ov-step{
+  flex:1;min-width:120px;
+  background:#fff;border:1px solid var(--line-l);border-radius:12px;
+  padding:.75rem .8rem;display:flex;flex-direction:column;gap:.16rem;
 }
-.tx__rule{height:1px;background:var(--line-l)}
+.ov-step__n{
+  width:18px;height:18px;border-radius:50%;
+  background:var(--app);color:#fff;
+  font-size:.66rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:.24rem;
+}
+.ov-step b{font-size:clamp(.82rem,1.05vw,.95rem);font-weight:700;color:var(--ink-dark)}
+.ov-step i{font-size:.72rem;font-style:normal;color:var(--ink-dark-dim);line-height:1.5}
+.ov-arrow{
+  align-self:center;flex:none;
+  color:var(--app);font-size:.95rem;font-weight:700;
+}
 
-.tx__foot{
-  display:grid;grid-template-columns:auto 1fr auto;
-  gap:clamp(1.4rem,4vw,3rem);align-items:center;
-  padding-top:clamp(1.5rem,4vh,2.6rem);
+.ov-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:clamp(.7rem,1.5vw,1.1rem);
+  margin-bottom:clamp(1.3rem,3vh,2rem);
 }
-.tx__qr{display:flex;flex-direction:column;gap:.6rem;align-items:flex-start}
+.ov-cap{
+  background:#fff;border:1px solid var(--line-l);border-radius:14px;
+  padding:clamp(.85rem,1.6vw,1.2rem);
+  display:flex;flex-direction:column;gap:.55rem;
+}
+.ov-cap__h{display:flex;align-items:center;gap:.55rem}
+.ov-cap__ic{
+  width:30px;height:30px;border-radius:9px;flex:none;
+  background:rgba(0,77,64,.09);
+  display:flex;align-items:center;justify-content:center;
+}
+.ov-cap__ic svg{width:17px;height:17px;stroke:var(--app);fill:none;
+  stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.ov-cap__t{font-size:clamp(.95rem,1.3vw,1.12rem);font-weight:700;color:var(--ink-dark)}
+.ov-cap__l{display:flex;flex-wrap:wrap;gap:.3rem}
+.ov-cap__l span{
+  font-size:.72rem;font-weight:500;color:var(--ink-dark-dim);
+  background:#f4f7f6;border:1px solid var(--line-l);
+  padding:.2rem .52rem;border-radius:99px;
+}
+
+.ov-foot{
+  margin-top:auto;
+  display:flex;align-items:center;gap:clamp(1rem,3vw,2.4rem);
+  padding-top:clamp(1.1rem,2.6vh,1.8rem);
+  border-top:1px solid var(--line-l);
+}
+.ov-qr{display:flex;align-items:center;gap:.6rem;flex:none}
 .qr-card{
-  width:clamp(104px,12vw,142px);background:#fff;
-  border:1px solid var(--line-l);border-radius:14px;padding:9px;
+  width:clamp(58px,7vw,78px);background:#fff;
+  border:1px solid var(--line-l);border-radius:10px;padding:5px;flex:none;
 }
 .qr-card svg{display:block;width:100%;height:auto}
-.tx__qrcap{font-size:.74rem;color:var(--ink-dark-dim);letter-spacing:.02em}
-
-.tx__spk{display:flex;flex-direction:column;align-items:center;
-  text-align:center;gap:.26rem}
-.tx__av{
-  width:54px;height:54px;border-radius:50%;background:var(--green);
-  color:#fff;display:flex;align-items:center;justify-content:center;
-  font-size:1.05rem;font-weight:600;margin-bottom:.55rem;
+.ov-qrcap{font-size:.72rem;color:var(--ink-dark-dim);line-height:1.45;max-width:8ch}
+.ov-close{flex:1;min-width:0}
+.ov-thanks{
+  font-size:clamp(1.1rem,1.9vw,1.5rem);font-weight:700;
+  color:var(--ink-dark);margin-bottom:.14rem;
 }
-.tx__spklabel{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--gold);font-weight:600}
-.tx__spkname{font-size:clamp(1.05rem,1.7vw,1.3rem);font-weight:700;
-  color:var(--ink-dark)}
-.tx__spkrole{font-size:clamp(.82rem,1.1vw,.94rem);color:var(--ink-dark-dim)}
-.tx__spkorg{font-size:clamp(.8rem,1.05vw,.9rem);color:var(--ink-dark-dim)}
-.tx__url{
-  justify-self:end;text-align:right;text-decoration:none;
-  font-size:clamp(.8rem,1.1vw,.96rem);font-weight:600;
-  letter-spacing:.05em;color:var(--gold);
+.ov-by{font-size:.78rem;color:var(--ink-dark-dim);line-height:1.5}
+.ov-url{
+  flex:none;text-decoration:none;
+  font-size:clamp(.8rem,1.1vw,.95rem);font-weight:600;
+  letter-spacing:.04em;color:var(--green);
 }
 
 /* ============================================================
@@ -810,16 +835,17 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
 @media (max-width:760px){
   .cards{grid-template-columns:1fr}
   .slide__in{padding-left:clamp(1.3rem,5vw,2rem);padding-right:clamp(1.3rem,5vw,2rem)}
+  .ov-grid{grid-template-columns:1fr 1fr}
 }
 @media (max-width:680px){
-  .tx__foot{grid-template-columns:1fr;justify-items:center;
-    gap:1.7rem;text-align:center}
-  .tx__qr{align-items:center}
-  .tx__url{justify-self:center;text-align:center}
+  .ov-arrow{display:none}
+  .ov-foot{flex-wrap:wrap;gap:1.1rem 1.6rem}
 }
 @media (max-width:520px){
   .counter{font-size:.7rem}
   .sys__secure{grid-template-columns:1fr}
+  .ov-grid{grid-template-columns:1fr}
+  .ov-foot{flex-direction:column;align-items:flex-start}
 }
 
 /* ---------- no-js fallback ---------- */
@@ -1285,27 +1311,107 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
     </div></div>
   </section>
 
-  <!-- ===================== SLIDE 7 · THANKS ===================== -->
-  <section class="slide s-thanks" data-slide="6" data-theme="light"
-           role="group" aria-label="สไลด์ 7 — ขอบคุณ">
+  <!-- ===================== SLIDE 7 · OVERVIEW ===================== -->
+  <section class="slide s-overview" data-slide="6" data-theme="light"
+           role="group" aria-label="สไลด์ 7 — ภาพรวมเว็บแอป">
     <div class="slide__in"><div class="wrap">
 
-      <div class="tx__head reveal">
-        <div class="tx__org">
-          <b>กรมสุขภาพจิต</b>
-          <span>โรงพยาบาลจิตเวชเลยราชนครินทร์</span>
+      <div class="ov-head">
+        <p class="eyebrow reveal">ภาพรวมเว็บแอป FMH8</p>
+        <h2 class="ov-title reveal" style="--i:1">เว็บแอปเดียว — ดูแลครบทั้งกระบวนการ</h2>
+      </div>
+
+      <div class="ov-flow reveal" style="--i:2">
+        <div class="ov-step">
+          <span class="ov-step__n">1</span>
+          <b>ลงทะเบียนก่อนพ้นโทษ</b>
+          <i>เรือนจำบันทึกผู้ป่วย + ประวัติยา</i>
         </div>
-        <div class="tx__logo">FMH8<i></i></div>
+        <span class="ov-arrow" aria-hidden="true">→</span>
+        <div class="ov-step">
+          <span class="ov-step__n">2</span>
+          <b>ประเมินความเสี่ยง</b>
+          <i>ระบบจัด 4 ระดับอัตโนมัติ</i>
+        </div>
+        <span class="ov-arrow" aria-hidden="true">→</span>
+        <div class="ov-step">
+          <span class="ov-step__n">3</span>
+          <b>เปิดสิทธิ์ + ลงเยี่ยม</b>
+          <i>รพ.สต. ในเขตบันทึก 2 นาที</i>
+        </div>
+        <span class="ov-arrow" aria-hidden="true">→</span>
+        <div class="ov-step">
+          <span class="ov-step__n">4</span>
+          <b>ข้อมูลไหลสองทาง</b>
+          <i>เรือนจำ–แม่ข่าย–ทีม เห็นเรียลไทม์</i>
+        </div>
+        <span class="ov-arrow" aria-hidden="true">→</span>
+        <div class="ov-step">
+          <span class="ov-step__n">5</span>
+          <b>สรุป + แจ้งเตือน</b>
+          <i>อัตโนมัติทุกเดือน เข้าไลน์กลุ่ม</i>
+        </div>
       </div>
 
-      <div class="tx__center">
-        <h2 class="tx__thanks reveal" style="--i:1">ขอบคุณครับ</h2>
+      <div class="ov-grid">
+        <article class="ov-cap reveal" style="--i:3">
+          <div class="ov-cap__h">
+            <span class="ov-cap__ic"><svg viewBox="0 0 24 24"><rect x="4.5" y="5" width="15" height="15" rx="2"/><path d="M9 5V3.5h6V5"/><path d="M8.5 11h7M8.5 15h4.5"/></svg></span>
+            <h3 class="ov-cap__t">จัดการผู้ป่วย</h3>
+          </div>
+          <div class="ov-cap__l">
+            <span>ลงทะเบียน</span><span>ค้นหา</span><span>ประวัติการรักษา</span><span>ความเสี่ยงอัตโนมัติ</span>
+          </div>
+        </article>
+        <article class="ov-cap reveal" style="--i:4">
+          <div class="ov-cap__h">
+            <span class="ov-cap__ic"><svg viewBox="0 0 24 24"><path d="M4 11l8-6 8 6"/><path d="M6.5 10v9h11v-9"/></svg></span>
+            <h3 class="ov-cap__t">ติดตามดูแล</h3>
+          </div>
+          <div class="ov-cap__l">
+            <span>เยี่ยมบ้าน</span><span>ปฏิทินนัดหมาย</span><span>เตือนขาดยา</span>
+          </div>
+        </article>
+        <article class="ov-cap reveal" style="--i:5">
+          <div class="ov-cap__h">
+            <span class="ov-cap__ic"><svg viewBox="0 0 24 24"><path d="M5 9h12l-3.2-3.2M19 15H7l3.2 3.2"/></svg></span>
+            <h3 class="ov-cap__t">ส่งต่อข้ามหน่วยงาน</h3>
+          </div>
+          <div class="ov-cap__l">
+            <span>สร้าง/รับ Refer</span><span>ส่งต่อหลายราย</span><span>ติดตามสถานะ</span>
+          </div>
+        </article>
+        <article class="ov-cap reveal" style="--i:6">
+          <div class="ov-cap__h">
+            <span class="ov-cap__ic"><svg viewBox="0 0 24 24"><path d="M5 5v14h14"/><rect x="8.5" y="11" width="3" height="5"/><rect x="14" y="7.5" width="3" height="8.5"/></svg></span>
+            <h3 class="ov-cap__t">มองเห็นภาพรวม</h3>
+          </div>
+          <div class="ov-cap__l">
+            <span>แดชบอร์ด</span><span>แผนที่ผู้ป่วย</span><span>รายงานสถิติ</span>
+          </div>
+        </article>
+        <article class="ov-cap reveal" style="--i:7">
+          <div class="ov-cap__h">
+            <span class="ov-cap__ic"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"/><path d="M9.3 12l2 2 3.4-3.6"/></svg></span>
+            <h3 class="ov-cap__t">ปลอดภัยตาม PDPA</h3>
+          </div>
+          <div class="ov-cap__l">
+            <span>สิทธิ์ 5 ระดับ</span><span>เห็นเฉพาะเขต</span><span>Audit log</span>
+          </div>
+        </article>
+        <article class="ov-cap reveal" style="--i:8">
+          <div class="ov-cap__h">
+            <span class="ov-cap__ic"><svg viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M10.5 18h3"/></svg></span>
+            <h3 class="ov-cap__t">ใช้ได้ทุกที่</h3>
+          </div>
+          <div class="ov-cap__l">
+            <span>PWA ลงแอป</span><span>ทำงานออฟไลน์</span><span>นำเข้า/ส่งออก Excel</span>
+          </div>
+        </article>
       </div>
 
-      <div class="tx__rule reveal" style="--i:2"></div>
-
-      <div class="tx__foot">
-        <div class="tx__qr reveal" style="--i:3">
+      <div class="ov-foot reveal" style="--i:9">
+        <div class="ov-qr">
           <div class="qr-card">
             <svg viewBox="0 0 33 33" shape-rendering="crispEdges"
                  role="img" aria-label="QR code เปิดเว็บไซต์ fmh8.org">
@@ -1313,18 +1419,13 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
               <path fill="#1a4d3a" d="M4 4h1v1h-1zM5 4h1v1h-1zM6 4h1v1h-1zM7 4h1v1h-1zM8 4h1v1h-1zM9 4h1v1h-1zM10 4h1v1h-1zM12 4h1v1h-1zM14 4h1v1h-1zM17 4h1v1h-1zM18 4h1v1h-1zM19 4h1v1h-1zM20 4h1v1h-1zM22 4h1v1h-1zM23 4h1v1h-1zM24 4h1v1h-1zM25 4h1v1h-1zM26 4h1v1h-1zM27 4h1v1h-1zM28 4h1v1h-1zM4 5h1v1h-1zM10 5h1v1h-1zM12 5h1v1h-1zM16 5h1v1h-1zM20 5h1v1h-1zM22 5h1v1h-1zM28 5h1v1h-1zM4 6h1v1h-1zM6 6h1v1h-1zM7 6h1v1h-1zM8 6h1v1h-1zM10 6h1v1h-1zM13 6h1v1h-1zM14 6h1v1h-1zM15 6h1v1h-1zM16 6h1v1h-1zM20 6h1v1h-1zM22 6h1v1h-1zM24 6h1v1h-1zM25 6h1v1h-1zM26 6h1v1h-1zM28 6h1v1h-1zM4 7h1v1h-1zM6 7h1v1h-1zM7 7h1v1h-1zM8 7h1v1h-1zM10 7h1v1h-1zM13 7h1v1h-1zM14 7h1v1h-1zM16 7h1v1h-1zM18 7h1v1h-1zM19 7h1v1h-1zM20 7h1v1h-1zM22 7h1v1h-1zM24 7h1v1h-1zM25 7h1v1h-1zM26 7h1v1h-1zM28 7h1v1h-1zM4 8h1v1h-1zM6 8h1v1h-1zM7 8h1v1h-1zM8 8h1v1h-1zM10 8h1v1h-1zM15 8h1v1h-1zM16 8h1v1h-1zM17 8h1v1h-1zM22 8h1v1h-1zM24 8h1v1h-1zM25 8h1v1h-1zM26 8h1v1h-1zM28 8h1v1h-1zM4 9h1v1h-1zM10 9h1v1h-1zM13 9h1v1h-1zM15 9h1v1h-1zM17 9h1v1h-1zM18 9h1v1h-1zM20 9h1v1h-1zM22 9h1v1h-1zM28 9h1v1h-1zM4 10h1v1h-1zM5 10h1v1h-1zM6 10h1v1h-1zM7 10h1v1h-1zM8 10h1v1h-1zM9 10h1v1h-1zM10 10h1v1h-1zM12 10h1v1h-1zM14 10h1v1h-1zM16 10h1v1h-1zM18 10h1v1h-1zM20 10h1v1h-1zM22 10h1v1h-1zM23 10h1v1h-1zM24 10h1v1h-1zM25 10h1v1h-1zM26 10h1v1h-1zM27 10h1v1h-1zM28 10h1v1h-1zM13 11h1v1h-1zM15 11h1v1h-1zM17 11h1v1h-1zM19 11h1v1h-1zM20 11h1v1h-1zM5 12h1v1h-1zM10 12h1v1h-1zM11 12h1v1h-1zM12 12h1v1h-1zM16 12h1v1h-1zM18 12h1v1h-1zM19 12h1v1h-1zM21 12h1v1h-1zM27 12h1v1h-1zM28 12h1v1h-1zM6 13h1v1h-1zM9 13h1v1h-1zM12 13h1v1h-1zM14 13h1v1h-1zM18 13h1v1h-1zM19 13h1v1h-1zM23 13h1v1h-1zM24 13h1v1h-1zM25 13h1v1h-1zM26 13h1v1h-1zM27 13h1v1h-1zM4 14h1v1h-1zM5 14h1v1h-1zM6 14h1v1h-1zM9 14h1v1h-1zM10 14h1v1h-1zM13 14h1v1h-1zM14 14h1v1h-1zM16 14h1v1h-1zM19 14h1v1h-1zM21 14h1v1h-1zM24 14h1v1h-1zM25 14h1v1h-1zM27 14h1v1h-1zM28 14h1v1h-1zM5 15h1v1h-1zM6 15h1v1h-1zM7 15h1v1h-1zM9 15h1v1h-1zM12 15h1v1h-1zM13 15h1v1h-1zM15 15h1v1h-1zM18 15h1v1h-1zM19 15h1v1h-1zM21 15h1v1h-1zM22 15h1v1h-1zM23 15h1v1h-1zM25 15h1v1h-1zM28 15h1v1h-1zM4 16h1v1h-1zM5 16h1v1h-1zM8 16h1v1h-1zM10 16h1v1h-1zM14 16h1v1h-1zM15 16h1v1h-1zM17 16h1v1h-1zM18 16h1v1h-1zM19 16h1v1h-1zM22 16h1v1h-1zM23 16h1v1h-1zM28 16h1v1h-1zM4 17h1v1h-1zM6 17h1v1h-1zM7 17h1v1h-1zM8 17h1v1h-1zM9 17h1v1h-1zM11 17h1v1h-1zM17 17h1v1h-1zM18 17h1v1h-1zM19 17h1v1h-1zM20 17h1v1h-1zM23 17h1v1h-1zM27 17h1v1h-1zM4 18h1v1h-1zM8 18h1v1h-1zM10 18h1v1h-1zM12 18h1v1h-1zM13 18h1v1h-1zM16 18h1v1h-1zM18 18h1v1h-1zM19 18h1v1h-1zM20 18h1v1h-1zM23 18h1v1h-1zM24 18h1v1h-1zM25 18h1v1h-1zM27 18h1v1h-1zM28 18h1v1h-1zM4 19h1v1h-1zM8 19h1v1h-1zM11 19h1v1h-1zM13 19h1v1h-1zM14 19h1v1h-1zM16 19h1v1h-1zM17 19h1v1h-1zM18 19h1v1h-1zM19 19h1v1h-1zM22 19h1v1h-1zM23 19h1v1h-1zM25 19h1v1h-1zM26 19h1v1h-1zM28 19h1v1h-1zM4 20h1v1h-1zM6 20h1v1h-1zM8 20h1v1h-1zM10 20h1v1h-1zM12 20h1v1h-1zM13 20h1v1h-1zM17 20h1v1h-1zM20 20h1v1h-1zM21 20h1v1h-1zM22 20h1v1h-1zM23 20h1v1h-1zM24 20h1v1h-1zM26 20h1v1h-1zM12 21h1v1h-1zM17 21h1v1h-1zM18 21h1v1h-1zM20 21h1v1h-1zM24 21h1v1h-1zM4 22h1v1h-1zM5 22h1v1h-1zM6 22h1v1h-1zM7 22h1v1h-1zM8 22h1v1h-1zM9 22h1v1h-1zM10 22h1v1h-1zM12 22h1v1h-1zM13 22h1v1h-1zM14 22h1v1h-1zM20 22h1v1h-1zM22 22h1v1h-1zM24 22h1v1h-1zM28 22h1v1h-1zM4 23h1v1h-1zM10 23h1v1h-1zM14 23h1v1h-1zM16 23h1v1h-1zM17 23h1v1h-1zM18 23h1v1h-1zM19 23h1v1h-1zM20 23h1v1h-1zM24 23h1v1h-1zM27 23h1v1h-1zM28 23h1v1h-1zM4 24h1v1h-1zM6 24h1v1h-1zM7 24h1v1h-1zM8 24h1v1h-1zM10 24h1v1h-1zM17 24h1v1h-1zM18 24h1v1h-1zM19 24h1v1h-1zM20 24h1v1h-1zM21 24h1v1h-1zM22 24h1v1h-1zM23 24h1v1h-1zM24 24h1v1h-1zM26 24h1v1h-1zM28 24h1v1h-1zM4 25h1v1h-1zM6 25h1v1h-1zM7 25h1v1h-1zM8 25h1v1h-1zM10 25h1v1h-1zM18 25h1v1h-1zM22 25h1v1h-1zM27 25h1v1h-1zM28 25h1v1h-1zM4 26h1v1h-1zM6 26h1v1h-1zM7 26h1v1h-1zM8 26h1v1h-1zM10 26h1v1h-1zM13 26h1v1h-1zM15 26h1v1h-1zM17 26h1v1h-1zM20 26h1v1h-1zM21 26h1v1h-1zM25 26h1v1h-1zM26 26h1v1h-1zM28 26h1v1h-1zM4 27h1v1h-1zM10 27h1v1h-1zM12 27h1v1h-1zM13 27h1v1h-1zM14 27h1v1h-1zM15 27h1v1h-1zM16 27h1v1h-1zM18 27h1v1h-1zM20 27h1v1h-1zM23 27h1v1h-1zM24 27h1v1h-1zM28 27h1v1h-1zM4 28h1v1h-1zM5 28h1v1h-1zM6 28h1v1h-1zM7 28h1v1h-1zM8 28h1v1h-1zM9 28h1v1h-1zM10 28h1v1h-1zM13 28h1v1h-1zM14 28h1v1h-1zM16 28h1v1h-1zM17 28h1v1h-1zM18 28h1v1h-1zM19 28h1v1h-1zM20 28h1v1h-1zM21 28h1v1h-1zM22 28h1v1h-1zM25 28h1v1h-1zM28 28h1v1h-1z"/>
             </svg>
           </div>
-          <span class="tx__qrcap">สแกนเพื่อเปิด fmh8.org</span>
+          <span class="ov-qrcap">สแกนเปิดเว็บแอป</span>
         </div>
-
-        <div class="tx__spk reveal" style="--i:4">
-          <span class="tx__av">ภช</span>
-          <span class="tx__spklabel">Speaker</span>
-          <span class="tx__spkname">นายภูมิชัย ตะโนนศรี</span>
-          <span class="tx__spkrole">นักวิชาการสาธารณสุข</span>
-          <span class="tx__spkorg">โรงพยาบาลจิตเวชเลยราชนครินทร์ · เขตสุขภาพที่ 8</span>
+        <div class="ov-close">
+          <p class="ov-thanks">ขอบคุณครับ</p>
+          <p class="ov-by">นายภูมิชัย ตะโนนศรี · นักวิชาการสาธารณสุข · โรงพยาบาลจิตเวชเลยราชนครินทร์ · เขตสุขภาพที่ 8</p>
         </div>
-
-        <a class="tx__url reveal" style="--i:5" href="https://fmh8.org/"
+        <a class="ov-url" href="https://fmh8.org/"
            data-no-nav target="_blank" rel="noopener">www.fmh8.org</a>
       </div>
 
