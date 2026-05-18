@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0a0a0a">
+<meta name="color-scheme" content="dark light">
 <meta name="description" content="FMH8 — ระบบดูแลผู้ป่วยนิติจิตเวชหลังพ้นโทษ เขตสุขภาพที่ 8 กรมสุขภาพจิต">
 <title>FMH8 · ระบบดูแลผู้ป่วยนิติจิตเวชหลังพ้นโทษ — เขตสุขภาพที่ 8</title>
 
@@ -22,7 +23,7 @@
   --bg-light:#f4f1e8;
   --bg-green:#1a4d3a;
   --ink:#ece7da;
-  --ink-dim:#928c7e;
+  --ink-dim:#a09a8c;
   --ink-dark:#161510;
   --ink-dark-dim:#6d6757;
   --gold:#d4a647;
@@ -229,18 +230,18 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
 .cv-glow__a{
   width:70vw;height:70vw;max-width:800px;max-height:800px;
   background:radial-gradient(circle,rgba(212,166,71,.1) 0%,transparent 65%);
-  animation:glowPulse 5s ease-in-out infinite;
 }
 .cv-glow__b{
   width:48vw;height:48vw;max-width:560px;max-height:560px;
   background:radial-gradient(circle,rgba(26,77,58,.2) 0%,transparent 60%);
-  animation:glowPulse 7s ease-in-out 1.5s infinite;
 }
 .cv-glow__c{
   width:32vw;height:32vw;max-width:380px;max-height:380px;
   background:radial-gradient(circle,rgba(212,166,71,.12) 0%,transparent 55%);
-  animation:glowPulse 4s ease-in-out 3s infinite;
 }
+.s-cover.is-active .cv-glow__a{animation:glowPulse 5s ease-in-out infinite}
+.s-cover.is-active .cv-glow__b{animation:glowPulse 7s ease-in-out 1.5s infinite}
+.s-cover.is-active .cv-glow__c{animation:glowPulse 4s ease-in-out 3s infinite}
 @keyframes glowPulse{
   0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.7}
   50%{transform:translate(-50%,-50%) scale(1.15);opacity:1}
@@ -254,19 +255,19 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
   transform:translate(-50%,-50%);
 }
 .cv-orbit__ring:nth-child(1){
-  width:min(36vw,420px);height:min(36vw,420px);
-  animation:orbitSpin 40s linear infinite,orbitFade 3s ease .8s forwards;
+  width:min(36vw,420px);height:min(36vw,420px);opacity:0;
 }
 .cv-orbit__ring:nth-child(2){
   width:min(52vw,600px);height:min(52vw,600px);
-  border-style:dashed;border-color:rgba(212,166,71,.05);
-  animation:orbitSpin 60s linear reverse infinite,orbitFade 3s ease 1.2s forwards;
+  border-style:dashed;border-color:rgba(212,166,71,.05);opacity:0;
 }
 .cv-orbit__ring:nth-child(3){
   width:min(68vw,780px);height:min(68vw,780px);
-  border-color:rgba(26,77,58,.12);
-  animation:orbitSpin 80s linear infinite,orbitFade 3s ease 1.6s forwards;
+  border-color:rgba(26,77,58,.12);opacity:0;
 }
+.s-cover.is-active .cv-orbit__ring:nth-child(1){animation:orbitSpin 40s linear infinite,orbitFade 3s ease .8s forwards}
+.s-cover.is-active .cv-orbit__ring:nth-child(2){animation:orbitSpin 60s linear reverse infinite,orbitFade 3s ease 1.2s forwards}
+.s-cover.is-active .cv-orbit__ring:nth-child(3){animation:orbitSpin 80s linear infinite,orbitFade 3s ease 1.6s forwards}
 @keyframes orbitSpin{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg)}}
 @keyframes orbitFade{from{opacity:0}to{opacity:1}}
 
@@ -1049,7 +1050,7 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
 }
 
 /* ============================================================
-   SLIDE 8 · THE CALLBACK
+   SLIDE 9 · THE CALLBACK
    ============================================================ */
 .cb__head{
   font-size:clamp(1.45rem,3vw,2.5rem);
@@ -1104,7 +1105,7 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
   color:rgba(236,231,218,.55);font-weight:400;
 }
 /* ============================================================
-   SLIDE 7 · OVERVIEW — web-app flow + capabilities
+   SLIDE 8 · OVERVIEW — web-app flow + capabilities
    ============================================================ */
 .s-overview .wrap{flex:1;display:flex;flex-direction:column}
 
@@ -1195,7 +1196,7 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
   .sys-grid{grid-template-columns:1fr;gap:2rem}
   .sys__secure{grid-template-columns:1fr 1fr;gap:1.4rem}
 }
-@media (max-width:760px){
+@media (max-width:900px){
   .cards{grid-template-columns:1fr}
   .slide__in{padding-left:clamp(1.3rem,5vw,2rem);padding-right:clamp(1.3rem,5vw,2rem)}
   .ov-grid{grid-template-columns:1fr 1fr}
@@ -1282,7 +1283,7 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
       <p class="cv-top">กรมสุขภาพจิต · โรงพยาบาลจิตเวชเลยราชนครินทร์</p>
 
       <div class="cv-mid">
-        <p class="cv-tagline">KMH Talk + Innovation 2026</p>
+        <p class="cv-tagline" lang="en">KMH Talk + Innovation 2026</p>
         <div class="cv-logo-wrap">
           <div class="cv-logo">FMH8</div>
         </div>
@@ -1337,11 +1338,11 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
       </div>
 
       <div class="cv-badges">
-        <span class="cv-badge" style="--d:3.4s">PDPA Compliant</span>
+        <span class="cv-badge" style="--d:3.4s" lang="en">PDPA Compliant</span>
         <span class="cv-sep" style="--d:3.48s" aria-hidden="true">•</span>
-        <span class="cv-badge" style="--d:3.55s">Region 8 · 7 Provinces</span>
+        <span class="cv-badge" style="--d:3.55s" lang="en">Region 8 · 7 Provinces</span>
         <span class="cv-sep" style="--d:3.63s" aria-hidden="true">•</span>
-        <span class="cv-badge" style="--d:3.7s">PWA · Offline-ready</span>
+        <span class="cv-badge" style="--d:3.7s" lang="en">PWA · Offline-ready</span>
       </div>
 
     </div></div>
@@ -1566,9 +1567,8 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
           <h3 class="km-beat__t">เราเรียน</h3>
           <p class="km-beat__d">
             ย้อนดูเคสก่อเหตุซ้ำในรอบ 5 ปี —
-            ทุกเคสมี 2 อย่างเหมือนกัน:
-            ขาดยาอย่างน้อย 2 สัปดาห์
-            และไม่มีใครในระบบรู้ว่าเขาขาดยา
+            วิเคราะห์รูปแบบร่วมของทุกเคส
+            เพื่อหา "จุดตาย" ที่ระบบมองไม่เห็น
           </p>
         </div>
 
@@ -1604,10 +1604,10 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
         <div class="km-insight__body">
           <p class="km-insight__t">สิ่งที่เราค้นพบ</p>
           <p class="km-insight__d">
-            ผู้ป่วยที่กลับมาก่อเหตุซ้ำ มี 2 อย่างเหมือนกันทุกเคส —
+            ทุกเคสที่ก่อเหตุซ้ำ มีรูปแบบเดียวกัน —
             <b>ขาดยามาแล้วอย่างน้อย 2 สัปดาห์</b> และ
             <b>ไม่มีใครในระบบรู้ว่าเขาขาดยา</b><br>
-            ปัญหาไม่ใช่ตัวผู้ป่วย… ปัญหาคือ "ระบบที่ตาบอด"
+            ปัญหาไม่ใช่ตัวผู้ป่วย… ปัญหาคือ <b>"ระบบที่ตาบอด"</b>
           </p>
         </div>
       </div>
@@ -1666,45 +1666,45 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
           </div>
         </div>
 
-        <div class="mock" aria-label="ตัวอย่างหน้าจอแอป FMH8">
+        <div class="mock" aria-label="ตัวอย่างหน้าจอแอป FMH8 — ส่งต่อผู้ป่วยและติดตาม">
           <div class="browser">
             <div class="browser__bar">
               <i class="d"></i><i class="d"></i><i class="d"></i>
-              <span class="url">fmh8.psyloei.go.th/dashboard</span>
+              <span class="url">fmh8.psyloei.go.th/refer</span>
             </div>
             <div class="browser__scr">
               <aside class="bw__side">
                 <div class="bw__logo">FMH<b>8</b></div>
-                <span class="bw__nav bw__nav--on">แดชบอร์ด</span>
+                <span class="bw__nav">แดชบอร์ด</span>
                 <span class="bw__nav">ลงทะเบียนผู้ป่วย</span>
+                <span class="bw__nav bw__nav--on">ส่งต่อผู้ป่วย</span>
                 <span class="bw__nav">ติดตามผู้ป่วย</span>
                 <span class="bw__nav">ปฏิทินนัดหมาย</span>
                 <span class="bw__nav">แผนที่ผู้ป่วย</span>
-                <span class="bw__nav">ส่งต่อผู้ป่วย</span>
                 <span class="bw__nav">รายงาน</span>
               </aside>
               <div class="bw__main">
-                <div class="bw__h">แดชบอร์ด · เขตสุขภาพที่ 8</div>
+                <div class="bw__h">ส่งต่อผู้ป่วย · ข้ามหน่วยงาน</div>
                 <div class="bw__kpis">
-                  <div class="bw__kpi"><b>2,468</b><span>ผู้ป่วยทั้งหมด</span></div>
-                  <div class="bw__kpi"><b>184</b><span>ติดตามเดือนนี้</span></div>
-                  <div class="bw__kpi"><b>32</b><span>เสี่ยงสูง</span></div>
+                  <div class="bw__kpi"><b>12</b><span>รอรับ</span></div>
+                  <div class="bw__kpi"><b>46</b><span>ส่งต่อแล้ว</span></div>
+                  <div class="bw__kpi"><b>3</b><span>เร่งด่วน</span></div>
                 </div>
-                <div class="bw__ct">ผู้ป่วยแยกตามจังหวัด</div>
+                <div class="bw__ct">สถานะการส่งต่อล่าสุด</div>
                 <div class="chart">
-                  <i style="--h:52%;--i:0"></i>
-                  <i style="--h:74%;--i:1"></i>
-                  <i class="hi" style="--h:96%;--i:2"></i>
-                  <i style="--h:44%;--i:3"></i>
-                  <i style="--h:67%;--i:4"></i>
-                  <i style="--h:81%;--i:5"></i>
-                  <i style="--h:58%;--i:6"></i>
+                  <i style="--h:36%;--i:0"></i>
+                  <i style="--h:58%;--i:1"></i>
+                  <i style="--h:44%;--i:2"></i>
+                  <i class="hi" style="--h:92%;--i:3"></i>
+                  <i style="--h:72%;--i:4"></i>
+                  <i style="--h:50%;--i:5"></i>
+                  <i style="--h:84%;--i:6"></i>
                 </div>
                 <div class="bw__risk">
-                  <span><i style="background:#1b9e5a"></i>ต่ำ</span>
-                  <span><i style="background:#d4af37"></i>กลาง</span>
-                  <span><i style="background:#ef6c00"></i>สูง</span>
-                  <span><i style="background:#b71c1c"></i>วิกฤต</span>
+                  <span><i style="background:#1b9e5a"></i>รับแล้ว</span>
+                  <span><i style="background:#d4af37"></i>รอรับ</span>
+                  <span><i style="background:#ef6c00"></i>รอดำเนินการ</span>
+                  <span><i style="background:#b71c1c"></i>เร่งด่วน</span>
                 </div>
               </div>
             </div>
@@ -1772,6 +1772,28 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
       <div class="res__head">
         <p class="eyebrow reveal">ผลลัพธ์ที่เกิดขึ้นจริง</p>
         <h2 class="res__title reveal" style="--i:1">หลังใช้ FMH8 เปลี่ยนชัดเจน 3 อย่าง</h2>
+        <p class="res__sub reveal" style="--i:1">เขตสุขภาพที่ 8 · ข้อมูลหลังนำระบบเข้าใช้งานจริง</p>
+      </div>
+
+      <div class="stat-row" style="margin-bottom:clamp(1.8rem,4vh,2.8rem)">
+        <div class="stat reveal" style="--i:2">
+          <div class="stat__num stat__num--gold">
+            <span class="count" data-count="100" data-delay="300" data-dur="1200">0</span><span class="stat__suffix">%</span>
+          </div>
+          <p class="stat__label">ผู้ป่วยพ้นโทษทุกรายถูกลงทะเบียน<br>ก่อนออกจากเรือนจำ</p>
+        </div>
+        <div class="stat reveal" style="--i:3">
+          <div class="stat__num stat__num--gold">
+            <span class="count" data-count="2" data-delay="500" data-dur="800">0</span><span class="stat__suffix">นาที</span>
+          </div>
+          <p class="stat__label">เวลาบันทึกต่อเคส — จากเดิม<br>โทรประสาน 30+ นาที</p>
+        </div>
+        <div class="stat reveal" style="--i:4">
+          <div class="stat__num stat__num--gold">
+            <span class="count" data-count="0" data-delay="700" data-dur="600">0</span><span class="stat__suffix">ราย</span>
+          </div>
+          <p class="stat__label">ข้อมูลรั่วไหลผ่านไลน์ส่วนตัว<br>นับตั้งแต่เริ่มใช้ FMH8</p>
+        </div>
       </div>
 
       <div class="res-grid">
@@ -1807,85 +1829,16 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
         <p class="res-quote__by">— เจ้าหน้าที่ รพ.สต. ในเขตสุขภาพที่ 8</p>
       </div>
 
-      <div class="res-next">
-        <div class="res-step reveal" style="--i:6">
-          <div class="res-step__icon res-step__icon--near">
-            <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          </div>
-          <div>
-            <p class="res-step__tag res-step__tag--near">ระยะใกล้</p>
-            <h3 class="res-step__t">ครอบคลุม 7 จังหวัด</h3>
-            <p class="res-step__d">ขยายให้ครบเขตสุขภาพที่ 8 ทั้งหมด — ผู้ป่วยทุกคนได้มาตรฐานเดียวกัน</p>
-          </div>
-        </div>
-        <div class="res-step reveal" style="--i:7">
-          <div class="res-step__icon res-step__icon--far">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          </div>
-          <div>
-            <p class="res-step__tag res-step__tag--far">ระยะไกล</p>
-            <h3 class="res-step__t">ต้นแบบ 12 เขตทั่วประเทศ</h3>
-            <p class="res-step__d">เป็นต้นแบบให้เขตสุขภาพอื่น และต่อยอดดูแลกลุ่ม SMI-V ที่ยังไม่มีระบบ</p>
-          </div>
-        </div>
-      </div>
-
-      <p class="res-close reveal" style="--i:8">
+      <p class="res-close reveal" style="--i:6">
         เพราะหัวใจของ FMH8 ไม่ใช่เทคโนโลยี — แต่คือแนวคิดที่ว่า <em>"ไม่ปล่อยให้ใครรับภาระคนเดียว"</em>
       </p>
 
     </div></div>
   </section>
 
-  <!-- ===================== SLIDE 8 · THE CALLBACK ===================== -->
-  <section class="slide s-callback" data-slide="7" data-theme="green"
-           role="group" aria-label="สไลด์ 8 — บทสรุป">
-    <div class="slide__in"><div class="wrap">
-      <p class="eyebrow reveal">และกลับมาที่แม่คนนั้น</p>
-      <h2 class="cb__head reveal" style="--i:1">
-        ถ้า FMH8 ทำงานครบทุกพื้นที่ — รพ.สต. จะรู้
-        <em>ตั้งแต่วันที่ลูกของเธอพ้นโทษ</em>
-      </h2>
-
-      <div class="tl">
-        <div class="tl__row reveal" style="--i:2">
-          <div class="tl__head">
-            <span class="tl__tag tl__tag--old">ระบบเดิม</span>
-            <span class="tl__dur tl__dur--old">47 วัน</span>
-          </div>
-          <div class="tl__track">
-            <span class="tl__bar tl__bar--old" style="--w:100%"></span>
-            <span class="tl__pill tl__pill--old">ก่อเหตุซ้ำ</span>
-          </div>
-          <p class="tl__note">กว่าจะมีใครในระบบรู้ — เหตุก็เกิดไปแล้ว</p>
-        </div>
-        <div class="tl__row reveal" style="--i:3">
-          <div class="tl__head">
-            <span class="tl__tag tl__tag--new">ด้วย FMH8</span>
-            <span class="tl__dur tl__dur--new">2–3 วัน</span>
-          </div>
-          <div class="tl__track">
-            <span class="tl__bar tl__bar--new" style="--w:8%"></span>
-            <span class="tl__pill tl__pill--new" style="--w:8%">ถึงตัวผู้ป่วย</span>
-          </div>
-          <p class="tl__note">รพ.สต. รู้ทันที และถึงบ้านพร้อมข้อมูลครบ</p>
-        </div>
-      </div>
-
-      <div class="finale">
-        <span class="finale__line words" data-words>เธอ…</span>
-        <span class="finale__line finale__line--accent words" data-words>ไม่ได้อยู่คนเดียว…</span>
-        <span class="finale__line words" data-words>อีกต่อไปแล้วนะคะ</span>
-        <p class="finale__by reveal" style="--i:4">
-          — เสียงของครอบครัวอีกหลายร้อยครอบครัว ในเขตสุขภาพที่ 8
-        </p>
-      </div>
-    </div></div>
-  </section>
-
-  <!-- ===================== SLIDE 7 · OVERVIEW ===================== -->
-  <section class="slide s-overview" data-slide="8" data-theme="light"
-           role="group" aria-label="สไลด์ 9 — ภาพรวมเว็บแอป">
+  <!-- ===================== SLIDE 8 · OVERVIEW ===================== -->
+  <section class="slide s-overview" data-slide="7" data-theme="light"
+           role="group" aria-label="สไลด์ 8 — ภาพรวมเว็บแอป">
     <div class="slide__in"><div class="wrap">
 
       <div class="ov-head">
@@ -1982,7 +1935,30 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
         </article>
       </div>
 
-      <div class="ov-foot reveal" style="--i:9">
+      <div class="res-next reveal" style="--i:9" aria-label="ก้าวต่อไป">
+        <div class="res-step">
+          <div class="res-step__icon res-step__icon--near">
+            <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <div>
+            <p class="res-step__tag res-step__tag--near">ระยะใกล้</p>
+            <h3 class="res-step__t">ครอบคลุม 7 จังหวัด</h3>
+            <p class="res-step__d">ขยายให้ครบเขตสุขภาพที่ 8 ทั้งหมด — ผู้ป่วยทุกคนได้มาตรฐานเดียวกัน</p>
+          </div>
+        </div>
+        <div class="res-step">
+          <div class="res-step__icon res-step__icon--far">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div>
+            <p class="res-step__tag res-step__tag--far">ระยะไกล</p>
+            <h3 class="res-step__t">ต้นแบบ 12 เขตทั่วประเทศ</h3>
+            <p class="res-step__d">เป็นต้นแบบให้เขตสุขภาพอื่น และต่อยอดดูแลกลุ่ม SMI-V ที่ยังไม่มีระบบ</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="ov-foot reveal" style="--i:10">
         <div class="ov-qr">
           <div class="qr-card">
             <svg viewBox="0 0 33 33" shape-rendering="crispEdges"
@@ -2001,6 +1977,52 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
            data-no-nav target="_blank" rel="noopener">www.fmh8.org</a>
       </div>
 
+    </div></div>
+  </section>
+
+  <!-- ===================== SLIDE 9 · THE CALLBACK ===================== -->
+  <section class="slide s-callback" data-slide="8" data-theme="green"
+           role="group" aria-label="สไลด์ 9 — บทสรุป">
+    <div class="slide__in"><div class="wrap">
+      <p class="eyebrow reveal">และกลับมาที่แม่คนนั้น</p>
+      <h2 class="cb__head reveal" style="--i:1">
+        ถ้า FMH8 ทำงานครบทุกพื้นที่ — รพ.สต. จะรู้
+        <em>ตั้งแต่วันที่ลูกของเธอพ้นโทษ</em>
+      </h2>
+
+      <div class="tl">
+        <div class="tl__row reveal" style="--i:2">
+          <div class="tl__head">
+            <span class="tl__tag tl__tag--old">ระบบเดิม</span>
+            <span class="tl__dur tl__dur--old">47 วัน</span>
+          </div>
+          <div class="tl__track">
+            <span class="tl__bar tl__bar--old" style="--w:100%"></span>
+            <span class="tl__pill tl__pill--old">ก่อเหตุซ้ำ</span>
+          </div>
+          <p class="tl__note">กว่าจะมีใครในระบบรู้ — เหตุก็เกิดไปแล้ว</p>
+        </div>
+        <div class="tl__row reveal" style="--i:3">
+          <div class="tl__head">
+            <span class="tl__tag tl__tag--new">ด้วย FMH8</span>
+            <span class="tl__dur tl__dur--new">2–3 วัน</span>
+          </div>
+          <div class="tl__track">
+            <span class="tl__bar tl__bar--new" style="--w:8%"></span>
+            <span class="tl__pill tl__pill--new" style="--w:8%">ถึงตัวผู้ป่วย</span>
+          </div>
+          <p class="tl__note">รพ.สต. รู้ทันที และถึงบ้านพร้อมข้อมูลครบ</p>
+        </div>
+      </div>
+
+      <div class="finale">
+        <span class="finale__line words" data-words>เธอ…</span>
+        <span class="finale__line finale__line--accent words" data-words>ไม่ได้อยู่คนเดียว…</span>
+        <span class="finale__line words" data-words>อีกต่อไปแล้วนะคะ</span>
+        <p class="finale__by reveal" style="--i:4">
+          — เสียงของครอบครัวอีกหลายร้อยครอบครัว ในเขตสุขภาพที่ 8
+        </p>
+      </div>
     </div></div>
   </section>
 
@@ -2167,7 +2189,10 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
 
   /* ---------- help overlay ---------- */
   function openHelp(){ helpOpen = true; help.classList.add('is-open');
-    help.setAttribute('aria-hidden', 'false'); }
+    help.setAttribute('aria-hidden', 'false');
+    var closeBtn = help.querySelector('[data-help-close]');
+    if (closeBtn) closeBtn.focus();
+  }
   function closeHelp(){ helpOpen = false; help.classList.remove('is-open');
     help.setAttribute('aria-hidden', 'true'); }
   function toggleHelp(){ helpOpen ? closeHelp() : openHelp(); }
@@ -2175,6 +2200,16 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
   document.getElementById('btnHelp').addEventListener('click', toggleHelp);
   help.addEventListener('click', function(e){
     if (e.target === help || e.target.closest('[data-help-close]')) closeHelp();
+  });
+  help.addEventListener('keydown', function(e){
+    if (e.key === 'Tab'){
+      var focusable = help.querySelectorAll('button, [tabindex]');
+      if (focusable.length){
+        var first = focusable[0], last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+      }
+    }
   });
 
   /* ---------- fullscreen ---------- */
@@ -2211,7 +2246,8 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
   /* ---------- keyboard ---------- */
   document.addEventListener('keydown', function(e){
     var k = e.key;
-    if (k === 'ArrowRight' || k === ' ' || k === 'Spacebar' || k === 'PageDown'){
+    var onInteractive = e.target.closest('button, a, [data-no-nav]');
+    if ((k === 'ArrowRight' || k === 'PageDown') || ((k === ' ' || k === 'Spacebar') && !onInteractive)){
       e.preventDefault(); next();
     } else if (k === 'ArrowLeft' || k === 'PageUp'){
       e.preventDefault(); prev();
