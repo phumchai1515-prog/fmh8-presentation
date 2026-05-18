@@ -27,6 +27,9 @@
   --ink-dark-dim:#6d6757;
   --gold:#d4a647;
   --green:#1a4d3a;
+  --app:#004d40;        /* real FMH8 web-app teal */
+  --app-gold:#d4af37;
+  --app-bg:#f4f7f6;
   --red:#b5462f;
   --line-d:rgba(236,231,218,.13);
   --line-l:rgba(20,21,16,.12);
@@ -233,7 +236,7 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
 .s-cover.is-active .cv-tagline{opacity:.8}
 
 .cv-logo{
-  font-size:clamp(8rem,22vw,20rem);
+  font-size:clamp(4.2rem,12vw,8.4rem);
   font-weight:700;line-height:.92;letter-spacing:-.04em;
   background:linear-gradient(180deg,#ffffff 0%,#d4d4d4 100%);
   -webkit-background-clip:text;background-clip:text;
@@ -295,7 +298,7 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
   font-size:clamp(.66rem,.86vw,.77rem);
   font-weight:400;letter-spacing:.04em;line-height:1.55;
   color:var(--ink-dim);max-width:44vw;
-  opacity:0;transition:opacity .8s ease 3.5s;
+  opacity:0;transition:opacity .8s ease 3.9s;
 }
 .s-cover.is-active .cv-corner{opacity:.85}
 .cv-corner-l{left:clamp(1.6rem,5vw,3.6rem);bottom:clamp(3.6rem,8vh,5.4rem)}
@@ -310,21 +313,22 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
   font-size:clamp(.72rem,.95vw,.85rem);
   font-weight:600;letter-spacing:.12em;text-transform:uppercase;
   color:var(--gold);
-  opacity:0;transition:opacity .7s ease 3.7s,color .25s ease;
+  opacity:0;transition:opacity .7s ease 4.1s,color .25s ease;
 }
 .s-cover.is-active .cv-start{opacity:1}
 .cv-start:hover{color:#e6c372}
 .cv-start__arrow{display:inline-block}
 .s-cover.is-active .cv-start__arrow{
-  animation:cvArrow 1.9s ease-in-out 4.2s infinite;
+  animation:cvArrow 1.9s ease-in-out 4.6s infinite;
 }
 @keyframes cvArrow{
   0%,100%{transform:translateX(0)}
   50%{transform:translateX(5px)}
 }
 @media (max-width:600px){
-  .cv-logo{font-size:clamp(4.6rem,19vw,8rem)}
+  .cv-logo{font-size:clamp(3.2rem,12vw,5.4rem)}
   .cv-corner,.cv-start{display:none}
+  .cv-app{width:min(92vw,420px)}
 }
 
 /* ============================================================
@@ -548,94 +552,120 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
   color:var(--ink-dim);line-height:1.75;
 }
 
-/* mockups */
+/* mockups — themed to the real FMH8 web app (deep-teal #004d40) */
 .mock{
   display:flex;flex-wrap:wrap;gap:1.2rem;
   align-items:center;justify-content:center;
 }
+
 .phone{
   position:relative;z-index:2;flex:none;
   width:clamp(168px,15vw,210px);aspect-ratio:295/600;
   background:#0d0d0d;border:1px solid var(--line-d);
   border-radius:30px;padding:8px;
+}
+.s-system .phone{
   opacity:0;transform:translateY(40px);
   transition:opacity .85s var(--ease) .15s,transform .85s var(--ease) .15s;
 }
-.slide.is-active .phone{opacity:1;transform:none}
+.s-system.is-active .phone{opacity:1;transform:none}
 .phone__scr{
-  background:var(--bg-light);border-radius:23px;height:100%;
+  background:var(--app-bg);border-radius:23px;height:100%;
   overflow:hidden;display:flex;flex-direction:column;
-  color:var(--ink-dark);font-size:8px;
+  color:#0f2a26;font-size:8px;
 }
 .ph__top{display:flex;justify-content:space-between;align-items:center;
   padding:6px 11px 3px;font-weight:600;font-size:7.2px}
-.ph__sig{width:13px;height:5px;border-radius:2px;background:var(--ink-dark)}
+.ph__sig{width:13px;height:5px;border-radius:2px;background:#0f2a26}
 .ph__hd{display:flex;align-items:center;gap:6px;padding:4px 10px 7px}
-.ph__back{font-size:11px;color:var(--ink-dark-dim)}
+.ph__back{font-size:11px;color:#6b8581}
 .ph__ttl{font-weight:700;font-size:9.6px;flex:1}
-.ph__sync{font-size:6px;font-weight:600;color:var(--green);
-  background:rgba(26,77,58,.12);padding:2.5px 6px;border-radius:99px}
+.ph__sync{font-size:6px;font-weight:600;color:var(--app);
+  background:rgba(0,77,64,.12);padding:2.5px 6px;border-radius:99px}
 .ph__body{padding:0 10px;display:flex;flex-direction:column;gap:5px;flex:1}
-.ph__off{background:rgba(212,166,71,.16);color:#8a6a16;
+.ph__off{background:rgba(212,175,55,.2);color:#8a6a16;
   font-size:6.4px;font-weight:500;padding:4px 7px;border-radius:6px}
 .ph__pt{display:flex;align-items:center;gap:6px;background:#fff;
-  border:1px solid var(--line-l);border-radius:8px;padding:6px}
-.ph__av{width:19px;height:19px;border-radius:50%;flex:none;background:var(--green);
+  border:1px solid #e4ede9;border-radius:8px;padding:6px}
+.ph__av{width:19px;height:19px;border-radius:50%;flex:none;background:var(--app);
   color:#fff;display:flex;align-items:center;justify-content:center;
   font-size:6.4px;font-weight:600}
 .ph__pi{display:flex;flex-direction:column;gap:1px;flex:1}
 .ph__pi b{font-size:7.4px;font-weight:700}
-.ph__pi i{font-size:6px;font-style:normal;color:var(--ink-dark-dim)}
-.ph__round{font-size:6px;font-weight:600;color:var(--green);
-  background:rgba(26,77,58,.1);padding:2.5px 5px;border-radius:99px;flex:none}
+.ph__pi i{font-size:6px;font-style:normal;color:#6b8581}
+.ph__round{font-size:6px;font-weight:600;color:var(--app);
+  background:rgba(0,77,64,.1);padding:2.5px 5px;border-radius:99px;flex:none}
 .ph__chk{display:flex;align-items:center;gap:6px;
-  border:1px solid var(--line-l);border-radius:7px;
-  padding:6px 8px;font-size:7.2px;font-weight:500;color:var(--ink-dark-dim)}
+  border:1px solid #e4ede9;border-radius:7px;
+  padding:6px 8px;font-size:7.2px;font-weight:500;color:#6b8581}
 .ph__chk::before{content:"";width:11px;height:11px;flex:none;
-  border-radius:3px;border:1.3px solid rgba(20,21,16,.25)}
-.ph__chk--on{color:var(--ink-dark);background:rgba(26,77,58,.07);
-  border-color:rgba(26,77,58,.3)}
-.ph__chk--on::before{background:var(--green);border-color:var(--green);
+  border-radius:3px;border:1.3px solid rgba(15,42,38,.25)}
+.ph__chk--on{color:#0f2a26;background:rgba(0,77,64,.07);
+  border-color:rgba(0,77,64,.3)}
+.ph__chk--on::before{background:var(--app);border-color:var(--app);
   content:"\2713";color:#fff;font-size:8px;
   display:flex;align-items:center;justify-content:center}
-.ph__btn{margin:7px 10px 10px;background:var(--green);color:#fff;
+.ph__btn{margin:7px 10px 10px;background:var(--app);color:#fff;
   text-align:center;font-weight:600;font-size:8px;padding:8px;border-radius:8px}
 
 .browser{
-  flex:none;width:clamp(258px,32vw,400px);
+  flex:none;
   background:#0d0d0d;border:1px solid var(--line-d);
   border-radius:12px;overflow:hidden;
+}
+.s-system .browser{
+  width:clamp(258px,32vw,400px);
   opacity:0;transform:translateY(40px);
   transition:opacity .85s var(--ease),transform .85s var(--ease);
 }
-.slide.is-active .browser{opacity:1;transform:none}
+.s-system.is-active .browser{opacity:1;transform:none}
 .browser__bar{display:flex;align-items:center;gap:5px;
   padding:8px 11px;border-bottom:1px solid var(--line-d)}
 .browser__bar .d{width:7px;height:7px;border-radius:50%;background:rgba(236,231,218,.2)}
 .browser__bar .url{margin-left:7px;font-size:8px;color:var(--ink-dim);
   background:rgba(236,231,218,.05);padding:3px 9px;border-radius:99px}
-.browser__scr{display:flex;background:var(--bg-light);
-  color:var(--ink-dark);height:clamp(168px,21vw,250px)}
-.bw__side{width:31%;background:var(--green);color:#dfe7e0;
-  padding:11px 9px;display:flex;flex-direction:column;gap:7px}
-.bw__logo{font-weight:700;font-size:10.4px;color:#fff;margin-bottom:3px}
-.bw__nav{font-size:8px;font-weight:400;opacity:.6}
-.bw__nav--on{opacity:1;font-weight:600;color:var(--gold)}
-.bw__main{flex:1;padding:13px 13px;display:flex;flex-direction:column}
-.bw__h{font-size:9.6px;font-weight:700;margin-bottom:8px}
-.bw__chips{display:flex;gap:5px;margin-bottom:12px;flex-wrap:wrap}
-.bw__chips span{font-size:6.6px;font-weight:500;background:#fff;
-  border:1px solid var(--line-l);padding:3.5px 6px;border-radius:5px}
-.bw__ct{font-size:7.4px;font-weight:600;color:var(--ink-dark-dim);margin-bottom:6px}
-.chart{display:flex;align-items:flex-end;gap:5px;flex:1;min-height:66px}
+.browser__scr{display:flex;background:var(--app-bg);
+  color:#0f2a26;height:clamp(176px,20vw,240px)}
+.bw__side{width:34%;background:var(--app);
+  padding:10px 9px;display:flex;flex-direction:column;gap:3.5px}
+.bw__logo{font-weight:700;font-size:10.4px;color:#fff;
+  margin-bottom:4px;letter-spacing:.02em}
+.bw__logo b{color:var(--app-gold)}
+.bw__nav{font-size:7.2px;font-weight:400;color:rgba(207,224,219,.78)}
+.bw__nav--on{font-weight:700;color:var(--app-gold)}
+.bw__main{flex:1;padding:11px;display:flex;flex-direction:column;gap:6px}
+.bw__h{font-size:9px;font-weight:700}
+.bw__kpis{display:flex;gap:5px}
+.bw__kpi{flex:1;background:#fff;border:1px solid #e4ede9;
+  border-radius:6px;padding:5px}
+.bw__kpi b{display:block;font-size:11px;font-weight:700;color:var(--app);
+  line-height:1.1}
+.bw__kpi span{font-size:5.6px;color:#6b8581}
+.bw__ct{font-size:7px;font-weight:600;color:#6b8581}
+.chart{display:flex;align-items:flex-end;gap:4px;flex:1;min-height:50px}
 .chart i{
-  flex:1;border-radius:3px 3px 0 0;background:var(--green);height:var(--h);
+  flex:1;border-radius:2px 2px 0 0;background:var(--app);height:var(--h);
   transform:scaleY(0);transform-origin:bottom;
   transition:transform .9s var(--ease);
   transition-delay:calc(var(--i) * .08s + .35s);
 }
-.chart i:nth-child(3),.chart i:nth-child(6){background:var(--gold)}
-.slide.is-active .chart i{transform:scaleY(1)}
+.chart i.hi{background:var(--app-gold)}
+.s-system.is-active .chart i,.s-cover.is-active .chart i{transform:scaleY(1)}
+.bw__risk{display:flex;gap:7px;flex-wrap:wrap}
+.bw__risk span{display:inline-flex;align-items:center;gap:3px;
+  font-size:5.8px;color:#6b8581;font-weight:500}
+.bw__risk i{width:5px;height:5px;border-radius:50%}
+
+/* cover · web-app reveal */
+.cv-app{
+  width:clamp(280px,40vw,500px);
+  margin-top:clamp(.8rem,2.4vh,1.9rem);
+  opacity:0;transform:translateY(34px) scale(.97);
+  transition:opacity 1s cubic-bezier(.16,1,.3,1) 2.7s,
+             transform 1s cubic-bezier(.16,1,.3,1) 2.7s;
+}
+.s-cover.is-active .cv-app{opacity:1;transform:none}
+.cv-app .browser{width:100%}
 
 .sys__secure{
   display:grid;grid-template-columns:repeat(4,1fr);
@@ -799,7 +829,8 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
   transform:none;min-height:100vh}
 .no-js .reveal,.no-js .w,.no-js .phone,.no-js .browser,
 .no-js .cv-top,.no-js .cv-tagline,.no-js .cv-logo,.no-js .cv-sub,
-.no-js .cv-region,.no-js .cv-badges>*,.no-js .cv-corner,.no-js .cv-start{
+.no-js .cv-region,.no-js .cv-badges>*,.no-js .cv-corner,.no-js .cv-start,
+.no-js .cv-app{
   opacity:1!important;transform:none!important}
 .no-js .cv-underline{transform:scaleX(1)!important}
 .no-js .chart i{transform:scaleY(1)!important}
@@ -813,7 +844,7 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
   .slide,.reveal,.w,.phone,.browser,.chart i,.tl__bar,.tl__pill,
   .progress i,.help,.help__card,
   .cv-top,.cv-tagline,.cv-logo,.cv-underline,.cv-sub,.cv-region,
-  .cv-badges>*,.cv-corner,.cv-start{transition-duration:.01ms!important}
+  .cv-badges>*,.cv-corner,.cv-start,.cv-app{transition-duration:.01ms!important}
   .ring,.cv-start__arrow{animation:none!important}
   .ring{opacity:.22!important}
 }
@@ -837,14 +868,59 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
         <span class="cv-underline" aria-hidden="true"></span>
         <p class="cv-sub">ระบบดูแลผู้ป่วยนิติจิตเวชหลังพ้นโทษ</p>
         <p class="cv-region">เขตสุขภาพที่ 8 · กรมสุขภาพจิต</p>
+
+        <div class="cv-app" aria-label="ตัวอย่างหน้าจอเว็บแอป FMH8">
+          <div class="browser">
+            <div class="browser__bar">
+              <i class="d"></i><i class="d"></i><i class="d"></i>
+              <span class="url">fmh8.psyloei.go.th/dashboard</span>
+            </div>
+            <div class="browser__scr">
+              <aside class="bw__side">
+                <div class="bw__logo">FMH<b>8</b></div>
+                <span class="bw__nav bw__nav--on">แดชบอร์ด</span>
+                <span class="bw__nav">ลงทะเบียนผู้ป่วย</span>
+                <span class="bw__nav">ติดตามผู้ป่วย</span>
+                <span class="bw__nav">ปฏิทินนัดหมาย</span>
+                <span class="bw__nav">แผนที่ผู้ป่วย</span>
+                <span class="bw__nav">ส่งต่อผู้ป่วย</span>
+                <span class="bw__nav">รายงาน</span>
+              </aside>
+              <div class="bw__main">
+                <div class="bw__h">แดชบอร์ด · เขตสุขภาพที่ 8</div>
+                <div class="bw__kpis">
+                  <div class="bw__kpi"><b>2,468</b><span>ผู้ป่วยทั้งหมด</span></div>
+                  <div class="bw__kpi"><b>184</b><span>ติดตามเดือนนี้</span></div>
+                  <div class="bw__kpi"><b>32</b><span>เสี่ยงสูง</span></div>
+                </div>
+                <div class="bw__ct">ผู้ป่วยแยกตามจังหวัด</div>
+                <div class="chart">
+                  <i style="--h:52%;--i:0"></i>
+                  <i style="--h:74%;--i:1"></i>
+                  <i class="hi" style="--h:96%;--i:2"></i>
+                  <i style="--h:44%;--i:3"></i>
+                  <i style="--h:67%;--i:4"></i>
+                  <i style="--h:81%;--i:5"></i>
+                  <i style="--h:58%;--i:6"></i>
+                </div>
+                <div class="bw__risk">
+                  <span><i style="background:#1b9e5a"></i>ต่ำ</span>
+                  <span><i style="background:#d4af37"></i>กลาง</span>
+                  <span><i style="background:#ef6c00"></i>สูง</span>
+                  <span><i style="background:#b71c1c"></i>วิกฤต</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="cv-badges">
-        <span class="cv-badge" style="--d:3s">PDPA Compliant</span>
-        <span class="cv-sep" style="--d:3.08s" aria-hidden="true">•</span>
-        <span class="cv-badge" style="--d:3.15s">Region 8 · 7 Provinces</span>
-        <span class="cv-sep" style="--d:3.23s" aria-hidden="true">•</span>
-        <span class="cv-badge" style="--d:3.3s">PWA · Offline-ready</span>
+        <span class="cv-badge" style="--d:3.4s">PDPA Compliant</span>
+        <span class="cv-sep" style="--d:3.48s" aria-hidden="true">•</span>
+        <span class="cv-badge" style="--d:3.55s">Region 8 · 7 Provinces</span>
+        <span class="cv-sep" style="--d:3.63s" aria-hidden="true">•</span>
+        <span class="cv-badge" style="--d:3.7s">PWA · Offline-ready</span>
       </div>
 
     </div></div>
@@ -1069,28 +1145,41 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
           <div class="browser">
             <div class="browser__bar">
               <i class="d"></i><i class="d"></i><i class="d"></i>
-              <span class="url">fmh8 · แดชบอร์ดเขตสุขภาพที่ 8</span>
+              <span class="url">fmh8.psyloei.go.th/dashboard</span>
             </div>
             <div class="browser__scr">
               <aside class="bw__side">
-                <div class="bw__logo">FMH8</div>
+                <div class="bw__logo">FMH<b>8</b></div>
                 <span class="bw__nav bw__nav--on">แดชบอร์ด</span>
-                <span class="bw__nav">ผู้ป่วย</span>
-                <span class="bw__nav">ติดตาม</span>
-                <span class="bw__nav">ส่งต่อ</span>
+                <span class="bw__nav">ลงทะเบียนผู้ป่วย</span>
+                <span class="bw__nav">ติดตามผู้ป่วย</span>
+                <span class="bw__nav">ปฏิทินนัดหมาย</span>
+                <span class="bw__nav">แผนที่ผู้ป่วย</span>
+                <span class="bw__nav">ส่งต่อผู้ป่วย</span>
                 <span class="bw__nav">รายงาน</span>
               </aside>
               <div class="bw__main">
-                <div class="bw__h">ภาพรวม · เขตสุขภาพที่ 8</div>
-                <div class="bw__chips">
-                  <span>วันนี้ +12</span><span>ทั้งหมด 2,468</span><span>ติดตาม 184</span>
+                <div class="bw__h">แดชบอร์ด · เขตสุขภาพที่ 8</div>
+                <div class="bw__kpis">
+                  <div class="bw__kpi"><b>2,468</b><span>ผู้ป่วยทั้งหมด</span></div>
+                  <div class="bw__kpi"><b>184</b><span>ติดตามเดือนนี้</span></div>
+                  <div class="bw__kpi"><b>32</b><span>เสี่ยงสูง</span></div>
                 </div>
                 <div class="bw__ct">ผู้ป่วยแยกตามจังหวัด</div>
                 <div class="chart">
-                  <i style="--h:54%;--i:0"></i><i style="--h:78%;--i:1"></i>
-                  <i style="--h:92%;--i:2"></i><i style="--h:46%;--i:3"></i>
-                  <i style="--h:70%;--i:4"></i><i style="--h:84%;--i:5"></i>
-                  <i style="--h:60%;--i:6"></i>
+                  <i style="--h:52%;--i:0"></i>
+                  <i style="--h:74%;--i:1"></i>
+                  <i class="hi" style="--h:96%;--i:2"></i>
+                  <i style="--h:44%;--i:3"></i>
+                  <i style="--h:67%;--i:4"></i>
+                  <i style="--h:81%;--i:5"></i>
+                  <i style="--h:58%;--i:6"></i>
+                </div>
+                <div class="bw__risk">
+                  <span><i style="background:#1b9e5a"></i>ต่ำ</span>
+                  <span><i style="background:#d4af37"></i>กลาง</span>
+                  <span><i style="background:#ef6c00"></i>สูง</span>
+                  <span><i style="background:#b71c1c"></i>วิกฤต</span>
                 </div>
               </div>
             </div>
