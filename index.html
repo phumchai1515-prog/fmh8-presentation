@@ -201,104 +201,215 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
 }
 
 /* ============================================================
-   SLIDE 1 · COVER
+   SLIDE 1 · COVER — CINEMATIC
    ============================================================ */
-.s-cover::before{
-  content:"";position:absolute;z-index:0;
-  left:50%;top:50%;transform:translate(-50%,-50%);
-  width:130vw;height:82vh;pointer-events:none;
-  background:radial-gradient(ellipse 40% 52% at 50% 50%,
-    rgba(212,166,71,.05) 0%,transparent 70%);
+
+/* ---- animated grid background ---- */
+.s-cover{overflow:hidden}
+.cv-grid{
+  position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(212,166,71,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(212,166,71,.04) 1px,transparent 1px);
+  background-size:68px 68px;
+  background-position:center;
+  mask-image:radial-gradient(ellipse 60% 55% at 50% 50%,#000 0%,transparent 100%);
+  -webkit-mask-image:radial-gradient(ellipse 60% 55% at 50% 50%,#000 0%,transparent 100%);
+  opacity:0;
+  transition:opacity 2s ease .3s;
 }
+.s-cover.is-active .cv-grid{opacity:1}
+
+/* ---- layered radial glows ---- */
+.cv-glow{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.cv-glow__a,.cv-glow__b,.cv-glow__c{
+  position:absolute;border-radius:50%;
+  left:50%;top:50%;transform:translate(-50%,-50%);
+}
+.cv-glow__a{
+  width:70vw;height:70vw;max-width:800px;max-height:800px;
+  background:radial-gradient(circle,rgba(212,166,71,.1) 0%,transparent 65%);
+  animation:glowPulse 5s ease-in-out infinite;
+}
+.cv-glow__b{
+  width:48vw;height:48vw;max-width:560px;max-height:560px;
+  background:radial-gradient(circle,rgba(26,77,58,.2) 0%,transparent 60%);
+  animation:glowPulse 7s ease-in-out 1.5s infinite;
+}
+.cv-glow__c{
+  width:32vw;height:32vw;max-width:380px;max-height:380px;
+  background:radial-gradient(circle,rgba(212,166,71,.12) 0%,transparent 55%);
+  animation:glowPulse 4s ease-in-out 3s infinite;
+}
+@keyframes glowPulse{
+  0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.7}
+  50%{transform:translate(-50%,-50%) scale(1.15);opacity:1}
+}
+
+/* ---- orbiting rings ---- */
+.cv-orbit{position:absolute;inset:0;z-index:0;pointer-events:none}
+.cv-orbit__ring{
+  position:absolute;left:50%;top:50%;
+  border-radius:50%;border:1px solid rgba(212,166,71,.08);
+  transform:translate(-50%,-50%);
+}
+.cv-orbit__ring:nth-child(1){
+  width:min(36vw,420px);height:min(36vw,420px);
+  animation:orbitSpin 40s linear infinite,orbitFade 3s ease .8s forwards;
+}
+.cv-orbit__ring:nth-child(2){
+  width:min(52vw,600px);height:min(52vw,600px);
+  border-style:dashed;border-color:rgba(212,166,71,.05);
+  animation:orbitSpin 60s linear reverse infinite,orbitFade 3s ease 1.2s forwards;
+}
+.cv-orbit__ring:nth-child(3){
+  width:min(68vw,780px);height:min(68vw,780px);
+  border-color:rgba(26,77,58,.12);
+  animation:orbitSpin 80s linear infinite,orbitFade 3s ease 1.6s forwards;
+}
+@keyframes orbitSpin{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+@keyframes orbitFade{from{opacity:0}to{opacity:1}}
+
+/* ---- floating particles (pure CSS) ---- */
+.cv-particles{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.cv-p{
+  position:absolute;width:3px;height:3px;border-radius:50%;
+  background:var(--gold);opacity:0;
+}
+.s-cover.is-active .cv-p{animation:particleFloat var(--dur,8s) ease-in-out var(--del,0s) infinite}
+@keyframes particleFloat{
+  0%{opacity:0;transform:translateY(0) scale(.4)}
+  15%{opacity:var(--op,.4)}
+  85%{opacity:var(--op,.4)}
+  100%{opacity:0;transform:translateY(var(--dy,-120px)) scale(.2)}
+}
+
+/* ---- horizontal light sweep across logo ---- */
+.cv-logo-wrap{position:relative;display:inline-block;overflow:hidden}
+.cv-logo-wrap::after{
+  content:"";position:absolute;inset:-20% -100% -20% -100%;
+  background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.12) 45%,
+    rgba(255,255,255,.2) 50%,rgba(255,255,255,.12) 55%,transparent 60%);
+  transform:translateX(-100%);
+}
+.s-cover.is-active .cv-logo-wrap::after{
+  animation:lightSweep 3s cubic-bezier(.22,.61,.36,1) 2s forwards;
+}
+@keyframes lightSweep{to{transform:translateX(100%)}}
+
+/* ---- cover layout ---- */
 .s-cover .slide__in{position:relative;z-index:1}
 .s-cover .wrap{flex:1;display:flex;flex-direction:column}
 
 .cv-top{
   text-align:center;
   font-size:clamp(.7rem,1vw,.84rem);
-  font-weight:500;letter-spacing:.18em;color:var(--ink-dim);
-  opacity:0;transition:opacity .9s ease .35s;
+  font-weight:500;letter-spacing:.22em;color:var(--ink-dim);
+  opacity:0;transform:translateY(-10px);
+  transition:opacity 1.2s ease .3s,transform 1.2s var(--ease) .3s;
 }
-.s-cover.is-active .cv-top{opacity:1}
+.s-cover.is-active .cv-top{opacity:1;transform:none}
 
 .cv-mid{
   flex:1;display:flex;flex-direction:column;
   align-items:center;justify-content:center;text-align:center;
-  gap:clamp(.5rem,1.5vh,1.1rem);
+  gap:clamp(.6rem,1.8vh,1.2rem);
   padding:clamp(1.4rem,4vh,3rem) 0;
 }
+
+/* tagline with animated border */
 .cv-tagline{
   font-size:clamp(.72rem,1.05vw,.92rem);
-  font-weight:600;letter-spacing:.3em;text-transform:uppercase;
+  font-weight:600;letter-spacing:.35em;text-transform:uppercase;
   color:var(--gold);
-  opacity:0;transition:opacity .6s ease .2s;
+  padding:.45rem 1.4rem;
+  border:1px solid rgba(212,166,71,.25);border-radius:99px;
+  opacity:0;transform:scale(.9);
+  transition:opacity .8s ease .5s,transform .8s var(--ease) .5s,border-color .4s ease;
 }
-.s-cover.is-active .cv-tagline{opacity:.8}
+.s-cover.is-active .cv-tagline{opacity:.85;transform:none}
+.cv-tagline:hover{border-color:rgba(212,166,71,.5)}
 
+/* ---- LOGO — dramatic entrance ---- */
 .cv-logo{
-  font-size:clamp(4.2rem,12vw,8.4rem);
-  font-weight:700;line-height:.92;letter-spacing:-.04em;
-  background:linear-gradient(180deg,#ffffff 0%,#d4d4d4 100%);
+  font-size:clamp(5.5rem,15vw,11rem);
+  font-weight:700;line-height:.88;letter-spacing:-.04em;
+  background:linear-gradient(180deg,#ffffff 0%,#e8e0cf 40%,#d4a647 100%);
   -webkit-background-clip:text;background-clip:text;
   -webkit-text-fill-color:transparent;color:transparent;
-  text-shadow:0 0 80px rgba(212,166,71,.15);
-  opacity:0;transform:translateY(30px) scale(.95);
-  transition:opacity 1.2s cubic-bezier(.16,1,.3,1) .8s,
-             transform 1.2s cubic-bezier(.16,1,.3,1) .8s;
+  filter:drop-shadow(0 0 60px rgba(212,166,71,.25)) drop-shadow(0 0 120px rgba(212,166,71,.1));
+  opacity:0;transform:translateY(40px) scale(.88);
+  transition:opacity 1.4s cubic-bezier(.16,1,.3,1) .9s,
+             transform 1.4s cubic-bezier(.16,1,.3,1) .9s,
+             filter 1.4s ease .9s;
 }
-.s-cover.is-active .cv-logo{opacity:1;transform:none}
+.s-cover.is-active .cv-logo{
+  opacity:1;transform:none;
+  filter:drop-shadow(0 0 40px rgba(212,166,71,.2)) drop-shadow(0 0 80px rgba(212,166,71,.08));
+}
 
+/* animated underline — wider + glow */
 .cv-underline{
-  width:clamp(74px,13vw,170px);height:2px;border-radius:2px;
-  background:var(--gold);
-  transform:scaleX(0);transform-origin:left;
-  transition:transform .6s cubic-bezier(.16,1,.3,1) 1.6s;
+  width:clamp(100px,18vw,220px);height:2px;border-radius:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  box-shadow:0 0 12px rgba(212,166,71,.3);
+  transform:scaleX(0);
+  transition:transform .8s cubic-bezier(.16,1,.3,1) 1.8s;
 }
 .s-cover.is-active .cv-underline{transform:scaleX(1)}
 
 .cv-sub{
-  font-size:clamp(1rem,2vw,1.6rem);font-weight:400;color:#fff;
+  font-size:clamp(1.05rem,2.2vw,1.7rem);font-weight:400;color:#fff;
   opacity:0;transform:translateY(20px);
-  transition:opacity .8s var(--ease) 2s,transform .8s var(--ease) 2s;
+  transition:opacity .9s var(--ease) 2.1s,transform .9s var(--ease) 2.1s;
 }
-.s-cover.is-active .cv-sub{opacity:.9;transform:none}
+.s-cover.is-active .cv-sub{opacity:.92;transform:none}
 
 .cv-region{
   font-size:clamp(.95rem,1.6vw,1.3rem);font-weight:600;color:var(--gold);
   opacity:0;transform:translateY(20px);
-  transition:opacity .8s var(--ease) 2.4s,transform .8s var(--ease) 2.4s;
+  transition:opacity .8s var(--ease) 2.5s,transform .8s var(--ease) 2.5s;
 }
 .s-cover.is-active .cv-region{opacity:1;transform:none}
 
+/* badges with glassmorphism */
 .cv-badges{
   display:flex;flex-wrap:wrap;align-items:center;justify-content:center;
   gap:clamp(.5rem,1.8vw,1.3rem);
+  margin-top:.4rem;
 }
 .cv-badges>*{
   opacity:0;transform:translateY(14px);
   transition:opacity .6s var(--ease),transform .6s var(--ease);
 }
 .s-cover.is-active .cv-badges>*{transition-delay:var(--d,3s)}
-.s-cover.is-active .cv-badge{opacity:.7;transform:none}
+.s-cover.is-active .cv-badge{opacity:1;transform:none}
 .s-cover.is-active .cv-sep{opacity:.45;transform:none}
 .cv-badge{
-  display:inline-flex;align-items:center;gap:.5rem;
+  display:inline-flex;align-items:center;gap:.55rem;
   font-size:clamp(.6rem,.82vw,.73rem);
   letter-spacing:.2em;text-transform:uppercase;
   font-weight:500;color:var(--ink-dim);
+  padding:.35rem .7rem;border-radius:99px;
+  background:rgba(236,231,218,.04);
+  border:1px solid rgba(236,231,218,.08);
+  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+  transition:background .3s ease,border-color .3s ease;
 }
+.cv-badge:hover{background:rgba(212,166,71,.08);border-color:rgba(212,166,71,.2)}
 .cv-badge::before{
-  content:"";width:4px;height:4px;border-radius:50%;flex:none;
-  background:#46a474;box-shadow:0 0 5px rgba(70,164,116,.6);
+  content:"";width:5px;height:5px;border-radius:50%;flex:none;
+  background:#46a474;box-shadow:0 0 6px rgba(70,164,116,.7),0 0 14px rgba(70,164,116,.3);
 }
 .cv-sep{color:rgba(236,231,218,.22);font-size:.7rem}
 
+/* corners + start button */
 .cv-corner{
   position:absolute;z-index:3;
   font-size:clamp(.66rem,.86vw,.77rem);
   font-weight:400;letter-spacing:.04em;line-height:1.55;
   color:var(--ink-dim);max-width:44vw;
-  opacity:0;transition:opacity .8s ease 3.9s;
+  opacity:0;transition:opacity .8s ease 4.2s;
 }
 .s-cover.is-active .cv-corner{opacity:.85}
 .cv-corner-l{left:clamp(1.6rem,5vw,3.6rem);bottom:clamp(3.6rem,8vh,5.4rem)}
@@ -308,27 +419,37 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
 .cv-start{
   position:absolute;z-index:3;
   right:clamp(1.6rem,5vw,3.6rem);bottom:clamp(3.9rem,8vh,5.5rem);
-  display:inline-flex;align-items:center;gap:.5rem;
-  background:none;border:0;cursor:pointer;font-family:inherit;
+  display:inline-flex;align-items:center;gap:.6rem;
+  background:rgba(212,166,71,.08);border:1px solid rgba(212,166,71,.3);
+  border-radius:99px;padding:.5rem 1.2rem;
+  cursor:pointer;font-family:inherit;
   font-size:clamp(.72rem,.95vw,.85rem);
   font-weight:600;letter-spacing:.12em;text-transform:uppercase;
   color:var(--gold);
-  opacity:0;transition:opacity .7s ease 4.1s,color .25s ease;
+  opacity:0;transition:opacity .7s ease 4.4s,background .3s ease,border-color .3s ease;
 }
 .s-cover.is-active .cv-start{opacity:1}
-.cv-start:hover{color:#e6c372}
+.cv-start:hover{background:rgba(212,166,71,.16);border-color:var(--gold)}
 .cv-start__arrow{display:inline-block}
 .s-cover.is-active .cv-start__arrow{
-  animation:cvArrow 1.9s ease-in-out 4.6s infinite;
+  animation:cvArrow 1.9s ease-in-out 5s infinite;
 }
 @keyframes cvArrow{
   0%,100%{transform:translateX(0)}
-  50%{transform:translateX(5px)}
+  50%{transform:translateX(6px)}
 }
+
+/* ---- vignette frame edges ---- */
+.cv-vignette{
+  position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 80% 80% at 50% 50%,transparent 50%,rgba(6,6,6,.6) 100%);
+}
+
 @media (max-width:600px){
-  .cv-logo{font-size:clamp(3.2rem,12vw,5.4rem)}
+  .cv-logo{font-size:clamp(3.6rem,14vw,6rem)}
   .cv-corner,.cv-start{display:none}
   .cv-app{width:min(92vw,420px)}
+  .cv-orbit__ring:nth-child(3){display:none}
 }
 
 /* ============================================================
@@ -506,7 +627,120 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
 .cascade .arrow{color:var(--ink-dark-dim);background:0;border:0;padding:0}
 
 /* ============================================================
-   SLIDE 5 · THE SYSTEM
+   SLIDE 5 · KM 3 BEATS
+   ============================================================ */
+.s-km .wrap{max-width:1080px}
+.km__head{text-align:center;margin-bottom:clamp(2.2rem,5vh,3.6rem)}
+.km__title{
+  font-size:clamp(1.8rem,4.2vw,3.4rem);font-weight:700;line-height:1.35;
+  margin-bottom:.6rem;
+}
+.km__sub{
+  font-size:clamp(.92rem,1.35vw,1.1rem);color:var(--ink-dim);line-height:1.7;
+}
+
+/* timeline rail */
+.km-tl{
+  position:relative;
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:clamp(1.2rem,2.8vw,2.4rem);
+}
+.km-tl::before{
+  content:"";position:absolute;
+  top:46px;left:16.7%;right:16.7%;height:2px;
+  background:linear-gradient(90deg,var(--gold),rgba(212,166,71,.25),var(--gold));
+  z-index:0;
+}
+
+.km-beat{
+  position:relative;z-index:1;
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+}
+
+/* circle number */
+.km-beat__ring{
+  width:92px;height:92px;border-radius:50%;
+  background:rgba(212,166,71,.08);
+  border:1.5px solid rgba(212,166,71,.35);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:1.3rem;flex:none;
+  transition:border-color .5s ease,background .5s ease;
+}
+.km-beat:hover .km-beat__ring{
+  border-color:var(--gold);background:rgba(212,166,71,.15);
+}
+.km-beat__icon{
+  width:42px;height:42px;stroke:var(--gold);fill:none;
+  stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;
+}
+
+.km-beat__n{
+  font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:.55rem;
+}
+.km-beat__t{
+  font-size:clamp(1.2rem,2vw,1.6rem);font-weight:700;
+  margin-bottom:.65rem;line-height:1.35;
+}
+.km-beat__d{
+  font-size:clamp(.84rem,1.1vw,.96rem);
+  color:var(--ink-dim);line-height:1.85;max-width:30ch;
+}
+
+/* participants pill row */
+.km-who{
+  display:flex;flex-wrap:wrap;justify-content:center;
+  gap:.35rem;margin-top:.9rem;
+}
+.km-who span{
+  font-size:.68rem;font-weight:500;
+  background:rgba(236,231,218,.07);border:1px solid var(--line-d);
+  padding:.25rem .55rem;border-radius:99px;color:var(--ink-dim);
+}
+
+/* insight box */
+.km-insight{
+  margin-top:clamp(2.4rem,5vh,3.8rem);
+  background:rgba(181,70,47,.08);
+  border:1px solid rgba(181,70,47,.22);border-radius:16px;
+  padding:clamp(1.3rem,2.6vw,2rem) clamp(1.5rem,3vw,2.4rem);
+  display:flex;align-items:flex-start;gap:1.2rem;
+  max-width:840px;margin-left:auto;margin-right:auto;
+}
+.km-insight__icon{
+  flex:none;width:36px;height:36px;
+  background:rgba(181,70,47,.18);border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+}
+.km-insight__icon svg{width:20px;height:20px;stroke:var(--red);fill:none;
+  stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.km-insight__body{flex:1}
+.km-insight__t{
+  font-size:clamp(1rem,1.5vw,1.2rem);font-weight:700;
+  margin-bottom:.45rem;color:var(--ink);
+}
+.km-insight__d{
+  font-size:clamp(.86rem,1.15vw,1rem);
+  color:rgba(236,231,218,.7);line-height:1.85;
+}
+.km-insight__d b{color:var(--red);font-weight:600}
+
+/* bottom quote */
+.km-close{
+  margin-top:clamp(1.6rem,3.5vh,2.6rem);text-align:center;
+  font-size:clamp(1.05rem,1.7vw,1.35rem);font-weight:600;
+  color:var(--ink);line-height:1.7;
+}
+.km-close em{font-style:normal;color:var(--gold)}
+
+@media (max-width:760px){
+  .km-tl{grid-template-columns:1fr;gap:2rem}
+  .km-tl::before{display:none}
+  .km-insight{flex-direction:column;gap:.8rem}
+}
+
+/* ============================================================
+   SLIDE 6 · THE SYSTEM
    ============================================================ */
 .sys__intro{text-align:center;margin-bottom:clamp(2rem,4.5vh,3.4rem)}
 .sys__pre{font-size:clamp(.92rem,1.4vw,1.12rem);color:var(--ink-dim);margin-bottom:.9rem}
@@ -686,7 +920,136 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
 .sys__line b{color:var(--gold);font-weight:600}
 
 /* ============================================================
-   SLIDE 6 · THE CALLBACK
+   SLIDE 7 · RESULTS
+   ============================================================ */
+.s-results .wrap{max-width:1080px}
+.res__head{text-align:center;margin-bottom:clamp(2rem,4.5vh,3.2rem)}
+.res__title{
+  font-size:clamp(1.8rem,4.2vw,3.4rem);font-weight:700;line-height:1.35;
+  margin-bottom:.5rem;
+}
+.res__sub{
+  font-size:clamp(.92rem,1.35vw,1.1rem);color:var(--ink-dim);line-height:1.7;
+}
+
+/* before → after cards */
+.res-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:clamp(1rem,2vw,1.6rem);
+  margin-bottom:clamp(2rem,4.5vh,3.2rem);
+}
+.res-card{
+  position:relative;
+  background:rgba(236,231,218,.04);
+  border:1px solid var(--line-d);border-radius:18px;
+  padding:clamp(1.4rem,2.4vw,2rem);
+  display:flex;flex-direction:column;gap:.85rem;
+  overflow:hidden;
+  transition:border-color .4s ease,transform .45s var(--ease);
+}
+.res-card:hover{border-color:rgba(212,166,71,.3);transform:translateY(-6px)}
+.res-card__n{
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(212,166,71,.1);border:1px solid rgba(212,166,71,.25);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.82rem;font-weight:700;color:var(--gold);
+}
+.res-card__old{
+  font-size:clamp(.82rem,1.05vw,.92rem);
+  color:var(--ink-dim);line-height:1.75;
+  padding-left:.9rem;border-left:2px solid rgba(181,70,47,.4);
+}
+.res-card__arrow{
+  display:flex;align-items:center;gap:.4rem;
+  font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--gold);
+}
+.res-card__arrow::before{
+  content:"";width:22px;height:1px;background:var(--gold);
+}
+.res-card__new{
+  font-size:clamp(.95rem,1.4vw,1.15rem);
+  font-weight:600;color:var(--ink);line-height:1.65;
+}
+
+/* quote highlight */
+.res-quote{
+  position:relative;
+  background:rgba(26,77,58,.12);
+  border:1px solid rgba(26,77,58,.25);border-radius:18px;
+  padding:clamp(1.6rem,3vw,2.4rem) clamp(1.8rem,3.5vw,2.8rem);
+  text-align:center;
+  margin-bottom:clamp(2rem,4.5vh,3.2rem);
+}
+.res-quote::before{
+  content:""";position:absolute;
+  top:-.15em;left:clamp(.8rem,2vw,1.4rem);
+  font-size:clamp(3.5rem,7vw,5.5rem);font-weight:700;line-height:1;
+  color:rgba(26,77,58,.3);pointer-events:none;
+}
+.res-quote__text{
+  font-size:clamp(1.15rem,2vw,1.6rem);font-weight:600;
+  color:var(--ink);line-height:1.7;
+  max-width:36ch;margin:0 auto .6rem;
+}
+.res-quote__by{
+  font-size:clamp(.78rem,1vw,.88rem);
+  color:var(--ink-dim);font-weight:400;
+}
+
+/* next steps */
+.res-next{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:clamp(1rem,2.2vw,1.8rem);
+}
+.res-step{
+  background:rgba(236,231,218,.04);
+  border:1px solid var(--line-d);border-radius:14px;
+  padding:clamp(1.2rem,2.2vw,1.8rem);
+  display:flex;gap:1rem;align-items:flex-start;
+}
+.res-step__icon{
+  flex:none;width:40px;height:40px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+}
+.res-step__icon--near{background:rgba(212,166,71,.12)}
+.res-step__icon--far{background:rgba(26,77,58,.15)}
+.res-step__icon svg{
+  width:20px;height:20px;fill:none;
+  stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;
+}
+.res-step__icon--near svg{stroke:var(--gold)}
+.res-step__icon--far svg{stroke:#46a474}
+.res-step__tag{
+  font-size:.66rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  margin-bottom:.3rem;
+}
+.res-step__tag--near{color:var(--gold)}
+.res-step__tag--far{color:#46a474}
+.res-step__t{
+  font-size:clamp(1.05rem,1.6vw,1.3rem);font-weight:700;
+  margin-bottom:.35rem;line-height:1.35;
+}
+.res-step__d{
+  font-size:clamp(.82rem,1.1vw,.95rem);
+  color:var(--ink-dim);line-height:1.75;
+}
+
+/* closing line */
+.res-close{
+  margin-top:clamp(1.8rem,4vh,2.8rem);text-align:center;
+  font-size:clamp(1.05rem,1.7vw,1.35rem);font-weight:600;
+  color:var(--ink);line-height:1.7;
+}
+.res-close em{font-style:normal;color:var(--gold)}
+
+@media (max-width:760px){
+  .res-grid{grid-template-columns:1fr}
+  .res-next{grid-template-columns:1fr}
+}
+
+/* ============================================================
+   SLIDE 8 · THE CALLBACK
    ============================================================ */
 .cb__head{
   font-size:clamp(1.45rem,3vw,2.5rem);
@@ -856,7 +1219,7 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
 .no-js .reveal,.no-js .w,.no-js .phone,.no-js .browser,
 .no-js .cv-top,.no-js .cv-tagline,.no-js .cv-logo,.no-js .cv-sub,
 .no-js .cv-region,.no-js .cv-badges>*,.no-js .cv-corner,.no-js .cv-start,
-.no-js .cv-app{
+.no-js .cv-app,.no-js .cv-grid{
   opacity:1!important;transform:none!important}
 .no-js .cv-underline{transform:scaleX(1)!important}
 .no-js .chart i{transform:scaleY(1)!important}
@@ -871,7 +1234,8 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
   .progress i,.help,.help__card,
   .cv-top,.cv-tagline,.cv-logo,.cv-underline,.cv-sub,.cv-region,
   .cv-badges>*,.cv-corner,.cv-start,.cv-app{transition-duration:.01ms!important}
-  .ring,.cv-start__arrow{animation:none!important}
+  .ring,.cv-start__arrow,.cv-glow__a,.cv-glow__b,.cv-glow__c,
+  .cv-orbit__ring,.cv-p{animation:none!important}
   .ring{opacity:.22!important}
 }
 </style>
@@ -884,13 +1248,44 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
   <!-- ===================== SLIDE 1 · COVER ===================== -->
   <section class="slide s-cover is-active" data-slide="0" data-theme="dark"
            role="group" aria-label="สไลด์ 1 — หน้าปก">
+
+    <!-- cinematic background layers -->
+    <div class="cv-grid" aria-hidden="true"></div>
+    <div class="cv-glow" aria-hidden="true">
+      <div class="cv-glow__a"></div>
+      <div class="cv-glow__b"></div>
+      <div class="cv-glow__c"></div>
+    </div>
+    <div class="cv-orbit" aria-hidden="true">
+      <div class="cv-orbit__ring"></div>
+      <div class="cv-orbit__ring"></div>
+      <div class="cv-orbit__ring"></div>
+    </div>
+    <div class="cv-particles" aria-hidden="true">
+      <span class="cv-p" style="left:12%;top:68%;--dur:7s;--del:0s;--dy:-100px;--op:.35"></span>
+      <span class="cv-p" style="left:24%;top:78%;--dur:9s;--del:1.2s;--dy:-140px;--op:.25"></span>
+      <span class="cv-p" style="left:38%;top:82%;--dur:6s;--del:2.5s;--dy:-90px;--op:.4"></span>
+      <span class="cv-p" style="left:52%;top:75%;--dur:8s;--del:.8s;--dy:-130px;--op:.3"></span>
+      <span class="cv-p" style="left:66%;top:80%;--dur:10s;--del:3s;--dy:-160px;--op:.2"></span>
+      <span class="cv-p" style="left:78%;top:72%;--dur:7s;--del:1.8s;--dy:-110px;--op:.35"></span>
+      <span class="cv-p" style="left:88%;top:85%;--dur:9s;--del:.4s;--dy:-120px;--op:.28"></span>
+      <span class="cv-p" style="left:8%;top:45%;--dur:11s;--del:4s;--dy:-80px;--op:.2"></span>
+      <span class="cv-p" style="left:92%;top:52%;--dur:8s;--del:2s;--dy:-100px;--op:.22"></span>
+      <span class="cv-p" style="left:45%;top:90%;--dur:6s;--del:3.5s;--dy:-150px;--op:.3"></span>
+      <span class="cv-p" style="left:30%;top:60%;--dur:12s;--del:5s;--dy:-70px;--op:.18"></span>
+      <span class="cv-p" style="left:70%;top:55%;--dur:7s;--del:1s;--dy:-90px;--op:.25"></span>
+    </div>
+    <div class="cv-vignette" aria-hidden="true"></div>
+
     <div class="slide__in"><div class="wrap">
 
       <p class="cv-top">กรมสุขภาพจิต · โรงพยาบาลจิตเวชเลยราชนครินทร์</p>
 
       <div class="cv-mid">
         <p class="cv-tagline">KMH Talk + Innovation 2026</p>
-        <div class="cv-logo">FMH8</div>
+        <div class="cv-logo-wrap">
+          <div class="cv-logo">FMH8</div>
+        </div>
         <span class="cv-underline" aria-hidden="true"></span>
         <p class="cv-sub">ระบบดูแลผู้ป่วยนิติจิตเวชหลังพ้นโทษ</p>
         <p class="cv-region">เขตสุขภาพที่ 8 · กรมสุขภาพจิต</p>
@@ -1120,9 +1515,113 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
     </div></div>
   </section>
 
-  <!-- ===================== SLIDE 5 · THE SYSTEM ===================== -->
-  <section class="slide s-system" data-slide="4" data-theme="dark"
-           role="group" aria-label="สไลด์ 5 — ระบบ">
+  <!-- ===================== SLIDE 5 · KM 3 BEATS ===================== -->
+  <section class="slide s-km" data-slide="4" data-theme="dark"
+           role="group" aria-label="สไลด์ 5 — กระบวนการจัดการความรู้ 3 จังหวะ">
+    <div class="slide__in"><div class="wrap">
+
+      <div class="km__head">
+        <p class="eyebrow reveal">กระบวนการจัดการความรู้</p>
+        <h2 class="km__title reveal" style="--i:1">FMH8 เกิดจาก KM 3 จังหวะ</h2>
+        <p class="km__sub reveal" style="--i:2">ไม่ได้เกิดในห้องคอมพิวเตอร์ — แต่เกิดจากการฟังคนหน้างาน</p>
+      </div>
+
+      <div class="km-tl">
+        <!-- BEAT 1 -->
+        <div class="km-beat reveal" style="--i:2">
+          <div class="km-beat__ring">
+            <svg class="km-beat__icon" viewBox="0 0 24 24">
+              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+              <line x1="12" y1="19" x2="12" y2="23"/>
+              <line x1="8" y1="23" x2="16" y2="23"/>
+            </svg>
+          </div>
+          <p class="km-beat__n">จังหวะที่ 1</p>
+          <h3 class="km-beat__t">เราฟัง</h3>
+          <p class="km-beat__d">
+            เวทีแลกเปลี่ยนเรียนรู้ของคนหน้างาน
+            และการถอดบทเรียนหลังลงมือทำ —
+            ถามคำถามเดียว:
+            "จุดที่ผู้ป่วยหลุดจากระบบบ่อยที่สุด คือตอนไหน?"
+          </p>
+          <div class="km-who">
+            <span>พยาบาลจิตเวช</span>
+            <span>จนท. รพ.สต.</span>
+            <span>จนท. เรือนจำ</span>
+          </div>
+        </div>
+
+        <!-- BEAT 2 -->
+        <div class="km-beat reveal" style="--i:3">
+          <div class="km-beat__ring">
+            <svg class="km-beat__icon" viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              <line x1="11" y1="8" x2="11" y2="14"/>
+              <line x1="8" y1="11" x2="14" y2="11"/>
+            </svg>
+          </div>
+          <p class="km-beat__n">จังหวะที่ 2</p>
+          <h3 class="km-beat__t">เราเรียน</h3>
+          <p class="km-beat__d">
+            ย้อนดูเคสก่อเหตุซ้ำในรอบ 5 ปี —
+            ทุกเคสมี 2 อย่างเหมือนกัน:
+            ขาดยาอย่างน้อย 2 สัปดาห์
+            และไม่มีใครในระบบรู้ว่าเขาขาดยา
+          </p>
+        </div>
+
+        <!-- BEAT 3 -->
+        <div class="km-beat reveal" style="--i:4">
+          <div class="km-beat__ring">
+            <svg class="km-beat__icon" viewBox="0 0 24 24">
+              <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+              <path d="M2 17l10 5 10-5"/>
+              <path d="M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <p class="km-beat__n">จังหวะที่ 3</p>
+          <h3 class="km-beat__t">เราสร้าง</h3>
+          <p class="km-beat__d">
+            ออกแบบระบบร่วมกับคนใช้จริง —
+            พยาบาล เจ้าหน้าที่ รพ.สต.
+            เจ้าหน้าที่เรือนจำ และครอบครัวผู้ป่วย
+            ไม่ใช่จากในห้องประชุม
+          </p>
+          <div class="km-who">
+            <span>คนหน้างาน</span>
+            <span>ครอบครัว</span>
+            <span>Co-design</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="km-insight reveal" style="--i:5">
+        <div class="km-insight__icon">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <div class="km-insight__body">
+          <p class="km-insight__t">สิ่งที่เราค้นพบ</p>
+          <p class="km-insight__d">
+            ผู้ป่วยที่กลับมาก่อเหตุซ้ำ มี 2 อย่างเหมือนกันทุกเคส —
+            <b>ขาดยามาแล้วอย่างน้อย 2 สัปดาห์</b> และ
+            <b>ไม่มีใครในระบบรู้ว่าเขาขาดยา</b><br>
+            ปัญหาไม่ใช่ตัวผู้ป่วย… ปัญหาคือ "ระบบที่ตาบอด"
+          </p>
+        </div>
+      </div>
+
+      <p class="km-close reveal" style="--i:6">
+        จาก KM สู่ระบบจริง — เพราะ <em>คำตอบอยู่ที่คนหน้างาน</em>
+      </p>
+
+    </div></div>
+  </section>
+
+  <!-- ===================== SLIDE 6 · THE SYSTEM ===================== -->
+  <section class="slide s-system" data-slide="5" data-theme="dark"
+           role="group" aria-label="สไลด์ 6 — ระบบ">
     <div class="slide__in"><div class="wrap">
 
       <div class="sys__intro">
@@ -1265,9 +1764,82 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
     </div></div>
   </section>
 
-  <!-- ===================== SLIDE 6 · THE CALLBACK ===================== -->
-  <section class="slide s-callback" data-slide="5" data-theme="green"
-           role="group" aria-label="สไลด์ 6 — บทสรุป">
+  <!-- ===================== SLIDE 7 · RESULTS ===================== -->
+  <section class="slide s-results" data-slide="6" data-theme="dark"
+           role="group" aria-label="สไลด์ 7 — ผลลัพธ์">
+    <div class="slide__in"><div class="wrap">
+
+      <div class="res__head">
+        <p class="eyebrow reveal">ผลลัพธ์ที่เกิดขึ้นจริง</p>
+        <h2 class="res__title reveal" style="--i:1">หลังใช้ FMH8 เปลี่ยนชัดเจน 3 อย่าง</h2>
+      </div>
+
+      <div class="res-grid">
+        <!-- card 1 -->
+        <article class="res-card reveal" style="--i:2">
+          <span class="res-card__n">1</span>
+          <p class="res-card__old">กระดาษและข้อความไลน์ กระจัดกระจาย ไม่มีใครรู้ว่าข้อมูลอยู่ที่ไหน</p>
+          <p class="res-card__arrow">เปลี่ยนเป็น</p>
+          <p class="res-card__new">ฐานข้อมูลกลาง ที่ทุกคนเข้าถึงพร้อมกันได้</p>
+        </article>
+
+        <!-- card 2 -->
+        <article class="res-card reveal" style="--i:3">
+          <span class="res-card__n">2</span>
+          <p class="res-card__old">ข้อมูลไหลทางเดียว — ต้นทางส่ง แต่ไม่รู้ว่าปลายทางได้รับหรือไม่</p>
+          <p class="res-card__arrow">เปลี่ยนเป็น</p>
+          <p class="res-card__new">ข้อมูลไหลสองทาง ในเวลาจริง — เรือนจำ แม่ข่าย ทีมรักษา เห็นพร้อมกัน</p>
+        </article>
+
+        <!-- card 3 -->
+        <article class="res-card reveal" style="--i:4">
+          <span class="res-card__n">3</span>
+          <p class="res-card__old">โทรประสานข้ามจังหวัดทีละสาย ซ้ำซ้อน สูญเสียเวลา</p>
+          <p class="res-card__arrow">เปลี่ยนเป็น</p>
+          <p class="res-card__new">รายงานสรุปอัตโนมัติ ปลอดภัยตามกฎหมายคุ้มครองข้อมูล</p>
+        </article>
+      </div>
+
+      <div class="res-quote reveal" style="--i:5">
+        <p class="res-quote__text">
+          "พี่… ตั้งแต่มีระบบนี้ หนูรู้สึกว่ามีคนยืนข้างหนูแล้วค่ะ"
+        </p>
+        <p class="res-quote__by">— เจ้าหน้าที่ รพ.สต. ในเขตสุขภาพที่ 8</p>
+      </div>
+
+      <div class="res-next">
+        <div class="res-step reveal" style="--i:6">
+          <div class="res-step__icon res-step__icon--near">
+            <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <div>
+            <p class="res-step__tag res-step__tag--near">ระยะใกล้</p>
+            <h3 class="res-step__t">ครอบคลุม 7 จังหวัด</h3>
+            <p class="res-step__d">ขยายให้ครบเขตสุขภาพที่ 8 ทั้งหมด — ผู้ป่วยทุกคนได้มาตรฐานเดียวกัน</p>
+          </div>
+        </div>
+        <div class="res-step reveal" style="--i:7">
+          <div class="res-step__icon res-step__icon--far">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div>
+            <p class="res-step__tag res-step__tag--far">ระยะไกล</p>
+            <h3 class="res-step__t">ต้นแบบ 12 เขตทั่วประเทศ</h3>
+            <p class="res-step__d">เป็นต้นแบบให้เขตสุขภาพอื่น และต่อยอดดูแลกลุ่ม SMI-V ที่ยังไม่มีระบบ</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="res-close reveal" style="--i:8">
+        เพราะหัวใจของ FMH8 ไม่ใช่เทคโนโลยี — แต่คือแนวคิดที่ว่า <em>"ไม่ปล่อยให้ใครรับภาระคนเดียว"</em>
+      </p>
+
+    </div></div>
+  </section>
+
+  <!-- ===================== SLIDE 8 · THE CALLBACK ===================== -->
+  <section class="slide s-callback" data-slide="7" data-theme="green"
+           role="group" aria-label="สไลด์ 8 — บทสรุป">
     <div class="slide__in"><div class="wrap">
       <p class="eyebrow reveal">และกลับมาที่แม่คนนั้น</p>
       <h2 class="cb__head reveal" style="--i:1">
@@ -1312,8 +1884,8 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
   </section>
 
   <!-- ===================== SLIDE 7 · OVERVIEW ===================== -->
-  <section class="slide s-overview" data-slide="6" data-theme="light"
-           role="group" aria-label="สไลด์ 7 — ภาพรวมเว็บแอป">
+  <section class="slide s-overview" data-slide="8" data-theme="light"
+           role="group" aria-label="สไลด์ 9 — ภาพรวมเว็บแอป">
     <div class="slide__in"><div class="wrap">
 
       <div class="ov-head">
@@ -1439,7 +2011,7 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
   <div class="progress" aria-hidden="true"><i id="pfill"></i></div>
 
   <div class="counter" id="counter" aria-live="polite">
-    <b>01</b> / 07
+    <b>01</b> / 09
   </div>
 
   <nav class="dots" id="dots" data-no-nav aria-label="ไปยังสไลด์">
@@ -1447,9 +2019,11 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
     <button class="dot" data-i="1" aria-label="สไลด์ 2"></button>
     <button class="dot" data-i="2" aria-label="สไลด์ 3"></button>
     <button class="dot" data-i="3" aria-label="สไลด์ 4"></button>
-    <button class="dot" data-i="4" aria-label="สไลด์ 5"></button>
+    <button class="dot" data-i="4" aria-label="สไลด์ 5 — KM"></button>
     <button class="dot" data-i="5" aria-label="สไลด์ 6"></button>
     <button class="dot" data-i="6" aria-label="สไลด์ 7"></button>
+    <button class="dot" data-i="7" aria-label="สไลด์ 8"></button>
+    <button class="dot" data-i="8" aria-label="สไลด์ 9"></button>
   </nav>
 
   <button class="hud-btn hud-fs" id="btnFs" data-no-nav
