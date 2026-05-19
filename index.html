@@ -1174,14 +1174,25 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
    SLIDE 9 · THE CALLBACK
    ============================================================ */
 .cb__head{
-  font-size:clamp(1.45rem,3vw,2.5rem);
-  font-weight:700;line-height:1.45;max-width:30ch;
-  margin-bottom:clamp(1.8rem,4vh,2.8rem);
+  font-size:clamp(1.35rem,2.5vw,2.15rem);
+  font-weight:700;line-height:1.4;max-width:34ch;
+  margin-bottom:clamp(.9rem,2.2vh,1.5rem);
 }
 .cb__head em{font-style:normal;color:var(--gold)}
 
-.tl{display:flex;flex-direction:column;gap:clamp(1.1rem,2.6vw,1.8rem)}
-.tl__row{display:flex;flex-direction:column;gap:.6rem}
+/* closing slide — dark cinematic backdrop with warm glow */
+.slide.s-callback{
+  background:
+    radial-gradient(ellipse 58% 40% at 50% 60%,rgba(212,166,71,.13),transparent 72%),
+    radial-gradient(ellipse 130% 90% at 50% 50%,#15140e,#0a0a0a 72%);
+}
+.s-callback .slide__in{
+  padding-top:clamp(3rem,6vh,4.6rem);
+  padding-bottom:clamp(3.4rem,6.5vh,5rem);
+}
+
+.tl{display:flex;flex-direction:column;gap:clamp(.7rem,1.6vw,1.05rem)}
+.tl__row{display:flex;flex-direction:column;gap:.5rem}
 .tl__head{display:flex;align-items:baseline;gap:.85rem;flex-wrap:wrap}
 .tl__tag{
   font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
@@ -1189,7 +1200,7 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
 }
 .tl__tag--old{color:#f0c9bf;background:rgba(181,70,47,.26)}
 .tl__tag--new{color:#0d2b20;background:var(--gold)}
-.tl__dur{font-size:clamp(1.35rem,2.8vw,2.2rem);font-weight:700;letter-spacing:-.01em}
+.tl__dur{font-size:clamp(1.2rem,2.3vw,1.8rem);font-weight:700;letter-spacing:-.01em}
 .tl__dur--old{color:#e08a72}
 .tl__dur--new{color:var(--gold)}
 .tl__track{position:relative;height:12px;border-radius:99px;
@@ -1213,10 +1224,10 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
 .tl__note{font-size:clamp(.84rem,1.2vw,1rem);
   color:rgba(236,231,218,.6);line-height:1.7}
 
-.finale{margin-top:clamp(2.4rem,6vh,4.5rem)}
+.finale{margin-top:clamp(1.2rem,3vh,2rem)}
 .finale__line{
   display:block;
-  font-size:clamp(2rem,6.4vw,5.4rem);
+  font-size:clamp(1.6rem,4vw,3.1rem);
   font-weight:700;line-height:1.26;letter-spacing:-.01em;
 }
 .finale__line--accent{color:var(--gold)}
@@ -1295,20 +1306,20 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
 /* ============================================================
    SLIDE 11 · CALLBACK — closing block
    ============================================================ */
-.cb-end{margin-top:clamp(2rem,5vh,3.4rem)}
+.cb-end{margin-top:clamp(1rem,2.5vh,1.7rem)}
 .cb-end__sum{
-  font-size:clamp(1rem,1.6vw,1.3rem);font-weight:500;
-  color:var(--ink);line-height:1.85;max-width:50ch;
-  margin-bottom:1.5rem;
+  font-size:clamp(.9rem,1.35vw,1.08rem);font-weight:500;
+  color:var(--ink-dim);line-height:1.7;max-width:56ch;
+  margin-bottom:.9rem;
 }
 .cb-end__sum em{font-style:normal;color:var(--gold);font-weight:700}
 .cb-end__thanks{
-  font-size:clamp(1.8rem,4vw,3rem);font-weight:700;
-  color:var(--gold);line-height:1.2;margin-bottom:.5rem;
+  font-size:clamp(1.55rem,3.2vw,2.5rem);font-weight:700;
+  color:var(--gold);line-height:1.2;margin-bottom:.35rem;
 }
 .cb-end__by{
-  font-size:clamp(.78rem,1vw,.92rem);
-  color:rgba(236,231,218,.6);line-height:1.6;
+  font-size:clamp(.74rem,.95vw,.88rem);
+  color:var(--ink-dim);line-height:1.55;
 }
 
 /* ============================================================
@@ -1379,6 +1390,73 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
   .cv-orbit__ring,.cv-p{animation:none!important}
   .ring{opacity:.22!important}
 }
+
+/* ============================================================
+   TELEPROMPTER · บทพูด  (กด S หรือปุ่ม HUD)
+   ============================================================ */
+.hud-script{left:calc(clamp(1.2rem,4vw,2.6rem) + 3.1rem)}
+.hud-script.is-on{
+  background:rgba(212,166,71,.2);
+  border-color:var(--gold);color:var(--gold);
+}
+
+.prompter{
+  position:fixed;left:0;right:0;bottom:0;z-index:120;
+  height:min(42vh,440px);
+  display:flex;flex-direction:column;
+  background:rgba(11,11,10,.97);
+  border-top:2px solid var(--gold);
+  box-shadow:0 -20px 55px rgba(0,0,0,.6);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  transform:translateY(101%);
+  transition:transform .42s var(--ease);
+}
+.prompter.is-open{transform:translateY(0)}
+
+.prompter__bar{
+  flex:none;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  padding:.66rem clamp(1rem,3vw,2rem);
+  border-bottom:1px solid var(--line-d);
+}
+.prompter__meta{
+  min-width:0;
+  font-size:.82rem;font-weight:500;letter-spacing:.03em;color:var(--ink-dim);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.prompter__meta b{color:var(--gold);font-weight:700}
+.prompter__num{margin-left:.55rem;font-variant-numeric:tabular-nums}
+.prompter__tools{flex:none;display:flex;align-items:center;gap:.4rem}
+.prompter__btn{
+  font-family:inherit;cursor:pointer;
+  background:rgba(236,231,218,.07);border:1px solid var(--line-d);
+  color:var(--ink);border-radius:8px;
+  padding:.34rem .64rem;font-size:.82rem;font-weight:600;line-height:1;
+  transition:background .2s ease,border-color .2s ease;
+}
+.prompter__btn:hover{background:rgba(212,166,71,.16);border-color:var(--gold)}
+.prompter__x{font-size:.95rem}
+
+.prompter__body{
+  flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  padding:clamp(1rem,2.5vw,1.7rem) clamp(1rem,3vw,2rem) 2.6rem;
+  font-size:var(--pr-size,1.32rem);
+}
+.prompter__line{
+  color:#fff;font-weight:500;line-height:1.66;margin:0 0 .62rem;
+}
+.prompter__line--q{color:var(--gold);font-weight:700}
+.prompter__line--cue{
+  color:var(--ink-dark-dim);font-weight:400;font-style:italic;
+  font-size:.78em;letter-spacing:.04em;margin:.35rem 0 .9rem;
+}
+
+@media (max-width:600px){
+  .prompter{height:min(56vh,460px)}
+  .hud-script{left:calc(clamp(1.2rem,4vw,2.6rem) + 2.9rem)}
+}
+.no-js .prompter{display:none}
+@media print{.prompter{display:none!important}}
 </style>
 </head>
 
@@ -2201,7 +2279,7 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
   </section>
 
   <!-- ===================== SLIDE 11 · THE CALLBACK ===================== -->
-  <section class="slide s-callback" data-slide="10" data-theme="green"
+  <section class="slide s-callback" data-slide="10" data-theme="dark"
            role="group" aria-label="สไลด์ 11 — บทสรุป">
     <div class="slide__in"><div class="wrap">
       <p class="eyebrow reveal">และกลับมาที่แม่คนนั้น</p>
@@ -2287,6 +2365,16 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
 
   <button class="hud-btn hud-help" id="btnHelp" data-no-nav
           aria-label="ปุ่มลัดคีย์บอร์ด" title="ปุ่มลัด">?</button>
+
+  <button class="hud-btn hud-script" id="btnScript" data-no-nav
+          aria-label="แสดง/ซ่อนบทพูด (S)" title="บทพูด · S">
+    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3.5" y="4.5" width="17" height="15" rx="2"/>
+      <line x1="7" y1="9.5" x2="17" y2="9.5"/>
+      <line x1="7" y1="13" x2="17" y2="13"/>
+      <line x1="7" y1="16.5" x2="12.5" y2="16.5"/>
+    </svg>
+  </button>
 </div>
 
 <!-- ===================== HELP OVERLAY ===================== -->
@@ -2321,8 +2409,36 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
       <span class="help__keys"><span class="key">F</span><span class="key">Esc</span></span>
       <span>เข้า / ออก โหมดเต็มจอ</span>
     </div>
+    <div class="help__row">
+      <span class="help__keys"><span class="key">S</span></span>
+      <span>แสดง / ซ่อนบทพูด ใต้สไลด์</span>
+    </div>
+    <div class="help__row">
+      <span class="help__keys"><span class="key">P</span></span>
+      <span>เปิดหน้าต่าง Presenter — บทพูด + จับเวลา + ปุ่มเลื่อนสไลด์</span>
+    </div>
   </div>
 </div>
+
+<!-- ===================== TELEPROMPTER · บทพูด ===================== -->
+<aside class="prompter" id="prompter" data-no-nav aria-hidden="true"
+       aria-label="บทพูดสำหรับผู้นำเสนอ">
+  <div class="prompter__bar">
+    <span class="prompter__meta">
+      <b id="prAct">บทพูด</b>
+      <span class="prompter__num"><span id="prNum">01</span> / 11 · <span id="prTime">—</span></span>
+    </span>
+    <div class="prompter__tools">
+      <button class="prompter__btn" id="prFontDown" data-no-nav
+              aria-label="ลดขนาดตัวอักษร" title="ตัวเล็กลง">A−</button>
+      <button class="prompter__btn" id="prFontUp" data-no-nav
+              aria-label="เพิ่มขนาดตัวอักษร" title="ตัวใหญ่ขึ้น">A+</button>
+      <button class="prompter__btn prompter__x" id="prClose" data-no-nav
+              aria-label="ปิดบทพูด" title="ปิด (S)">✕</button>
+    </div>
+  </div>
+  <div class="prompter__body" id="prBody"></div>
+</aside>
 
 <script>
 (function(){
@@ -2516,18 +2632,173 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
   /* ==========================================================
      FEATURE 1 · PRESENTER MODE  (P key)
      ========================================================== */
-  var presenterNotes = [
-    'กรมสุขภาพจิต · KMH Talk + Innovation 2026',
-    'องก์ 1 — 9 โมงเช้า โทรศัพท์ดังขึ้น · แม่คนหนึ่งในเขตสุขภาพที่ 8',
-    'องก์ 1 — 47 วันที่ไม่มีใครรู้ → ก่อเหตุซ้ำ · "จุดบอด" · SMI-V 13,000+ · ข้ามกระทรวงคือจุดเปราะ',
-    'องก์ 2 — ส่งกันยังไง: กระดาษ / อีเมล / ไลน์ส่วนตัว → ภาระตกทุกคน',
-    'องก์ 2 — คำถาม: ออกแบบระบบใหม่ให้ทุกคน "ปลอดภัย" ร่วมกันยังไง?',
-    'องก์ 3 — แนะนำ FMH8 · เว็บ/PWA/ออฟไลน์ · พื้นที่มีข้อมูลตัวเอง · PDPA · ไลน์สรุปยอด',
-    'องก์ 3 — เบื้องหลัง: KM 3 จังหวะ · ฟัง (CoP+AAR) · เรียน (เคส 5 ปี) · สร้าง (Co-design)',
-    'องก์ 3 — ระบบทำงาน 3 ขั้น: ลงทะเบียนก่อนพ้นโทษ → ลงพื้นที่บันทึก → ข้อมูลไหลสองทาง',
-    'องก์ 4 — ผลลัพธ์ 3 อย่าง + คำพูด จนท. รพ.สต. "มีคนยืนข้างหนู"',
-    'องก์ 4 — ก้าวต่อไป 2 ระยะ: 7 จังหวัด → ต้นแบบ 12 เขต · หัวใจ: ไม่ปล่อยให้ใครรับภาระคนเดียว',
-    'องก์ 5 — Callback: 47 วัน → 2-3 วัน · "เธอไม่ได้อยู่คนเดียวอีกต่อไป" · ขอบคุณครับ'
+  /* full talk script · v6 — one entry per slide (11) */
+  var slideScript = [
+    { act:'หน้าปก', time:'ก่อนเริ่ม', lines:[
+      '(สไลด์หน้าปก — ยืนรอ ทักทายผู้ฟังตามธรรมเนียม)',
+      '(พร้อมแล้ว กด → หรือปุ่ม “กดเริ่ม” เพื่อเข้าสู่เรื่อง)'
+    ]},
+    { act:'องก์ 1 · ภาระที่มองไม่เห็น', time:'0:00–1:30', lines:[
+      '9 โมงเช้าวันหนึ่ง',
+      'โทรศัพท์ที่บ้านแม่คนหนึ่ง ในเขตสุขภาพที่ 8 ดังขึ้น',
+      'ปลายสายคือเจ้าหน้าที่ รพ.สต. เธอบอกว่า…',
+      '“พี่… หนูเพิ่งเปิดเอกสารจากเรือนจำเช้านี้… ว่าลูกพี่กลับมาอยู่บ้านแล้วค่ะ”',
+      'ลูกของเธอ พ้นโทษมาแล้ว…'
+    ]},
+    { act:'องก์ 1 · ภาระที่มองไม่เห็น', time:'0:00–1:30', lines:[
+      '47 วันครับ',
+      '47 วัน ที่ไม่มีใครในระบบรู้ว่าเขาอยู่ไหน',
+      '47 วัน ที่ไม่มีใครรู้ว่าเขายังกินยาอยู่หรือเปล่า',
+      'และในช่วง 47 วันนั้น…',
+      'เขาก่อเหตุซ้ำไปแล้วครับ',
+      '(เว้นจังหวะ)',
+      'วันนี้ผมอยากพูดเรื่อง…',
+      '“จุดบอด” ของระบบส่งต่อผู้ป่วยครับ',
+      'จุดบอดที่ทำให้แม่คนนั้น ต้องเฝ้าระวังลูกลำพัง โดยไม่มีใครช่วย',
+      '(เว้นจังหวะ)',
+      'ทั่วประเทศ มีผู้ป่วยจิตเวชที่เสี่ยงต่อการก่อเหตุรุนแรง',
+      'หรือที่เราเรียกสั้น ๆ ว่า SMI-V กว่า 13,000 คนครับ',
+      'แต่… มีน้อยกว่า 1 ใน 4 ที่ได้รับการติดตามจริง',
+      'และในกลุ่มที่พ้นโทษ ปัญหายิ่งหนัก',
+      'เพราะเรือนจำไม่ได้อยู่ในกระทรวงสาธารณสุข',
+      'การส่งข้อมูลข้ามกระทรวง คือจุดที่เปราะที่สุดครับ'
+    ]},
+    { act:'องก์ 2 · ปัญหาและภาระ', time:'1:30–3:00', lines:[
+      'ตอนผู้ป่วยจะพ้นโทษ เรือนจำต้องบอกพื้นที่ปลายทาง',
+      'ว่าเขากลับไปอยู่ที่ไหน ใครต้องดูแลต่อ ต้องกินยาอะไร',
+      'แต่ส่งกันยังไงครับ?',
+      'ส่งเป็นกระดาษ บางใบอ่านไม่ออก หรือหายระหว่างทาง',
+      'ส่งเป็นจดหมายอิเล็กทรอนิกส์ ที่ถูกลืมในกล่องของคนที่ลาออกไปแล้ว',
+      'และที่หนักที่สุด — ส่งผ่านข้อความไลน์ส่วนตัวระหว่างเจ้าหน้าที่',
+      '(เว้นจังหวะ)',
+      'ข้อมูลผู้ป่วยที่เคยก่อเหตุรุนแรง — ชื่อ เลขบัตรประชาชน ที่อยู่ ประวัติคดี',
+      'เก็บอยู่ในมือถือเจ้าหน้าที่แต่ละคน',
+      'ไม่มีการล็อก ไม่มีใครรู้ว่าใครเห็นบ้างครับ',
+      '(เว้นจังหวะ)',
+      'นี่คือ “ภาระ” ที่ตกอยู่กับทุกคน',
+      'ภาระของเจ้าหน้าที่ รพ.สต. ที่ต้องตามผู้ป่วยจากข้อความไลน์เก่า ๆ',
+      'ภาระของพยาบาลแม่ข่าย ที่ต้องโทรประสานข้ามจังหวัดทีละสาย',
+      'ภาระของครอบครัว ที่ต้องเฝ้าระวังอยู่ในบ้านคนเดียว',
+      'แต่ที่หนักที่สุด…',
+      'คือภาระของผู้ป่วยเอง ที่หลุดจากระบบ โดยไม่มีใครรู้'
+    ]},
+    { act:'องก์ 2 · ปัญหาและภาระ', time:'1:30–3:00', lines:[
+      'คำถามคือ…',
+      'ถ้าระบบเดิมทำให้ทุกคนเป็น “ภาระ” ของกันและกัน',
+      'เราจะออกแบบระบบใหม่ ที่ทำให้ทุกคน “ปลอดภัย” ร่วมกัน ได้ยังไงครับ?'
+    ]},
+    { act:'องก์ 3 · FMH8 และเบื้องหลังระบบ', time:'3:00–6:00', lines:[
+      'ผมขอแนะนำ…',
+      'FMH8 ครับ',
+      'ระบบดูแลผู้ป่วยนิติจิตเวชหลังพ้นโทษ ของเขตสุขภาพที่ 8',
+      'ที่ทีมโรงพยาบาลจิตเวชเลยราชนครินทร์พัฒนาขึ้น',
+      'เพื่อเปลี่ยน “ภาระของคนคนเดียว” ให้เป็น “ระบบที่ทุกคนปลอดภัยร่วมกัน”',
+      '(เว้นจังหวะ)',
+      'FMH8 เป็นโปรแกรมที่ใช้งานบนเว็บ ใช้ได้ทั้งคอมพิวเตอร์และมือถือ',
+      'ลงเป็นแอปบนมือถือได้เลย ไม่ต้องโหลดจาก App Store',
+      'และทำงานได้แม้ไม่มีสัญญาณอินเทอร์เน็ต — บันทึกไว้ในเครื่องก่อน แล้วส่งเองเมื่อกลับเข้าสัญญาณ',
+      '(เว้นจังหวะ)',
+      'หัวใจของระบบ คือการให้พื้นที่มีข้อมูลของตัวเองครับ',
+      'เจ้าหน้าที่ รพ.สต. มีฐานข้อมูลของตัวเอง เห็นเฉพาะผู้ป่วยในเขตที่ตัวเองดูแล',
+      'ระบบจัดสิทธิ์ให้อัตโนมัติ ตามจังหวัดและตามบทบาท',
+      'ส่วน อสม. หรือคนภายนอก ไม่มีสิทธิ์เข้าถึงข้อมูล เพื่อปกป้องผู้ป่วย ตามกฎหมายคุ้มครองข้อมูลส่วนบุคคล หรือ PDPA',
+      'และทุกครั้งที่ใครเปิดดูเคสไหน ระบบบันทึกไว้หมดครับ',
+      '(เว้นจังหวะ)',
+      'แล้วเราใช้ไลน์ยังไง?',
+      'ไลน์ทำหน้าที่เดียวเท่านั้นครับ — ส่งสรุปยอดรายเดือนเป็นตัวเลขรวม เข้ากลุ่มทีมแม่ข่าย',
+      'ไม่มีชื่อ ไม่มีข้อมูลรายบุคคล หลุดทางไลน์โดยเด็ดขาด',
+      'เราใช้ไลน์เพื่อสรุปยอด ไม่ใช่เพื่อแบกข้อมูลผู้ป่วยอีกต่อไป'
+    ]},
+    { act:'องก์ 3 · FMH8 และเบื้องหลังระบบ', time:'3:00–6:00', lines:[
+      'แล้วเราสร้างระบบนี้ขึ้นมายังไง?',
+      'FMH8 ไม่ได้เกิดในห้องคอมพิวเตอร์',
+      'มันเกิดจากกระบวนการจัดการความรู้ 3 จังหวะครับ',
+      '(เว้นจังหวะ)',
+      'จังหวะที่ 1 — เราฟัง',
+      'ใช้เครื่องมือจัดการความรู้ 2 อย่าง — เวทีแลกเปลี่ยนเรียนรู้ของคนหน้างาน',
+      'และการถอดบทเรียนหลังลงมือทำ',
+      'ในวงมีพยาบาลจิตเวช เจ้าหน้าที่ รพ.สต. และเจ้าหน้าที่เรือนจำ',
+      'เราถามคำถามเดียว — “จุดที่ผู้ป่วยหลุดจากระบบบ่อยที่สุด คือตอนไหน?”',
+      '(เว้นจังหวะ)',
+      'จังหวะที่ 2 — เราเรียน',
+      'ย้อนดูเคสที่กลับมาก่อเหตุซ้ำในรอบ 5 ปี เจอรูปแบบที่ชัดเจน',
+      'ผู้ป่วยที่กลับมาก่อเหตุซ้ำ มี 2 อย่างเหมือนกันทุกเคส',
+      'หนึ่ง — ขาดยามาแล้วอย่างน้อย 2 สัปดาห์',
+      'สอง — ไม่มีใครในระบบรู้ว่าเขาขาดยา',
+      'ปัญหาไม่ใช่ตัวผู้ป่วยครับ…',
+      'ปัญหาคือ “ระบบที่ตาบอด”',
+      '(เว้นจังหวะ)',
+      'จังหวะที่ 3 — เราสร้าง',
+      'ออกแบบระบบร่วมกับคนหน้างาน — พยาบาล เจ้าหน้าที่ รพ.สต. เจ้าหน้าที่เรือนจำ และครอบครัวผู้ป่วย',
+      'ออกแบบร่วมกับคนใช้จริง ไม่ใช่จากในห้องประชุมครับ'
+    ]},
+    { act:'องก์ 3 · FMH8 และเบื้องหลังระบบ', time:'3:00–6:00', lines:[
+      'ระบบทำงาน 3 ขั้น',
+      '(เว้นจังหวะ)',
+      'ขั้นที่ 1 — ลงทะเบียนก่อนพ้นโทษ',
+      'เจ้าหน้าที่เรือนจำลงทะเบียนผู้ป่วยเข้าระบบ พร้อมประวัติการรักษาและยา',
+      'ระบบจัดระดับความเสี่ยงให้อัตโนมัติ 4 ระดับ — ต่ำ กลาง สูง วิกฤต',
+      'ระดับวิกฤต ระบบเด้งเตือนทีมแม่ข่ายทันที',
+      '(เว้นจังหวะ)',
+      'ขั้นที่ 2 — ลงพื้นที่และบันทึก',
+      'เมื่อผู้ป่วยพ้นโทษ ระบบเปิดสิทธิ์ให้เจ้าหน้าที่ รพ.สต. ในเขตนั้น เห็นข้อมูลทันที',
+      'เจ้าหน้าที่ลงเยี่ยมบ้าน บันทึกในแอป — ใช้เวลาแค่ 2 นาทีต่อเคสครับ',
+      'ถ่ายรูป ทำเครื่องหมายตามรายการตรวจ บันทึกอาการ — เสร็จ',
+      'ข้อมูลอยู่ในระบบ ไม่ใช่ในอัลบั้มภาพของมือถือส่วนตัวอีกต่อไป',
+      '(เว้นจังหวะ)',
+      'ขั้นที่ 3 — ข้อมูลไหลสองทาง',
+      'ข้อมูลไหลกลับเข้าระบบทันที',
+      'เรือนจำ แม่ข่าย และทีมรักษา เห็นพร้อมกันในเวลาจริง',
+      'นี่คือสิ่งที่ระบบเดิมไม่มีครับ — ข้อมูลไหลสองทาง',
+      'และทุกสิ้นเดือน ระบบสรุปยอดอัตโนมัติ ส่งเข้าไลน์กลุ่ม',
+      'ไลน์กลับมาทำสิ่งที่มันทำได้ดี — สื่อสารกับทีม โดยไม่แบกข้อมูลผู้ป่วยอีกต่อไป'
+    ]},
+    { act:'องก์ 4 · ผลลัพธ์และก้าวต่อไป', time:'6:00–7:00', lines:[
+      'ผลลัพธ์เป็นยังไงครับ?',
+      'หลังใช้ FMH8 เปลี่ยนชัดเจน 3 อย่าง',
+      'หนึ่ง — จากกระดาษและข้อความไลน์ที่กระจัดกระจาย กลายเป็นฐานข้อมูลกลางที่ทุกคนเข้าถึงพร้อมกันได้',
+      'สอง — จากข้อมูลไหลทางเดียว กลายเป็นไหลสองทางในเวลาจริง',
+      'สาม — จากโทรประสานทีละสาย กลายเป็นรายงานสรุปอัตโนมัติ ปลอดภัยตามกฎหมายคุ้มครองข้อมูล',
+      '(เว้นจังหวะ)',
+      'แต่สิ่งที่ผมภูมิใจที่สุด ไม่ใช่ตัวเลขเหล่านี้ครับ',
+      'มันคือคำพูดของเจ้าหน้าที่ รพ.สต. คนหนึ่งที่บอกผมว่า…',
+      '“พี่… ตั้งแต่มีระบบนี้ หนูรู้สึกว่ามีคนยืนข้างหนูแล้วค่ะ”',
+      'นี่คือ “ภาระ” ที่ถูกแบ่งเบาครับ'
+    ]},
+    { act:'องก์ 4 · ผลลัพธ์และก้าวต่อไป', time:'6:00–7:00', lines:[
+      'ก้าวต่อไปของ FMH8 มี 2 ระยะ',
+      '(เว้นจังหวะ)',
+      'ระยะใกล้',
+      'ขยายให้ครอบคลุมเขตสุขภาพที่ 8 ครบทั้ง 7 จังหวัด',
+      'ให้ผู้ป่วยจิตเวชหลังพ้นโทษทุกคนในเขต ได้มาตรฐานเดียวกัน',
+      '(เว้นจังหวะ)',
+      'ระยะไกล',
+      'เป็นต้นแบบให้เขตสุขภาพอื่น ทั้ง 12 เขต',
+      'และต่อยอดไปดูแลกลุ่มเสี่ยงสูงกลุ่มอื่น เช่น ผู้ป่วยจิตเวชที่เสี่ยงก่อเหตุรุนแรง',
+      '(เว้นจังหวะ)',
+      'เพราะหัวใจของ FMH8 ไม่ใช่เทคโนโลยีครับ',
+      'หัวใจของมัน คือแนวคิดที่ว่า…',
+      '“ไม่ปล่อยให้ใครรับภาระคนเดียว”'
+    ]},
+    { act:'องก์ 5 · ปิดให้ก้องในใจ', time:'7:00–8:00', lines:[
+      'ผมอยากกลับไปที่แม่คนนั้นครับ',
+      'ที่ลูกของเธอหายไป 47 วัน โดยไม่มีใครรู้',
+      '(เว้นจังหวะ)',
+      'วันนี้ ถ้า FMH8 ทำงานครบทุกพื้นที่',
+      'เจ้าหน้าที่ รพ.สต. จะรู้ตั้งแต่วันที่ลูกของเธอพ้นโทษ',
+      'ไม่ต้องรอ 47 วัน',
+      'ทีม รพ.สต. จะถึงตัวลูกของเธอภายในไม่กี่วัน พร้อมข้อมูลครบ',
+      'ไม่ใช่หลังจากเขาก่อเหตุซ้ำไปแล้ว',
+      '(เว้นจังหวะ)',
+      'นี่ไม่ใช่แค่เทคโนโลยีครับ',
+      'นี่คือการบอกแม่คนนั้น และอีกหลายร้อยครอบครัวในเขตสุขภาพที่ 8 ว่า…',
+      '“เธอ… ไม่ได้อยู่คนเดียว… อีกต่อไปแล้วนะคะ”',
+      '(เว้นจังหวะ)',
+      'FMH8 ไม่ได้แค่ติดตามผู้ป่วย',
+      'แต่เปลี่ยนการดูแลผู้ป่วยจิตเวชหลังพ้นโทษ…',
+      'จาก “ภาระของคนคนเดียว” ให้เป็น “ระบบที่ทุกคนปลอดภัยร่วมกัน”',
+      'ขอบคุณครับ'
+    ]}
   ];
 
   var presenterWin = null;
@@ -2554,31 +2825,144 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
       presenterWin.focus(); return;
     }
     var titles = getSlideTitles();
-    var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Presenter</title>' +
+    var html = '<!DOCTYPE html><html lang="th"><head><meta charset="UTF-8">' +
+      '<meta name="viewport" content="width=device-width,initial-scale=1">' +
+      '<title>Presenter · FMH8</title>' +
+      '<link rel="preconnect" href="https://fonts.googleapis.com">' +
+      '<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">' +
       '<style>' +
-      'body{margin:0;padding:2rem;background:#111;color:#ece7da;font-family:system-ui,-apple-system,sans-serif;font-size:15px}' +
-      '#timer{font-size:4rem;font-weight:700;letter-spacing:.04em;font-variant-numeric:tabular-nums;margin-bottom:1.5rem}' +
-      '.warn{color:#d4a647}.danger{color:#b5462f}' +
-      '#slide-num{font-size:1.3rem;color:#a09a8c;margin-bottom:1rem}' +
-      '#next-title{font-size:1.1rem;color:#a09a8c;margin-bottom:1.8rem}' +
-      'label{font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;color:#6d6757;display:block;margin-bottom:.4rem}' +
-      '#notes{font-size:1.5rem;font-weight:500;line-height:1.8;color:#fff;padding:1.2rem;background:rgba(255,255,255,.05);border-radius:12px;border:1px solid rgba(236,231,218,.1)}' +
+      '*{box-sizing:border-box;margin:0;padding:0}' +
+      'html,body{height:100%}' +
+      'body{background:#0c0c0b;color:#ece7da;' +
+        'font-family:"IBM Plex Sans Thai",system-ui,-apple-system,"Sukhumvit Set",sans-serif;' +
+        'display:flex;flex-direction:column;padding:clamp(.5rem,1.4vw,1rem);' +
+        'gap:clamp(.35rem,1vh,.7rem)}' +
+      'header{flex:none;display:flex;align-items:center;justify-content:space-between;' +
+        'gap:1rem;border-bottom:1px solid rgba(236,231,218,.13);' +
+        'padding-bottom:clamp(.3rem,.9vh,.6rem)}' +
+      '#timer{font-size:clamp(2rem,5.5vw,3.8rem);font-weight:700;' +
+        'letter-spacing:.03em;font-variant-numeric:tabular-nums;line-height:1}' +
+      '#timer.warn{color:#d4a647}#timer.danger{color:#b5462f}' +
+      '#sn{font-size:clamp(.85rem,1.7vw,1.3rem);color:#a09a8c;' +
+        'text-align:right;line-height:1.5;font-weight:500}' +
+      '#sn b{color:#d4a647;font-weight:700}' +
+      'main{flex:1;min-height:0;display:flex;flex-direction:column}' +
+      '.lbl{font-size:clamp(.62rem,1.1vw,.78rem);letter-spacing:.18em;' +
+        'text-transform:uppercase;color:#6d6757}' +
+      '.ntbar{flex:none;display:flex;align-items:center;justify-content:space-between;' +
+        'gap:.7rem;flex-wrap:wrap;margin-bottom:.3rem}' +
+      '.asc{display:flex;align-items:center;gap:.4rem}' +
+      '#asv{font-size:clamp(.72rem,1.3vw,.92rem);color:#a09a8c;' +
+        'min-width:4.6em;text-align:center;font-weight:600}' +
+      '.asb{cursor:pointer;font-family:inherit;font-weight:600;line-height:1;' +
+        'background:rgba(236,231,218,.07);border:1px solid rgba(236,231,218,.18);' +
+        'color:#ece7da;border-radius:8px;padding:.36rem .62rem;' +
+        'font-size:clamp(.76rem,1.4vw,1rem)}' +
+      '.asb:hover{background:rgba(212,166,71,.18);border-color:#d4a647}' +
+      '.asb--on{background:#d4a647;color:#0c0c0b;border-color:#d4a647}' +
+      '#nt{flex:1;min-height:0;overflow-y:auto;' +
+        'padding:clamp(1rem,2.6vw,1.9rem);background:rgba(255,255,255,.05);' +
+        'border:1px solid rgba(236,231,218,.1);border-radius:14px}' +
+      '.pl{font-size:clamp(1.5rem,3.5vw,3rem);font-weight:600;line-height:1.6;' +
+        'color:#fff;margin:0 0 .5em}' +
+      '.pl.q{color:#d4a647}' +
+      '.pl.cue{color:#807a68;font-weight:400;font-style:italic;' +
+        'font-size:clamp(1rem,2.2vw,1.7rem);margin:.35em 0 .7em}' +
+      'footer{flex:none;display:flex;align-items:center;gap:clamp(.6rem,1.6vw,1.1rem);' +
+        'border-top:1px solid rgba(236,231,218,.13);' +
+        'padding-top:clamp(.3rem,.9vh,.6rem)}' +
+      '#nw{flex:1;min-width:0}' +
+      '#nl{font-size:clamp(.6rem,1vw,.72rem);letter-spacing:.16em;' +
+        'text-transform:uppercase;color:#6d6757}' +
+      '#nx{font-size:clamp(.95rem,1.9vw,1.45rem);color:#a09a8c;' +
+        'white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:.2rem}' +
+      '.nav{flex:none;cursor:pointer;font-family:inherit;font-weight:700;' +
+        'border-radius:12px;border:1px solid rgba(236,231,218,.18);' +
+        'background:rgba(236,231,218,.07);color:#ece7da;' +
+        'padding:clamp(.5rem,1.2vh,.8rem) clamp(.9rem,2vw,1.4rem);' +
+        'font-size:clamp(1rem,2vw,1.5rem)}' +
+      '.nav:hover{background:rgba(212,166,71,.18);border-color:#d4a647}' +
+      '.nav:active{transform:translateY(1px)}' +
+      '#bn{background:#d4a647;color:#0c0c0b;border-color:#d4a647}' +
+      '#bn:hover{background:#e0b65e}' +
+      '#hint{flex:none;text-align:center;color:#6d6757;' +
+        'font-size:clamp(.66rem,1.2vw,.82rem);padding-top:.15rem}' +
       '</style></head><body>' +
-      '<div id="timer">00:00</div>' +
-      '<div id="slide-num"></div>' +
-      '<label>Next Slide</label><div id="next-title">—</div>' +
-      '<label>Speaker Notes</label><div id="notes"></div>' +
+      '<header><div id="timer">00:00</div><div id="sn">—</div></header>' +
+      '<main>' +
+        '<div class="ntbar"><span class="lbl">บทพูด · Speaker Notes</span>' +
+          '<div class="asc">' +
+            '<button class="asb" id="ad" title="ช้าลง">−</button>' +
+            '<span id="asv">ปานกลาง</span>' +
+            '<button class="asb" id="au" title="เร็วขึ้น">+</button>' +
+            '<button class="asb" id="as">▶ เลื่อนอัตโนมัติ</button>' +
+          '</div>' +
+        '</div>' +
+        '<div id="nt"></div>' +
+      '</main>' +
+      '<footer>' +
+        '<div id="nw"><div id="nl">สไลด์ถัดไป</div><div id="nx">—</div></div>' +
+        '<button class="nav" id="bp">‹ ก่อนหน้า</button>' +
+        '<button class="nav" id="bn">ถัดไป ›</button>' +
+      '</footer>' +
+      '<div id="hint">เว้นวรรค หรือคลิกที่ใดก็ได้ → สไลด์ถัดไป</div>' +
       '<script>' +
-      'window.addEventListener("message",function(e){' +
-        'try{var d=JSON.parse(e.data);}catch(x){return;}' +
-        'if(d.type==="slideChange"){' +
-          'document.getElementById("slide-num").textContent="Slide "+(d.current+1)+" / "+d.total;' +
-          'document.getElementById("notes").textContent=d.notes||"";' +
-          'document.getElementById("next-title").textContent=d.nextTitle||"— End —";' +
-        '}' +
+      'var nt=document.getElementById("nt");' +
+      'var asBtn=document.getElementById("as"),asVal=document.getElementById("asv");' +
+      'var AS_SPEEDS=[7,12,20,32,48],AS_LABELS=["ช้ามาก","ช้า","ปานกลาง","เร็ว","เร็วมาก"];' +
+      'var asIdx=2,asOn=false,asPos=0,asLast=0,asRAF=0;' +
+      'function setAsUI(){asVal.textContent=AS_LABELS[asIdx];' +
+        'asBtn.textContent=asOn?"⏸ หยุดเลื่อน":"▶ เลื่อนอัตโนมัติ";' +
+        'asBtn.className=asOn?"asb asb--on":"asb";}' +
+      'function asFrame(now){if(!asOn){asRAF=0;return;}' +
+        'var dt=now-asLast;asLast=now;' +
+        'var max=Math.max(0,nt.scrollHeight-nt.clientHeight);' +
+        'if(asPos<max){asPos=Math.min(max,asPos+AS_SPEEDS[asIdx]*dt/1000);nt.scrollTop=asPos;}' +
+        'asRAF=requestAnimationFrame(asFrame);}' +
+      'function asStart(){if(asOn)return;asOn=true;asPos=nt.scrollTop;' +
+        'asLast=performance.now();setAsUI();asRAF=requestAnimationFrame(asFrame);}' +
+      'function asStop(){asOn=false;if(asRAF)cancelAnimationFrame(asRAF);asRAF=0;setAsUI();}' +
+      'asBtn.addEventListener("click",function(){asOn?asStop():asStart();this.blur();});' +
+      'document.getElementById("ad").addEventListener("click",function(){' +
+        'asIdx=Math.max(0,asIdx-1);setAsUI();this.blur();});' +
+      'document.getElementById("au").addEventListener("click",function(){' +
+        'asIdx=Math.min(AS_SPEEDS.length-1,asIdx+1);setAsUI();this.blur();});' +
+      'nt.addEventListener("wheel",function(){setTimeout(function(){asPos=nt.scrollTop;},0);});' +
+      'asStart();' +
+      'function snd(o){try{if(window.opener&&!window.opener.closed)' +
+        'window.opener.postMessage(JSON.stringify(o),"*");}catch(e){}}' +
+      'function go(d){snd({type:"nav",dir:d});}' +
+      'document.getElementById("bp").addEventListener("click",function(){go("prev");this.blur();});' +
+      'document.getElementById("bn").addEventListener("click",function(){go("next");this.blur();});' +
+      'var lastClick=0;' +
+      'document.addEventListener("click",function(e){' +
+        'if(e.target.closest("button"))return;' +
+        'if(Date.now()-lastClick<280)return;' +
+        'lastClick=Date.now();go("next");});' +
+      'document.addEventListener("keydown",function(e){if(e.repeat)return;var k=e.key;' +
+        'if(k===" "){if(e.target.tagName==="BUTTON")return;e.preventDefault();go("next");}' +
+        'else if(k==="ArrowRight"||k==="PageDown"){e.preventDefault();go("next");}' +
+        'else if(k==="ArrowLeft"||k==="PageUp"){e.preventDefault();go("prev");}' +
+        'else if(k==="Home"){e.preventDefault();go("home");}' +
+        'else if(k==="End"){e.preventDefault();go("end");}' +
+        'else if(k==="ArrowDown"){e.preventDefault();nt.scrollTop+=80;asPos=nt.scrollTop;}' +
+        'else if(k==="ArrowUp"){e.preventDefault();nt.scrollTop-=80;asPos=nt.scrollTop;}});' +
+      'window.addEventListener("message",function(e){var d;' +
+        'try{d=JSON.parse(e.data);}catch(x){return;}' +
+        'if(d.type!=="slideChange")return;' +
+        'document.getElementById("sn").innerHTML="สไลด์ <b>"+(d.current+1)+"</b> / "+d.total+' +
+          '(d.act?" · "+d.act:"")+(d.time?" · "+d.time:"");' +
+        'nt.innerHTML="";' +
+        'var L=d.lines||[];' +
+        'for(var i=0;i<L.length;i++){var r=L[i],p=document.createElement("div"),c="pl";' +
+          'if(r.charAt(0)==="("&&r.charAt(r.length-1)===")")c+=" cue";' +
+          'else if(r.charAt(0)==="“")c+=" q";' +
+          'p.className=c;p.textContent=r;nt.appendChild(p);}' +
+        'nt.scrollTop=0;asPos=0;asLast=performance.now();' +
+        'document.getElementById("nx").textContent=d.nextTitle||"— จบการนำเสนอ —";' +
       '});' +
       '<\/script></body></html>';
-    presenterWin = window.open('', 'PresenterView', 'width=640,height=520');
+    presenterWin = window.open('', 'PresenterView', 'width=900,height=760');
     if(!presenterWin) return;
     presenterWin.document.open();
     presenterWin.document.write(html);
@@ -2602,11 +2986,14 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
   function syncPresenter(){
     if(!presenterWin || presenterWin.closed) return;
     var titles = getSlideTitles();
+    var s = slideScript[current] || { act:'', time:'', lines:[] };
     presenterWin.postMessage(JSON.stringify({
       type: 'slideChange',
       current: current,
       total: total,
-      notes: presenterNotes[current] || '',
+      act: s.act || '',
+      time: s.time || '',
+      lines: s.lines || [],
       nextTitle: current < total - 1 ? titles[current + 1] : null
     }), '*');
   }
@@ -2616,9 +3003,21 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
   goTo = function(idx){
     _origGoTo(idx);
     syncPresenter();
+    if(prompterOpen) renderPrompter();
     /* also reset auto-advance timer if active */
     if(autoOn) startAutoTimer();
   };
+
+  /* receive navigation commands from the Presenter window */
+  window.addEventListener('message', function(e){
+    var d;
+    try { d = JSON.parse(e.data); } catch(x){ return; }
+    if(!d || d.type !== 'nav') return;
+    if(d.dir === 'next') next();
+    else if(d.dir === 'prev') prev();
+    else if(d.dir === 'home') goTo(0);
+    else if(d.dir === 'end') goTo(total - 1);
+  });
 
   /* ==========================================================
      FEATURE 2 · AUTO-ADVANCE TIMER  (T key)
@@ -2723,11 +3122,83 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
       toggleAuto();
     } else if(k === 'd' || k === 'D'){
       toggleThemeOverride();
+    } else if(k === 's' || k === 'S'){
+      togglePrompter();
     }
   });
 
+  /* ==========================================================
+     FEATURE 4 · TELEPROMPTER — บทพูดใต้สไลด์  (S key)
+     ========================================================== */
+  var prompter  = document.getElementById('prompter');
+  var prBody    = document.getElementById('prBody');
+  var prAct     = document.getElementById('prAct');
+  var prNum     = document.getElementById('prNum');
+  var prTime    = document.getElementById('prTime');
+  var btnScript = document.getElementById('btnScript');
+  var prompterOpen = false;
+  var PR_SIZES = [1.0, 1.16, 1.32, 1.5, 1.72];   /* rem steps */
+  var prSizeIdx = 2;
+  var prWantOpen = false;
+
+  try {
+    var savedSize = localStorage.getItem('fmh8.prompter.size');
+    var savedOpen = localStorage.getItem('fmh8.prompter.open');
+    if (savedSize !== null){
+      var si = parseInt(savedSize, 10);
+      if (!isNaN(si)) prSizeIdx = Math.max(0, Math.min(PR_SIZES.length - 1, si));
+    }
+    prWantOpen = (savedOpen === '1');
+  } catch (e) {}
+
+  function applyPrSize(){
+    prBody.style.setProperty('--pr-size', PR_SIZES[prSizeIdx] + 'rem');
+    try { localStorage.setItem('fmh8.prompter.size', String(prSizeIdx)); } catch (e) {}
+  }
+
+  function renderPrompter(){
+    var s = slideScript[current] || { act:'', time:'', lines:[] };
+    prAct.textContent  = s.act || ('สไลด์ ' + (current + 1));
+    prNum.textContent  = pad(current + 1);
+    prTime.textContent = s.time || '—';
+    prBody.innerHTML = '';
+    var lines = s.lines || [];
+    for (var i = 0; i < lines.length; i++){
+      var raw = lines[i];
+      var p = document.createElement('p');
+      var cls = 'prompter__line';
+      if (/^\(.*\)$/.test(raw)) cls += ' prompter__line--cue';
+      else if (raw.charAt(0) === '“') cls += ' prompter__line--q';
+      p.className = cls;
+      p.textContent = raw;
+      prBody.appendChild(p);
+    }
+    prBody.scrollTop = 0;
+  }
+
+  function setPrompter(open){
+    prompterOpen = open;
+    prompter.classList.toggle('is-open', open);
+    prompter.setAttribute('aria-hidden', open ? 'false' : 'true');
+    if (btnScript) btnScript.classList.toggle('is-on', open);
+    if (open) renderPrompter();
+    try { localStorage.setItem('fmh8.prompter.open', open ? '1' : '0'); } catch (e) {}
+  }
+  function togglePrompter(){ setPrompter(!prompterOpen); }
+
+  if (btnScript) btnScript.addEventListener('click', togglePrompter);
+  document.getElementById('prClose').addEventListener('click', function(){ setPrompter(false); });
+  document.getElementById('prFontUp').addEventListener('click', function(){
+    prSizeIdx = Math.min(PR_SIZES.length - 1, prSizeIdx + 1); applyPrSize();
+  });
+  document.getElementById('prFontDown').addEventListener('click', function(){
+    prSizeIdx = Math.max(0, prSizeIdx - 1); applyPrSize();
+  });
+  applyPrSize();
+
   /* ---------- init ---------- */
   goTo(0);
+  if (prWantOpen) setPrompter(true);
 })();
 </script>
 
