@@ -704,6 +704,11 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
   background:rgba(212,166,71,.08);border:1px solid rgba(212,166,71,.18);
   display:inline-block;margin-bottom:.55rem;
 }
+.km-beat__tools{
+  display:flex;flex-wrap:wrap;justify-content:center;
+  gap:.3rem;margin-bottom:.55rem;
+}
+.km-beat__tools .km-beat__tool{margin-bottom:0}
 .km-beat__d{
   font-size:clamp(.84rem,1.1vw,.96rem);
   color:var(--ink-dim);line-height:1.85;max-width:30ch;
@@ -765,7 +770,6 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
    SLIDE 6 · THE SYSTEM
    ============================================================ */
 .sys__intro{text-align:center;margin-bottom:clamp(2rem,4.5vh,3.4rem)}
-.sys__pre{font-size:clamp(.92rem,1.4vw,1.12rem);color:var(--ink-dim);margin-bottom:.9rem}
 .sys__logo{
   position:relative;
   font-size:clamp(3rem,9vw,6.6rem);
@@ -881,24 +885,45 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
 .browser__bar .url{margin-left:7px;font-size:8px;color:var(--ink-dim);
   background:rgba(236,231,218,.05);padding:3px 9px;border-radius:99px}
 .browser__scr{display:flex;background:var(--app-bg);
-  color:#0f2a26;height:clamp(176px,20vw,240px)}
-.bw__side{width:34%;background:var(--app);
-  padding:10px 9px;display:flex;flex-direction:column;gap:3.5px}
+  color:#0f2a26;height:clamp(198px,23vw,276px)}
+
+/* sidebar — grouped nav (mirrors real sidebar-v2) */
+.bw__side{width:35%;background:var(--app);
+  padding:9px 8px;display:flex;flex-direction:column;gap:2.4px;overflow:hidden}
 .bw__logo{font-weight:700;font-size:10.4px;color:#fff;
-  margin-bottom:4px;letter-spacing:.02em}
+  margin-bottom:3px;letter-spacing:.02em}
 .bw__logo b{color:var(--app-gold)}
-.bw__nav{font-size:7.2px;font-weight:400;color:rgba(207,224,219,.78)}
-.bw__nav--on{font-weight:700;color:var(--app-gold)}
-.bw__main{flex:1;padding:11px;display:flex;flex-direction:column;gap:6px}
+.bw__sec{font-size:5px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:rgba(207,224,219,.5);
+  margin-top:4px;margin-bottom:1px}
+.bw__nav{display:flex;align-items:center;gap:4px;
+  font-size:7px;font-weight:400;color:rgba(207,224,219,.82);
+  padding:1.6px 5px;border-radius:5px}
+.bw__nav::before{content:"";width:4px;height:4px;border-radius:1.5px;
+  background:currentColor;opacity:.5;flex:none}
+.bw__nav--on{font-weight:700;color:#fff;background:rgba(255,255,255,.13)}
+.bw__nav--on::before{background:var(--app-gold);opacity:1}
+
+/* main area */
+.bw__main{flex:1;padding:9px 10px;display:flex;flex-direction:column;
+  gap:6px;overflow:hidden}
+.bw__top{display:flex;align-items:center;justify-content:space-between;gap:6px}
 .bw__h{font-size:9px;font-weight:700}
+.bw__user{width:14px;height:14px;border-radius:50%;flex:none;
+  background:var(--app-gold);color:var(--app);
+  font-size:7px;font-weight:700;
+  display:flex;align-items:center;justify-content:center}
 .bw__kpis{display:flex;gap:5px}
 .bw__kpi{flex:1;background:#fff;border:1px solid #e4ede9;
-  border-radius:6px;padding:5px}
-.bw__kpi b{display:block;font-size:11px;font-weight:700;color:var(--app);
-  line-height:1.1}
+  border-left:2.5px solid var(--app);border-radius:6px;padding:5px 6px}
+.bw__kpi--2{border-left-color:#00897b}
+.bw__kpi--3{border-left-color:var(--app-gold)}
+.bw__kpi b{display:block;font-size:11.5px;font-weight:700;color:var(--app);
+  line-height:1.15}
+.bw__kpi--3 b{color:#b48c1e}
 .bw__kpi span{font-size:5.6px;color:#6b8581}
 .bw__ct{font-size:7px;font-weight:600;color:#6b8581}
-.chart{display:flex;align-items:flex-end;gap:4px;flex:1;min-height:50px}
+.chart{display:flex;align-items:flex-end;gap:4px;flex:1;min-height:46px}
 .chart i{
   flex:1;border-radius:2px 2px 0 0;background:var(--app);height:var(--h);
   transform:scaleY(0);transform-origin:bottom;
@@ -906,7 +931,8 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
   transition-delay:calc(var(--i) * .08s + .35s);
 }
 .chart i.hi{background:var(--app-gold)}
-.s-system.is-active .chart i,.s-cover.is-active .chart i{transform:scaleY(1)}
+.s-system.is-active .chart i,.s-cover.is-active .chart i,
+.s-intro.is-active .chart i{transform:scaleY(1)}
 .bw__risk{display:flex;gap:7px;flex-wrap:wrap}
 .bw__risk span{display:inline-flex;align-items:center;gap:3px;
   font-size:5.8px;color:#6b8581;font-weight:500}
@@ -923,6 +949,38 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
 .s-cover.is-active .cv-app{opacity:1;transform:none}
 .cv-app .browser{width:100%}
 
+/* intro slide · web-app showcase */
+.intro-app{width:clamp(300px,50vw,560px);margin:clamp(1.4rem,3.2vh,2.6rem) auto 0}
+.intro-app .browser{width:100%}
+
+.sys__about{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:clamp(1rem,2.2vw,1.8rem);
+  margin-top:clamp(1.8rem,4vw,2.8rem);
+}
+.about-card{
+  background:rgba(236,231,218,.04);
+  border:1px solid var(--line-d);border-radius:14px;
+  padding:clamp(1.1rem,2.2vw,1.6rem);
+  display:flex;flex-direction:column;gap:.6rem;
+  transition:border-color .4s ease,transform .45s var(--ease);
+}
+.about-card:hover{border-color:rgba(212,166,71,.3);transform:translateY(-5px)}
+.about-card__ic{
+  width:38px;height:38px;border-radius:10px;flex:none;
+  background:rgba(212,166,71,.1);border:1px solid rgba(212,166,71,.22);
+  display:flex;align-items:center;justify-content:center;
+}
+.about-card__ic svg{width:20px;height:20px;stroke:var(--gold);fill:none;
+  stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.about-card__t{font-size:clamp(1rem,1.5vw,1.2rem);font-weight:700}
+.about-card__d{
+  font-size:clamp(.84rem,1.1vw,.96rem);
+  color:var(--ink-dim);line-height:1.8;
+}
+@media (max-width:760px){
+  .sys__about{grid-template-columns:1fr}
+}
 .sys__secure{
   display:grid;grid-template-columns:repeat(4,1fr);
   gap:clamp(.8rem,2vw,1.6rem);
@@ -1148,11 +1206,6 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
   font-weight:700;line-height:1.26;letter-spacing:-.01em;
 }
 .finale__line--accent{color:var(--gold)}
-.finale__by{
-  margin-top:1.8rem;
-  font-size:clamp(.85rem,1.2vw,1rem);
-  color:rgba(236,231,218,.55);font-weight:400;
-}
 
 /* region 8 map */
 .region-map{display:inline-block;width:100%;max-width:400px}
@@ -1167,88 +1220,81 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
 .slide[data-theme="light"] .region-map .map-title{fill:var(--green)}
 
 /* ============================================================
-   SLIDE 8 · OVERVIEW — web-app flow + capabilities
+   SLIDE 6 · INTRO — access cards (web / PWA / offline)
    ============================================================ */
-.s-overview .wrap{flex:1;display:flex;flex-direction:column}
-
-.ov-head{margin-bottom:clamp(1.3rem,3vh,2rem)}
-.ov-title{
-  font-size:clamp(1.5rem,3.2vw,2.6rem);
-  font-weight:700;line-height:1.35;color:var(--ink-dark);max-width:26ch;
-}
-
-.ov-flow{
-  display:flex;align-items:stretch;flex-wrap:wrap;
-  gap:.4rem;margin-bottom:clamp(1.3rem,3vh,2rem);
-}
-.ov-step{
-  flex:1;min-width:120px;
-  background:#fff;border:1px solid var(--line-l);border-radius:12px;
-  padding:.75rem .8rem;display:flex;flex-direction:column;gap:.16rem;
-}
-.ov-step__n{
-  width:18px;height:18px;border-radius:50%;
-  background:var(--app);color:#fff;
-  font-size:.66rem;font-weight:700;
-  display:flex;align-items:center;justify-content:center;
-  margin-bottom:.24rem;
-}
-.ov-step b{font-size:clamp(.82rem,1.05vw,.95rem);font-weight:700;color:var(--ink-dark)}
-.ov-step i{font-size:.72rem;font-style:normal;color:var(--ink-dark-dim);line-height:1.5}
-.ov-arrow{
-  align-self:center;flex:none;
-  color:var(--app);font-size:.95rem;font-weight:700;
-}
-
-.ov-grid{
+.sys__access{
   display:grid;grid-template-columns:repeat(3,1fr);
-  gap:clamp(.7rem,1.5vw,1.1rem);
-  margin-bottom:clamp(1.3rem,3vh,2rem);
+  gap:clamp(.8rem,2vw,1.4rem);
+  margin-top:clamp(1.6rem,3.5vw,2.6rem);
 }
-.ov-cap{
-  background:#fff;border:1px solid var(--line-l);border-radius:14px;
-  padding:clamp(.85rem,1.6vw,1.2rem);
-  display:flex;flex-direction:column;gap:.55rem;
+.access{
+  background:rgba(236,231,218,.04);
+  border:1px solid var(--line-d);border-radius:14px;
+  padding:clamp(1rem,2vw,1.45rem);
+  display:flex;flex-direction:column;gap:.5rem;
+  transition:border-color .4s ease,transform .45s var(--ease);
 }
-.ov-cap__h{display:flex;align-items:center;gap:.55rem}
-.ov-cap__ic{
-  width:30px;height:30px;border-radius:9px;flex:none;
-  background:rgba(0,77,64,.09);
+.access:hover{border-color:rgba(212,166,71,.3);transform:translateY(-5px)}
+.access__ic{
+  width:34px;height:34px;border-radius:9px;flex:none;
+  background:rgba(212,166,71,.1);
   display:flex;align-items:center;justify-content:center;
 }
-.ov-cap__ic svg{width:17px;height:17px;stroke:var(--app);fill:none;
-  stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-.ov-cap__t{font-size:clamp(.95rem,1.3vw,1.12rem);font-weight:700;color:var(--ink-dark)}
-.ov-cap__l{display:flex;flex-wrap:wrap;gap:.3rem}
-.ov-cap__l span{
-  font-size:.72rem;font-weight:500;color:var(--ink-dark-dim);
-  background:#f4f7f6;border:1px solid var(--line-l);
-  padding:.2rem .52rem;border-radius:99px;
+.access__ic svg{
+  width:19px;height:19px;stroke:var(--gold);fill:none;
+  stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;
+}
+.access__t{font-size:clamp(1rem,1.4vw,1.18rem);font-weight:700;color:var(--ink)}
+.access__d{font-size:clamp(.82rem,1.1vw,.95rem);color:var(--ink-dim);line-height:1.7}
+
+/* count-up "less-than" prefix */
+.stat__lt{
+  font-size:.32em;font-weight:600;
+  color:var(--ink-dim);align-self:center;margin-right:.18em;
 }
 
-.ov-foot{
-  margin-top:auto;
-  display:flex;align-items:center;gap:clamp(1rem,3vw,2.4rem);
-  padding-top:clamp(1.1rem,2.6vh,1.8rem);
-  border-top:1px solid var(--line-l);
-}
-.ov-qr{display:flex;align-items:center;gap:.6rem;flex:none}
+/* ============================================================
+   SLIDE 10 · ก้าวต่อไป — region map + QR footer
+   ============================================================ */
+.next-map{text-align:center;margin:clamp(1rem,2.5vh,1.8rem) 0}
+
 .qr-card{
-  width:clamp(58px,7vw,78px);background:#fff;
-  border:1px solid var(--line-l);border-radius:10px;padding:5px;flex:none;
+  background:#fff;border:1px solid var(--line-l);
+  border-radius:10px;padding:6px;flex:none;
 }
 .qr-card svg{display:block;width:100%;height:auto}
-.ov-qrcap{font-size:.72rem;color:var(--ink-dark-dim);line-height:1.45;max-width:8ch}
-.ov-close{flex:1;min-width:0}
-.ov-thanks{
-  font-size:clamp(1.1rem,1.9vw,1.5rem);font-weight:700;
-  color:var(--ink-dark);margin-bottom:.14rem;
+
+.next-foot{
+  display:flex;align-items:center;justify-content:center;
+  gap:clamp(.9rem,2.2vw,1.4rem);
+  margin-top:clamp(1.6rem,3.5vh,2.6rem);
+  padding-top:clamp(1.4rem,3vh,2rem);
+  border-top:1px solid var(--line-d);
 }
-.ov-by{font-size:.78rem;color:var(--ink-dark-dim);line-height:1.5}
-.ov-url{
-  flex:none;text-decoration:none;
-  font-size:clamp(.8rem,1.1vw,.95rem);font-weight:600;
-  letter-spacing:.04em;color:var(--green);
+.next-foot .qr-card{width:clamp(72px,9vw,96px)}
+.next-foot__t{font-size:clamp(.98rem,1.4vw,1.15rem);font-weight:700;color:var(--ink)}
+.next-foot__d{
+  font-size:clamp(.78rem,1vw,.9rem);
+  color:var(--ink-dim);line-height:1.55;margin-top:.25rem;
+}
+
+/* ============================================================
+   SLIDE 11 · CALLBACK — closing block
+   ============================================================ */
+.cb-end{margin-top:clamp(2rem,5vh,3.4rem)}
+.cb-end__sum{
+  font-size:clamp(1rem,1.6vw,1.3rem);font-weight:500;
+  color:var(--ink);line-height:1.85;max-width:50ch;
+  margin-bottom:1.5rem;
+}
+.cb-end__sum em{font-style:normal;color:var(--gold);font-weight:700}
+.cb-end__thanks{
+  font-size:clamp(1.8rem,4vw,3rem);font-weight:700;
+  color:var(--gold);line-height:1.2;margin-bottom:.5rem;
+}
+.cb-end__by{
+  font-size:clamp(.78rem,1vw,.92rem);
+  color:rgba(236,231,218,.6);line-height:1.6;
 }
 
 /* ============================================================
@@ -1257,21 +1303,18 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
 @media (max-width:900px){
   .sys-grid{grid-template-columns:1fr;gap:2rem}
   .sys__secure{grid-template-columns:1fr 1fr;gap:1.4rem}
+  .sys__access{grid-template-columns:1fr}
 }
 @media (max-width:900px){
   .cards{grid-template-columns:1fr}
   .slide__in{padding-left:clamp(1.3rem,5vw,2rem);padding-right:clamp(1.3rem,5vw,2rem)}
-  .ov-grid{grid-template-columns:1fr 1fr}
 }
 @media (max-width:680px){
-  .ov-arrow{display:none}
-  .ov-foot{flex-wrap:wrap;gap:1.1rem 1.6rem}
+  .next-foot{flex-wrap:wrap;text-align:center}
 }
 @media (max-width:520px){
   .counter{font-size:.7rem}
   .sys__secure{grid-template-columns:1fr}
-  .ov-grid{grid-template-columns:1fr}
-  .ov-foot{flex-direction:column;align-items:flex-start}
 }
 
 /* ---------- no-js fallback ---------- */
@@ -1382,22 +1425,29 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
             <div class="browser__scr">
               <aside class="bw__side">
                 <div class="bw__logo">FMH<b>8</b></div>
+                <span class="bw__sec">หลัก</span>
                 <span class="bw__nav bw__nav--on">แดชบอร์ด</span>
+                <span class="bw__sec">จัดการผู้ป่วย</span>
                 <span class="bw__nav">ลงทะเบียนผู้ป่วย</span>
-                <span class="bw__nav">ติดตามผู้ป่วย</span>
-                <span class="bw__nav">ปฏิทินนัดหมาย</span>
+                <span class="bw__nav">รายชื่อผู้ป่วย</span>
+                <span class="bw__nav">บันทึกการติดตาม</span>
                 <span class="bw__nav">แผนที่ผู้ป่วย</span>
+                <span class="bw__nav">ปฏิทินนัดหมาย</span>
                 <span class="bw__nav">ส่งต่อผู้ป่วย</span>
+                <span class="bw__sec">ข้อมูล</span>
                 <span class="bw__nav">รายงาน</span>
               </aside>
               <div class="bw__main">
-                <div class="bw__h">แดชบอร์ด · เขตสุขภาพที่ 8</div>
+                <div class="bw__top">
+                  <div class="bw__h">แดชบอร์ด · เขตสุขภาพที่ 8</div>
+                  <span class="bw__user">ภ</span>
+                </div>
                 <div class="bw__kpis">
                   <div class="bw__kpi"><b>2,468</b><span>ผู้ป่วยทั้งหมด</span></div>
-                  <div class="bw__kpi"><b>184</b><span>ติดตามเดือนนี้</span></div>
-                  <div class="bw__kpi"><b>32</b><span>เสี่ยงสูง</span></div>
+                  <div class="bw__kpi bw__kpi--2"><b>184</b><span>ติดตามเดือนนี้</span></div>
+                  <div class="bw__kpi bw__kpi--3"><b>76%</b><span>อัตราการติดตาม</span></div>
                 </div>
-                <div class="bw__ct">ผู้ป่วยแยกตามจังหวัด</div>
+                <div class="bw__ct">ผู้ป่วยแยกตามหน่วยบริการ</div>
                 <div class="chart">
                   <i style="--h:52%;--i:0"></i>
                   <i style="--h:74%;--i:1"></i>
@@ -1487,6 +1537,11 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
         และเมื่อถึงวันที่ 47 — <b>เขาก่อเหตุซ้ำไปแล้ว</b>
       </p>
 
+      <p class="num-note reveal" style="--i:3">
+        วันนี้ ผมอยากพูดถึง <b>“จุดบอด”</b> ของระบบส่งต่อผู้ป่วย —
+        จุดบอดที่ทำให้แม่คนนั้น ต้องเฝ้าระวังลูกลำพัง โดยไม่มีใครช่วย
+      </p>
+
       <div class="num-div reveal" style="--i:4"></div>
 
       <div class="stat-row">
@@ -1501,19 +1556,19 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
         </div>
         <div class="stat reveal" style="--i:5">
           <div class="stat__num stat__num--gold">
-            <span class="count" data-count="75"
+            <span class="stat__lt">น้อยกว่า</span><span class="count" data-count="25"
                   data-delay="650" data-dur="1400">0</span><span class="stat__suffix">%</span>
           </div>
           <p class="stat__label">
-            หลุดจากการติดตาม — มีไม่ถึง 1 ใน 4<br>
-            ที่ได้รับการดูแลต่อเนื่องอย่างแท้จริง
+            ของผู้ป่วย SMI-V ที่ได้รับการติดตาม<br>
+            ต่อเนื่องอย่างแท้จริง — น้อยกว่า 1 ใน 4
           </p>
         </div>
       </div>
 
       <p class="num-note reveal" style="--i:6">
         และในกลุ่ม <b>ผู้พ้นโทษ</b> ปัญหายิ่งหนักขึ้น — เพราะเรือนจำไม่ได้อยู่ในกระทรวงสาธารณสุข
-        ข้อมูลของผู้ป่วยจึงขาดช่วงตั้งแต่วันแรก
+        <b>การส่งข้อมูลข้ามกระทรวง จึงเป็นจุดที่เปราะที่สุด</b>
       </p>
     </div></div>
   </section>
@@ -1616,17 +1671,141 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
         ถ้าระบบเดิมทำให้ทุกคนเป็น <em>"ภาระ"</em> ของกันและกัน —<br>
         เราจะออกแบบระบบใหม่ที่ทำให้ทุกคน <em>"ปลอดภัย"</em> ร่วมกันได้ยังไง?
       </p>
-      <p class="bridge__hint reveal" style="--i:2">คำตอบ อยู่ที่กระบวนการจัดการความรู้</p>
+      <p class="bridge__hint reveal" style="--i:2">และนี่คือคำตอบของเรา</p>
     </div></div>
   </section>
 
-  <!-- ===================== SLIDE 6 · KM 3 BEATS ===================== -->
-  <section class="slide s-km" data-slide="5" data-theme="dark"
-           role="group" aria-label="สไลด์ 6 — กระบวนการจัดการความรู้ 3 จังหวะ">
+  <!-- ===================== SLIDE 6 · แนะนำ FMH8 ===================== -->
+  <section class="slide s-intro" data-slide="5" data-theme="dark"
+           role="group" aria-label="สไลด์ 6 — แนะนำ FMH8">
+    <div class="slide__in"><div class="wrap">
+
+      <div class="sys__intro">
+        <p class="eyebrow reveal">เราจึงออกแบบระบบใหม่</p>
+        <div class="sys__logo reveal" style="--i:1">FMH8</div>
+        <p class="sys__shift reveal" style="--i:2">
+          ระบบดูแลผู้ป่วยนิติจิตเวชหลังพ้นโทษ · เขตสุขภาพที่ 8 ·
+          พัฒนาโดยทีมโรงพยาบาลจิตเวชเลยราชนครินทร์<br>
+          เปลี่ยน “ภาระของคนคนเดียว” → “ระบบที่ทุกคนปลอดภัยร่วมกัน”
+        </p>
+      </div>
+
+      <div class="intro-app reveal" style="--i:3"
+           aria-label="ตัวอย่างหน้าจอเว็บแอป FMH8 — แดชบอร์ดเขตสุขภาพที่ 8">
+        <div class="browser">
+          <div class="browser__bar">
+            <i class="d"></i><i class="d"></i><i class="d"></i>
+            <span class="url">fmh8.psyloei.go.th/dashboard</span>
+          </div>
+          <div class="browser__scr">
+            <aside class="bw__side">
+              <div class="bw__logo">FMH<b>8</b></div>
+              <span class="bw__sec">หลัก</span>
+              <span class="bw__nav bw__nav--on">แดชบอร์ด</span>
+              <span class="bw__sec">จัดการผู้ป่วย</span>
+              <span class="bw__nav">ลงทะเบียนผู้ป่วย</span>
+              <span class="bw__nav">รายชื่อผู้ป่วย</span>
+              <span class="bw__nav">บันทึกการติดตาม</span>
+              <span class="bw__nav">แผนที่ผู้ป่วย</span>
+              <span class="bw__nav">ปฏิทินนัดหมาย</span>
+              <span class="bw__nav">ส่งต่อผู้ป่วย</span>
+              <span class="bw__sec">ข้อมูล</span>
+              <span class="bw__nav">รายงาน</span>
+            </aside>
+            <div class="bw__main">
+              <div class="bw__top">
+                <div class="bw__h">แดชบอร์ด · เขตสุขภาพที่ 8</div>
+                <span class="bw__user">ภ</span>
+              </div>
+              <div class="bw__kpis">
+                <div class="bw__kpi"><b>2,468</b><span>ผู้ป่วยทั้งหมด</span></div>
+                <div class="bw__kpi bw__kpi--2"><b>184</b><span>ติดตามเดือนนี้</span></div>
+                <div class="bw__kpi bw__kpi--3"><b>76%</b><span>อัตราการติดตาม</span></div>
+              </div>
+              <div class="bw__ct">ผู้ป่วยแยกตามหน่วยบริการ</div>
+              <div class="chart">
+                <i style="--h:52%;--i:0"></i>
+                <i style="--h:74%;--i:1"></i>
+                <i class="hi" style="--h:96%;--i:2"></i>
+                <i style="--h:44%;--i:3"></i>
+                <i style="--h:67%;--i:4"></i>
+                <i style="--h:81%;--i:5"></i>
+                <i style="--h:58%;--i:6"></i>
+              </div>
+              <div class="bw__risk">
+                <span><i style="background:#1b9e5a"></i>ต่ำ</span>
+                <span><i style="background:#d4af37"></i>กลาง</span>
+                <span><i style="background:#ef6c00"></i>สูง</span>
+                <span><i style="background:#b71c1c"></i>วิกฤต</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sys__access">
+        <article class="access reveal" style="--i:2">
+          <span class="access__ic" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </span>
+          <p class="access__t">ใช้งานบนเว็บ</p>
+          <p class="access__d">เปิดได้ทั้งคอมพิวเตอร์และมือถือ ในเบราว์เซอร์เดียว</p>
+        </article>
+        <article class="access reveal" style="--i:3">
+          <span class="access__ic" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2.5"/><line x1="12" y1="6.5" x2="12" y2="12.5"/><polyline points="9.5 10 12 12.5 14.5 10"/></svg>
+          </span>
+          <p class="access__t">ลงเป็นแอปบนมือถือ</p>
+          <p class="access__d">ติดตั้งได้เลย ไม่ต้องโหลดจาก App Store</p>
+        </article>
+        <article class="access reveal" style="--i:4">
+          <span class="access__ic" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><line x1="3" y1="3" x2="21" y2="21"/><path d="M17.5 17.5H7a4 4 0 0 1-.9-7.9"/><path d="M9 6.6A5 5 0 0 1 18 9a3.5 3.5 0 0 1 2.5 5.7"/></svg>
+          </span>
+          <p class="access__t">ทำงานแม้ไม่มีสัญญาณ</p>
+          <p class="access__d">บันทึกในเครื่องก่อน แล้วส่งเองเมื่อกลับเข้าสัญญาณ</p>
+        </article>
+      </div>
+
+      <p class="sys__line reveal" style="--i:5">
+        หัวใจของระบบ — <b>แต่ละพื้นที่มีฐานข้อมูลของตัวเอง</b>
+        เห็นเฉพาะผู้ป่วยในเขตที่ดูแล ระบบจัดสิทธิ์ให้อัตโนมัติตามจังหวัดและบทบาท
+      </p>
+
+      <div class="sys__secure">
+        <div class="reveal" style="--i:5">
+          <p class="secure__t">เห็นเฉพาะเขตของตัวเอง</p>
+          <p class="secure__d">Area-based access</p>
+        </div>
+        <div class="reveal" style="--i:6">
+          <p class="secure__t">อสม. และคนภายนอกเข้าไม่ได้</p>
+          <p class="secure__d">PDPA compliant</p>
+        </div>
+        <div class="reveal" style="--i:7">
+          <p class="secure__t">ทุกการเปิดดูเคสถูกบันทึก</p>
+          <p class="secure__d">Audit log</p>
+        </div>
+        <div class="reveal" style="--i:8">
+          <p class="secure__t">5 ระดับสิทธิ์ลดหลั่น</p>
+          <p class="secure__d">RBAC · 5 levels</p>
+        </div>
+      </div>
+
+      <p class="sys__line reveal" style="--i:9">
+        และไลน์ — ทำหน้าที่เดียวเท่านั้น: <b>ส่งสรุปยอดรายเดือนเป็นตัวเลขรวม</b>
+        เข้ากลุ่มทีมแม่ข่าย ไม่มีชื่อ ไม่มีข้อมูลรายบุคคลหลุดทางไลน์อีกต่อไป
+      </p>
+
+    </div></div>
+  </section>
+
+  <!-- ===================== SLIDE 7 · KM 3 จังหวะ ===================== -->
+  <section class="slide s-km" data-slide="6" data-theme="dark"
+           role="group" aria-label="สไลด์ 7 — กระบวนการจัดการความรู้ 3 จังหวะ">
     <div class="slide__in"><div class="wrap">
 
       <div class="km__head">
-        <p class="eyebrow reveal">กระบวนการจัดการความรู้</p>
+        <p class="eyebrow reveal">เบื้องหลังระบบ · กระบวนการจัดการความรู้</p>
         <h2 class="km__title reveal" style="--i:1">FMH8 เกิดจาก KM 3 จังหวะ</h2>
         <p class="km__sub reveal" style="--i:2">ไม่ได้เกิดในห้องคอมพิวเตอร์ — แต่เกิดจากการฟังคนหน้างาน</p>
       </div>
@@ -1644,7 +1823,10 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
           </div>
           <p class="km-beat__n">จังหวะที่ 1</p>
           <h3 class="km-beat__t">เราฟัง</h3>
-          <p class="km-beat__tool" lang="en">Community of Practice (CoP)</p>
+          <div class="km-beat__tools">
+            <span class="km-beat__tool" lang="en">Community of Practice (CoP)</span>
+            <span class="km-beat__tool" lang="en">After Action Review (AAR)</span>
+          </div>
           <p class="km-beat__d">
             เวทีแลกเปลี่ยนเรียนรู้ของคนหน้างาน
             และการถอดบทเรียนหลังลงมือทำ —
@@ -1670,7 +1852,7 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
           </div>
           <p class="km-beat__n">จังหวะที่ 2</p>
           <h3 class="km-beat__t">เราเรียน</h3>
-          <p class="km-beat__tool" lang="en">After Action Review (AAR)</p>
+          <p class="km-beat__tool">ทบทวนเคสย้อนหลัง · 5 ปี</p>
           <p class="km-beat__d">
             ย้อนดูเคสก่อเหตุซ้ำในรอบ 5 ปี —
             วิเคราะห์รูปแบบร่วมของทุกเคส
@@ -1726,16 +1908,16 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
     </div></div>
   </section>
 
-  <!-- ===================== SLIDE 6 · THE SYSTEM ===================== -->
-  <section class="slide s-system" data-slide="6" data-theme="dark"
-           role="group" aria-label="สไลด์ 6 — ระบบ">
+  <!-- ===================== SLIDE 8 · ระบบทำงาน 3 ขั้น ===================== -->
+  <section class="slide s-system" data-slide="7" data-theme="dark"
+           role="group" aria-label="สไลด์ 8 — ระบบทำงาน 3 ขั้น">
     <div class="slide__in"><div class="wrap">
 
-      <div class="sys__intro">
-        <p class="sys__pre reveal">เราจึงออกแบบระบบใหม่ — และขอแนะนำ</p>
-        <div class="sys__logo reveal" style="--i:1">FMH8</div>
-        <p class="sys__shift reveal" style="--i:2">
-          เปลี่ยน “ภาระของคนคนเดียว” → “ระบบที่ทุกคนปลอดภัยร่วมกัน”
+      <div class="res__head">
+        <p class="eyebrow reveal">วิธีทำงานของ FMH8</p>
+        <h2 class="res__title reveal" style="--i:1">ระบบทำงาน 3 ขั้น</h2>
+        <p class="res__sub reveal" style="--i:1">
+          ลงทะเบียนก่อนพ้นโทษ → ลงพื้นที่และบันทึก → ข้อมูลไหลสองทาง
         </p>
       </div>
 
@@ -1746,8 +1928,8 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
             <div>
               <h3 class="step__t">ลงทะเบียนก่อนพ้นโทษ</h3>
               <p class="step__d">
-                เรือนจำลงทะเบียนผู้ป่วยพร้อมประวัติยา —
-                ระบบจัดระดับความเสี่ยงให้อัตโนมัติ 4 ระดับ
+                เจ้าหน้าที่เรือนจำลงทะเบียนผู้ป่วยพร้อมประวัติการรักษาและยา
+                ระบบจัดระดับความเสี่ยงอัตโนมัติ 4 ระดับ — ระดับวิกฤตเด้งเตือนแม่ข่ายทันที
               </p>
             </div>
           </div>
@@ -1782,20 +1964,27 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
             <div class="browser__scr">
               <aside class="bw__side">
                 <div class="bw__logo">FMH<b>8</b></div>
+                <span class="bw__sec">หลัก</span>
                 <span class="bw__nav">แดชบอร์ด</span>
+                <span class="bw__sec">จัดการผู้ป่วย</span>
                 <span class="bw__nav">ลงทะเบียนผู้ป่วย</span>
-                <span class="bw__nav bw__nav--on">ส่งต่อผู้ป่วย</span>
-                <span class="bw__nav">ติดตามผู้ป่วย</span>
-                <span class="bw__nav">ปฏิทินนัดหมาย</span>
+                <span class="bw__nav">รายชื่อผู้ป่วย</span>
+                <span class="bw__nav">บันทึกการติดตาม</span>
                 <span class="bw__nav">แผนที่ผู้ป่วย</span>
+                <span class="bw__nav">ปฏิทินนัดหมาย</span>
+                <span class="bw__nav bw__nav--on">ส่งต่อผู้ป่วย</span>
+                <span class="bw__sec">ข้อมูล</span>
                 <span class="bw__nav">รายงาน</span>
               </aside>
               <div class="bw__main">
-                <div class="bw__h">ส่งต่อผู้ป่วย · ข้ามหน่วยงาน</div>
+                <div class="bw__top">
+                  <div class="bw__h">ส่งต่อผู้ป่วย · ข้ามหน่วยงาน</div>
+                  <span class="bw__user">ภ</span>
+                </div>
                 <div class="bw__kpis">
                   <div class="bw__kpi"><b>12</b><span>รอรับ</span></div>
-                  <div class="bw__kpi"><b>46</b><span>ส่งต่อแล้ว</span></div>
-                  <div class="bw__kpi"><b>3</b><span>เร่งด่วน</span></div>
+                  <div class="bw__kpi bw__kpi--2"><b>46</b><span>ส่งต่อแล้ว</span></div>
+                  <div class="bw__kpi bw__kpi--3"><b>3</b><span>เร่งด่วน</span></div>
                 </div>
                 <div class="bw__ct">สถานะการส่งต่อล่าสุด</div>
                 <div class="chart">
@@ -1845,35 +2034,12 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
         </div>
       </div>
 
-      <div class="sys__secure">
-        <div class="reveal" style="--i:0">
-          <p class="secure__t">เห็นเฉพาะเขตของตัวเอง</p>
-          <p class="secure__d">Area-based access</p>
-        </div>
-        <div class="reveal" style="--i:1">
-          <p class="secure__t">ปกป้องข้อมูลตาม PDPA</p>
-          <p class="secure__d">PDPA compliant</p>
-        </div>
-        <div class="reveal" style="--i:2">
-          <p class="secure__t">ทุกการเข้าถึงถูกบันทึก</p>
-          <p class="secure__d">Audit log</p>
-        </div>
-        <div class="reveal" style="--i:3">
-          <p class="secure__t">5 ระดับสิทธิ์ลดหลั่น</p>
-          <p class="secure__d">RBAC · 5 levels</p>
-        </div>
-      </div>
-
-      <p class="sys__line reveal">
-        และไลน์ — ทำหน้าที่เดียวเท่านั้น: <b>สื่อสารกับทีม</b>
-        ไม่แบกข้อมูลผู้ป่วยรายบุคคลอีกต่อไป
-      </p>
     </div></div>
   </section>
 
-  <!-- ===================== SLIDE 7 · RESULTS ===================== -->
-  <section class="slide s-results" data-slide="7" data-theme="dark"
-           role="group" aria-label="สไลด์ 7 — ผลลัพธ์">
+  <!-- ===================== SLIDE 9 · RESULTS ===================== -->
+  <section class="slide s-results" data-slide="8" data-theme="dark"
+           role="group" aria-label="สไลด์ 9 — ผลลัพธ์">
     <div class="slide__in"><div class="wrap">
 
       <div class="res__head">
@@ -1936,121 +2102,28 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
         <p class="res-quote__by">— เจ้าหน้าที่ รพ.สต. ในเขตสุขภาพที่ 8</p>
       </div>
 
-      <p class="res-close reveal" style="--i:6">
-        เพราะหัวใจของ FMH8 ไม่ใช่เทคโนโลยี — แต่คือแนวคิดที่ว่า <em>"ไม่ปล่อยให้ใครรับภาระคนเดียว"</em>
-      </p>
-
     </div></div>
   </section>
 
-  <!-- ===================== SLIDE 8 · OVERVIEW ===================== -->
-  <section class="slide s-overview" data-slide="8" data-theme="light"
-           role="group" aria-label="สไลด์ 8 — ภาพรวมเว็บแอป">
+  <!-- ===================== SLIDE 10 · ก้าวต่อไป ===================== -->
+  <section class="slide s-results" data-slide="9" data-theme="dark"
+           role="group" aria-label="สไลด์ 10 — ก้าวต่อไป">
     <div class="slide__in"><div class="wrap">
 
-      <div class="ov-head">
-        <p class="eyebrow reveal">ภาพรวมเว็บแอป FMH8</p>
-        <h2 class="ov-title reveal" style="--i:1">เว็บแอปเดียว — ดูแลครบทั้งกระบวนการ</h2>
+      <div class="res__head">
+        <p class="eyebrow reveal">ก้าวต่อไปของ FMH8</p>
+        <h2 class="res__title reveal" style="--i:1">FMH8 มี 2 ระยะข้างหน้า</h2>
       </div>
 
-      <div class="ov-flow reveal" style="--i:2">
-        <div class="ov-step">
-          <span class="ov-step__n">1</span>
-          <b>ลงทะเบียนก่อนพ้นโทษ</b>
-          <i>เรือนจำบันทึกผู้ป่วย + ประวัติยา</i>
-        </div>
-        <span class="ov-arrow" aria-hidden="true">→</span>
-        <div class="ov-step">
-          <span class="ov-step__n">2</span>
-          <b>ประเมินความเสี่ยง</b>
-          <i>ระบบจัด 4 ระดับอัตโนมัติ</i>
-        </div>
-        <span class="ov-arrow" aria-hidden="true">→</span>
-        <div class="ov-step">
-          <span class="ov-step__n">3</span>
-          <b>เปิดสิทธิ์ + ลงเยี่ยม</b>
-          <i>รพ.สต. ในเขตบันทึก 2 นาที</i>
-        </div>
-        <span class="ov-arrow" aria-hidden="true">→</span>
-        <div class="ov-step">
-          <span class="ov-step__n">4</span>
-          <b>ข้อมูลไหลสองทาง</b>
-          <i>เรือนจำ–แม่ข่าย–ทีม เห็นเรียลไทม์</i>
-        </div>
-        <span class="ov-arrow" aria-hidden="true">→</span>
-        <div class="ov-step">
-          <span class="ov-step__n">5</span>
-          <b>สรุป + แจ้งเตือน</b>
-          <i>อัตโนมัติทุกเดือน เข้าไลน์กลุ่ม</i>
-        </div>
-      </div>
-
-      <div class="ov-grid">
-        <article class="ov-cap reveal" style="--i:3">
-          <div class="ov-cap__h">
-            <span class="ov-cap__ic"><svg viewBox="0 0 24 24"><rect x="4.5" y="5" width="15" height="15" rx="2"/><path d="M9 5V3.5h6V5"/><path d="M8.5 11h7M8.5 15h4.5"/></svg></span>
-            <h3 class="ov-cap__t">จัดการผู้ป่วย</h3>
-          </div>
-          <div class="ov-cap__l">
-            <span>ลงทะเบียน</span><span>ค้นหา</span><span>ประวัติการรักษา</span><span>ความเสี่ยงอัตโนมัติ</span>
-          </div>
-        </article>
-        <article class="ov-cap reveal" style="--i:4">
-          <div class="ov-cap__h">
-            <span class="ov-cap__ic"><svg viewBox="0 0 24 24"><path d="M4 11l8-6 8 6"/><path d="M6.5 10v9h11v-9"/></svg></span>
-            <h3 class="ov-cap__t">ติดตามดูแล</h3>
-          </div>
-          <div class="ov-cap__l">
-            <span>เยี่ยมบ้าน</span><span>ปฏิทินนัดหมาย</span><span>เตือนขาดยา</span>
-          </div>
-        </article>
-        <article class="ov-cap reveal" style="--i:5">
-          <div class="ov-cap__h">
-            <span class="ov-cap__ic"><svg viewBox="0 0 24 24"><path d="M5 9h12l-3.2-3.2M19 15H7l3.2 3.2"/></svg></span>
-            <h3 class="ov-cap__t">ส่งต่อข้ามหน่วยงาน</h3>
-          </div>
-          <div class="ov-cap__l">
-            <span>สร้าง/รับ Refer</span><span>ส่งต่อหลายราย</span><span>ติดตามสถานะ</span>
-          </div>
-        </article>
-        <article class="ov-cap reveal" style="--i:6">
-          <div class="ov-cap__h">
-            <span class="ov-cap__ic"><svg viewBox="0 0 24 24"><path d="M5 5v14h14"/><rect x="8.5" y="11" width="3" height="5"/><rect x="14" y="7.5" width="3" height="8.5"/></svg></span>
-            <h3 class="ov-cap__t">มองเห็นภาพรวม</h3>
-          </div>
-          <div class="ov-cap__l">
-            <span>แดชบอร์ด</span><span>แผนที่ผู้ป่วย</span><span>รายงานสถิติ</span>
-          </div>
-        </article>
-        <article class="ov-cap reveal" style="--i:7">
-          <div class="ov-cap__h">
-            <span class="ov-cap__ic"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"/><path d="M9.3 12l2 2 3.4-3.6"/></svg></span>
-            <h3 class="ov-cap__t">ปลอดภัยตาม PDPA</h3>
-          </div>
-          <div class="ov-cap__l">
-            <span>สิทธิ์ 5 ระดับ</span><span>เห็นเฉพาะเขต</span><span>Audit log</span>
-          </div>
-        </article>
-        <article class="ov-cap reveal" style="--i:8">
-          <div class="ov-cap__h">
-            <span class="ov-cap__ic"><svg viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M10.5 18h3"/></svg></span>
-            <h3 class="ov-cap__t">ใช้ได้ทุกที่</h3>
-          </div>
-          <div class="ov-cap__l">
-            <span>PWA ลงแอป</span><span>ทำงานออฟไลน์</span><span>นำเข้า/ส่งออก Excel</span>
-          </div>
-        </article>
-      </div>
-
-      <div class="res-next reveal" style="--i:9" aria-label="ก้าวต่อไป">
+      <div class="res-next reveal" style="--i:2" aria-label="ก้าวต่อไป">
         <div class="res-step">
           <div class="res-step__icon res-step__icon--near">
             <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
           </div>
           <div>
             <p class="res-step__tag res-step__tag--near">ระยะใกล้</p>
-            <h3 class="res-step__t">ครอบคลุม 7 จังหวัด</h3>
-            <p class="res-step__d">ขยายให้ครบเขตสุขภาพที่ 8 ทั้งหมด — ผู้ป่วยทุกคนได้มาตรฐานเดียวกัน</p>
+            <h3 class="res-step__t">ครอบคลุมเขตสุขภาพที่ 8 ครบ 7 จังหวัด</h3>
+            <p class="res-step__d">ให้ผู้ป่วยจิตเวชหลังพ้นโทษทุกคนในเขต ได้รับการดูแลมาตรฐานเดียวกัน</p>
           </div>
         </div>
         <div class="res-step">
@@ -2059,13 +2132,13 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
           </div>
           <div>
             <p class="res-step__tag res-step__tag--far">ระยะไกล</p>
-            <h3 class="res-step__t">ต้นแบบ 12 เขตทั่วประเทศ</h3>
-            <p class="res-step__d">เป็นต้นแบบให้เขตสุขภาพอื่น และต่อยอดดูแลกลุ่ม SMI-V ที่ยังไม่มีระบบ</p>
+            <h3 class="res-step__t">เป็นต้นแบบให้ 12 เขตสุขภาพทั่วประเทศ</h3>
+            <p class="res-step__d">และต่อยอดดูแลกลุ่มเสี่ยงสูงกลุ่มอื่น เช่น ผู้ป่วยจิตเวชที่เสี่ยงก่อเหตุรุนแรง</p>
           </div>
         </div>
       </div>
 
-      <div style="text-align:center;margin:clamp(1rem,2.5vh,1.8rem) 0" class="reveal" style="--i:9">
+      <div class="next-map reveal" style="--i:3">
         <div class="region-map">
           <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="แผนที่เขตสุขภาพที่ 8">
             <title>เขตสุขภาพที่ 8 — 7 จังหวัด</title>
@@ -2088,8 +2161,12 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
         </div>
       </div>
 
-      <div class="ov-foot reveal" style="--i:10">
-        <div class="ov-qr">
+      <p class="res-close reveal" style="--i:4">
+        เพราะหัวใจของ FMH8 ไม่ใช่เทคโนโลยี — แต่คือแนวคิดที่ว่า
+        <em>“ไม่ปล่อยให้ใครรับภาระคนเดียว”</em>
+      </p>
+
+      <div class="next-foot reveal" style="--i:5">
           <div class="qr-card">
             <svg viewBox="0 0 33 33" shape-rendering="crispEdges"
                  role="img" aria-label="QR code เปิดเว็บไซต์ fmh8.org">
@@ -2097,22 +2174,18 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
               <path fill="#1a4d3a" d="M4 4h1v1h-1zM5 4h1v1h-1zM6 4h1v1h-1zM7 4h1v1h-1zM8 4h1v1h-1zM9 4h1v1h-1zM10 4h1v1h-1zM12 4h1v1h-1zM14 4h1v1h-1zM17 4h1v1h-1zM18 4h1v1h-1zM19 4h1v1h-1zM20 4h1v1h-1zM22 4h1v1h-1zM23 4h1v1h-1zM24 4h1v1h-1zM25 4h1v1h-1zM26 4h1v1h-1zM27 4h1v1h-1zM28 4h1v1h-1zM4 5h1v1h-1zM10 5h1v1h-1zM12 5h1v1h-1zM16 5h1v1h-1zM20 5h1v1h-1zM22 5h1v1h-1zM28 5h1v1h-1zM4 6h1v1h-1zM6 6h1v1h-1zM7 6h1v1h-1zM8 6h1v1h-1zM10 6h1v1h-1zM13 6h1v1h-1zM14 6h1v1h-1zM15 6h1v1h-1zM16 6h1v1h-1zM20 6h1v1h-1zM22 6h1v1h-1zM24 6h1v1h-1zM25 6h1v1h-1zM26 6h1v1h-1zM28 6h1v1h-1zM4 7h1v1h-1zM6 7h1v1h-1zM7 7h1v1h-1zM8 7h1v1h-1zM10 7h1v1h-1zM13 7h1v1h-1zM14 7h1v1h-1zM16 7h1v1h-1zM18 7h1v1h-1zM19 7h1v1h-1zM20 7h1v1h-1zM22 7h1v1h-1zM24 7h1v1h-1zM25 7h1v1h-1zM26 7h1v1h-1zM28 7h1v1h-1zM4 8h1v1h-1zM6 8h1v1h-1zM7 8h1v1h-1zM8 8h1v1h-1zM10 8h1v1h-1zM15 8h1v1h-1zM16 8h1v1h-1zM17 8h1v1h-1zM22 8h1v1h-1zM24 8h1v1h-1zM25 8h1v1h-1zM26 8h1v1h-1zM28 8h1v1h-1zM4 9h1v1h-1zM10 9h1v1h-1zM13 9h1v1h-1zM15 9h1v1h-1zM17 9h1v1h-1zM18 9h1v1h-1zM20 9h1v1h-1zM22 9h1v1h-1zM28 9h1v1h-1zM4 10h1v1h-1zM5 10h1v1h-1zM6 10h1v1h-1zM7 10h1v1h-1zM8 10h1v1h-1zM9 10h1v1h-1zM10 10h1v1h-1zM12 10h1v1h-1zM14 10h1v1h-1zM16 10h1v1h-1zM18 10h1v1h-1zM20 10h1v1h-1zM22 10h1v1h-1zM23 10h1v1h-1zM24 10h1v1h-1zM25 10h1v1h-1zM26 10h1v1h-1zM27 10h1v1h-1zM28 10h1v1h-1zM13 11h1v1h-1zM15 11h1v1h-1zM17 11h1v1h-1zM19 11h1v1h-1zM20 11h1v1h-1zM5 12h1v1h-1zM10 12h1v1h-1zM11 12h1v1h-1zM12 12h1v1h-1zM16 12h1v1h-1zM18 12h1v1h-1zM19 12h1v1h-1zM21 12h1v1h-1zM27 12h1v1h-1zM28 12h1v1h-1zM6 13h1v1h-1zM9 13h1v1h-1zM12 13h1v1h-1zM14 13h1v1h-1zM18 13h1v1h-1zM19 13h1v1h-1zM23 13h1v1h-1zM24 13h1v1h-1zM25 13h1v1h-1zM26 13h1v1h-1zM27 13h1v1h-1zM4 14h1v1h-1zM5 14h1v1h-1zM6 14h1v1h-1zM9 14h1v1h-1zM10 14h1v1h-1zM13 14h1v1h-1zM14 14h1v1h-1zM16 14h1v1h-1zM19 14h1v1h-1zM21 14h1v1h-1zM24 14h1v1h-1zM25 14h1v1h-1zM27 14h1v1h-1zM28 14h1v1h-1zM5 15h1v1h-1zM6 15h1v1h-1zM7 15h1v1h-1zM9 15h1v1h-1zM12 15h1v1h-1zM13 15h1v1h-1zM15 15h1v1h-1zM18 15h1v1h-1zM19 15h1v1h-1zM21 15h1v1h-1zM22 15h1v1h-1zM23 15h1v1h-1zM25 15h1v1h-1zM28 15h1v1h-1zM4 16h1v1h-1zM5 16h1v1h-1zM8 16h1v1h-1zM10 16h1v1h-1zM14 16h1v1h-1zM15 16h1v1h-1zM17 16h1v1h-1zM18 16h1v1h-1zM19 16h1v1h-1zM22 16h1v1h-1zM23 16h1v1h-1zM28 16h1v1h-1zM4 17h1v1h-1zM6 17h1v1h-1zM7 17h1v1h-1zM8 17h1v1h-1zM9 17h1v1h-1zM11 17h1v1h-1zM17 17h1v1h-1zM18 17h1v1h-1zM19 17h1v1h-1zM20 17h1v1h-1zM23 17h1v1h-1zM27 17h1v1h-1zM4 18h1v1h-1zM8 18h1v1h-1zM10 18h1v1h-1zM12 18h1v1h-1zM13 18h1v1h-1zM16 18h1v1h-1zM18 18h1v1h-1zM19 18h1v1h-1zM20 18h1v1h-1zM23 18h1v1h-1zM24 18h1v1h-1zM25 18h1v1h-1zM27 18h1v1h-1zM28 18h1v1h-1zM4 19h1v1h-1zM8 19h1v1h-1zM11 19h1v1h-1zM13 19h1v1h-1zM14 19h1v1h-1zM16 19h1v1h-1zM17 19h1v1h-1zM18 19h1v1h-1zM19 19h1v1h-1zM22 19h1v1h-1zM23 19h1v1h-1zM25 19h1v1h-1zM26 19h1v1h-1zM28 19h1v1h-1zM4 20h1v1h-1zM6 20h1v1h-1zM8 20h1v1h-1zM10 20h1v1h-1zM12 20h1v1h-1zM13 20h1v1h-1zM17 20h1v1h-1zM20 20h1v1h-1zM21 20h1v1h-1zM22 20h1v1h-1zM23 20h1v1h-1zM24 20h1v1h-1zM26 20h1v1h-1zM12 21h1v1h-1zM17 21h1v1h-1zM18 21h1v1h-1zM20 21h1v1h-1zM24 21h1v1h-1zM4 22h1v1h-1zM5 22h1v1h-1zM6 22h1v1h-1zM7 22h1v1h-1zM8 22h1v1h-1zM9 22h1v1h-1zM10 22h1v1h-1zM12 22h1v1h-1zM13 22h1v1h-1zM14 22h1v1h-1zM20 22h1v1h-1zM22 22h1v1h-1zM24 22h1v1h-1zM28 22h1v1h-1zM4 23h1v1h-1zM10 23h1v1h-1zM14 23h1v1h-1zM16 23h1v1h-1zM17 23h1v1h-1zM18 23h1v1h-1zM19 23h1v1h-1zM20 23h1v1h-1zM24 23h1v1h-1zM27 23h1v1h-1zM28 23h1v1h-1zM4 24h1v1h-1zM6 24h1v1h-1zM7 24h1v1h-1zM8 24h1v1h-1zM10 24h1v1h-1zM17 24h1v1h-1zM18 24h1v1h-1zM19 24h1v1h-1zM20 24h1v1h-1zM21 24h1v1h-1zM22 24h1v1h-1zM23 24h1v1h-1zM24 24h1v1h-1zM26 24h1v1h-1zM28 24h1v1h-1zM4 25h1v1h-1zM6 25h1v1h-1zM7 25h1v1h-1zM8 25h1v1h-1zM10 25h1v1h-1zM18 25h1v1h-1zM22 25h1v1h-1zM27 25h1v1h-1zM28 25h1v1h-1zM4 26h1v1h-1zM6 26h1v1h-1zM7 26h1v1h-1zM8 26h1v1h-1zM10 26h1v1h-1zM13 26h1v1h-1zM15 26h1v1h-1zM17 26h1v1h-1zM20 26h1v1h-1zM21 26h1v1h-1zM25 26h1v1h-1zM26 26h1v1h-1zM28 26h1v1h-1zM4 27h1v1h-1zM10 27h1v1h-1zM12 27h1v1h-1zM13 27h1v1h-1zM14 27h1v1h-1zM15 27h1v1h-1zM16 27h1v1h-1zM18 27h1v1h-1zM20 27h1v1h-1zM23 27h1v1h-1zM24 27h1v1h-1zM28 27h1v1h-1zM4 28h1v1h-1zM5 28h1v1h-1zM6 28h1v1h-1zM7 28h1v1h-1zM8 28h1v1h-1zM9 28h1v1h-1zM10 28h1v1h-1zM13 28h1v1h-1zM14 28h1v1h-1zM16 28h1v1h-1zM17 28h1v1h-1zM18 28h1v1h-1zM19 28h1v1h-1zM20 28h1v1h-1zM21 28h1v1h-1zM22 28h1v1h-1zM25 28h1v1h-1zM28 28h1v1h-1z"/>
             </svg>
           </div>
-          <span class="ov-qrcap">สแกนเปิดเว็บแอป<br><small style="font-size:.6rem;opacity:.6">Demo: guest / fmh8demo</small></span>
-        </div>
-        <div class="ov-close">
-          <p class="ov-thanks">ขอบคุณครับ</p>
-          <p class="ov-by">นายภูมิชัย ตะโนนศรี · นักวิชาการสาธารณสุข · โรงพยาบาลจิตเวชเลยราชนครินทร์ · เขตสุขภาพที่ 8</p>
-        </div>
-        <a class="ov-url" href="https://fmh8.org/"
-           data-no-nav target="_blank" rel="noopener">www.fmh8.org</a>
+          <div class="next-foot__txt">
+            <p class="next-foot__t">สแกนเปิดเว็บแอป FMH8</p>
+            <p class="next-foot__d">fmh8.psyloei.go.th · ทดลองใช้: guest / fmh8demo</p>
+          </div>
       </div>
 
     </div></div>
   </section>
 
-  <!-- ===================== SLIDE 9 · THE CALLBACK ===================== -->
-  <section class="slide s-callback" data-slide="9" data-theme="green"
-           role="group" aria-label="สไลด์ 9 — บทสรุป">
+  <!-- ===================== SLIDE 11 · THE CALLBACK ===================== -->
+  <section class="slide s-callback" data-slide="10" data-theme="green"
+           role="group" aria-label="สไลด์ 11 — บทสรุป">
     <div class="slide__in"><div class="wrap">
       <p class="eyebrow reveal">และกลับมาที่แม่คนนั้น</p>
       <h2 class="cb__head reveal" style="--i:1">
@@ -2149,8 +2222,16 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
         <span class="finale__line words" data-words>เธอ…</span>
         <span class="finale__line finale__line--accent words" data-words>ไม่ได้อยู่คนเดียว…</span>
         <span class="finale__line words" data-words>อีกต่อไปแล้วนะคะ</span>
-        <p class="finale__by reveal" style="--i:4">
-          — เสียงของครอบครัวอีกหลายร้อยครอบครัว ในเขตสุขภาพที่ 8
+      </div>
+
+      <div class="cb-end reveal" style="--i:4">
+        <p class="cb-end__sum">
+          FMH8 ไม่ได้แค่ติดตามผู้ป่วย — แต่เปลี่ยนการดูแลผู้ป่วยจิตเวชหลังพ้นโทษ
+          จาก <em>“ภาระของคนคนเดียว”</em> สู่ <em>“ระบบที่ทุกคนปลอดภัยร่วมกัน”</em>
+        </p>
+        <p class="cb-end__thanks">ขอบคุณครับ</p>
+        <p class="cb-end__by">
+          นายภูมิชัย ตะโนนศรี · นักวิชาการสาธารณสุข · โรงพยาบาลจิตเวชเลยราชนครินทร์ · เขตสุขภาพที่ 8
         </p>
       </div>
     </div></div>
@@ -2163,20 +2244,21 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
   <div class="progress" aria-hidden="true"><i id="pfill"></i></div>
 
   <div class="counter" id="counter" aria-live="polite">
-    <b>01</b> / 10
+    <b>01</b> / 11
   </div>
 
   <nav class="dots" id="dots" data-no-nav aria-label="ไปยังสไลด์">
-    <button class="dot is-on" data-i="0" aria-label="สไลด์ 1"></button>
-    <button class="dot" data-i="1" aria-label="สไลด์ 2"></button>
-    <button class="dot" data-i="2" aria-label="สไลด์ 3"></button>
-    <button class="dot" data-i="3" aria-label="สไลด์ 4"></button>
-    <button class="dot" data-i="4" aria-label="สไลด์ 5"></button>
-    <button class="dot" data-i="5" aria-label="สไลด์ 6 — KM"></button>
-    <button class="dot" data-i="6" aria-label="สไลด์ 7"></button>
-    <button class="dot" data-i="7" aria-label="สไลด์ 8"></button>
-    <button class="dot" data-i="8" aria-label="สไลด์ 9"></button>
-    <button class="dot" data-i="9" aria-label="สไลด์ 10"></button>
+    <button class="dot is-on" data-i="0" aria-label="สไลด์ 1 — หน้าปก"></button>
+    <button class="dot" data-i="1" aria-label="สไลด์ 2 — เรื่องจริง"></button>
+    <button class="dot" data-i="2" aria-label="สไลด์ 3 — ตัวเลข"></button>
+    <button class="dot" data-i="3" aria-label="สไลด์ 4 — ปัญหา"></button>
+    <button class="dot" data-i="4" aria-label="สไลด์ 5 — คำถาม"></button>
+    <button class="dot" data-i="5" aria-label="สไลด์ 6 — แนะนำ FMH8"></button>
+    <button class="dot" data-i="6" aria-label="สไลด์ 7 — KM 3 จังหวะ"></button>
+    <button class="dot" data-i="7" aria-label="สไลด์ 8 — ระบบ 3 ขั้น"></button>
+    <button class="dot" data-i="8" aria-label="สไลด์ 9 — ผลลัพธ์"></button>
+    <button class="dot" data-i="9" aria-label="สไลด์ 10 — ก้าวต่อไป"></button>
+    <button class="dot" data-i="10" aria-label="สไลด์ 11 — บทสรุป"></button>
   </nav>
 
   <button class="hud-btn hud-fs" id="btnFs" data-no-nav
@@ -2419,15 +2501,16 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
      ========================================================== */
   var presenterNotes = [
     'กรมสุขภาพจิต · KMH Talk + Innovation 2026',
-    '9 โมงเช้า โทรศัพท์ดังขึ้น — เปิดเรื่องด้วยแม่คนหนึ่ง',
-    '47 วัน ที่ไม่มีใครรู้ · SMI-V 13,000+ คน',
-    'กระดาษ อีเมล ไลน์ — ภาระตกที่ทุกคน',
-    'คำถาม: ออกแบบใหม่ยังไง?',
-    'KM 3 จังหวะ: ฟัง เรียน สร้าง · CoP + AAR + Co-design',
-    'FMH8: ลงทะเบียน → ลงพื้นที่ → ข้อมูลไหลสองทาง',
-    'ผลลัพธ์ 3 อย่าง + คำพูด จนท.รพ.สต.',
-    'ภาพรวมเว็บแอป + ก้าวต่อไป + QR',
-    'Callback: เธอไม่ได้อยู่คนเดียว — ขอบคุณครับ'
+    'องก์ 1 — 9 โมงเช้า โทรศัพท์ดังขึ้น · แม่คนหนึ่งในเขตสุขภาพที่ 8',
+    'องก์ 1 — 47 วันที่ไม่มีใครรู้ → ก่อเหตุซ้ำ · "จุดบอด" · SMI-V 13,000+ · ข้ามกระทรวงคือจุดเปราะ',
+    'องก์ 2 — ส่งกันยังไง: กระดาษ / อีเมล / ไลน์ส่วนตัว → ภาระตกทุกคน',
+    'องก์ 2 — คำถาม: ออกแบบระบบใหม่ให้ทุกคน "ปลอดภัย" ร่วมกันยังไง?',
+    'องก์ 3 — แนะนำ FMH8 · เว็บ/PWA/ออฟไลน์ · พื้นที่มีข้อมูลตัวเอง · PDPA · ไลน์สรุปยอด',
+    'องก์ 3 — เบื้องหลัง: KM 3 จังหวะ · ฟัง (CoP+AAR) · เรียน (เคส 5 ปี) · สร้าง (Co-design)',
+    'องก์ 3 — ระบบทำงาน 3 ขั้น: ลงทะเบียนก่อนพ้นโทษ → ลงพื้นที่บันทึก → ข้อมูลไหลสองทาง',
+    'องก์ 4 — ผลลัพธ์ 3 อย่าง + คำพูด จนท. รพ.สต. "มีคนยืนข้างหนู"',
+    'องก์ 4 — ก้าวต่อไป 2 ระยะ: 7 จังหวัด → ต้นแบบ 12 เขต · หัวใจ: ไม่ปล่อยให้ใครรับภาระคนเดียว',
+    'องก์ 5 — Callback: 47 วัน → 2-3 วัน · "เธอไม่ได้อยู่คนเดียวอีกต่อไป" · ขอบคุณครับ'
   ];
 
   var presenterWin = null;
@@ -2523,7 +2606,7 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
   /* ==========================================================
      FEATURE 2 · AUTO-ADVANCE TIMER  (T key)
      ========================================================== */
-  var autoTimings = [15, 45, 30, 30, 15, 60, 60, 45, 45, 30];
+  var autoTimings = [12, 45, 45, 45, 18, 65, 60, 60, 35, 30, 55];
   var autoOn = false;
   var autoInterval = null;
   var autoRemaining = 0;
