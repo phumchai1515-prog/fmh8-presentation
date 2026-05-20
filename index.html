@@ -1443,12 +1443,18 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
   font-size:var(--pr-size,1.32rem);
 }
 .prompter__line{
-  color:#fff;font-weight:500;line-height:1.66;margin:0 0 .62rem;
+  color:#fff;font-weight:600;line-height:1.72;margin:0 0 .68rem;
+  letter-spacing:.003em;
 }
 .prompter__line--q{color:var(--gold);font-weight:700}
 .prompter__line--cue{
-  color:var(--ink-dark-dim);font-weight:400;font-style:italic;
-  font-size:.78em;letter-spacing:.04em;margin:.35rem 0 .9rem;
+  color:var(--ink-dark-dim);font-weight:500;font-style:italic;
+  font-size:.78em;letter-spacing:.04em;margin:.4rem 0 .95rem;
+}
+.prompter__line .hi{
+  color:#e8b94d;background:rgba(212,166,71,.14);
+  padding:0 .18em;border-radius:.22em;font-weight:700;
+  box-shadow:0 0 0 1px rgba(212,166,71,.18) inset;
 }
 
 @media (max-width:600px){
@@ -2840,10 +2846,10 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
       'header{flex:none;display:flex;align-items:center;justify-content:space-between;' +
         'gap:1rem;border-bottom:1px solid rgba(236,231,218,.13);' +
         'padding-bottom:clamp(.3rem,.9vh,.6rem)}' +
-      '#timer{font-size:clamp(2rem,5.5vw,3.8rem);font-weight:700;' +
+      '#timer{font-size:clamp(1.5rem,3.6vw,2.6rem);font-weight:700;' +
         'letter-spacing:.03em;font-variant-numeric:tabular-nums;line-height:1}' +
       '#timer.warn{color:#d4a647}#timer.danger{color:#b5462f}' +
-      '#sn{font-size:clamp(.85rem,1.7vw,1.3rem);color:#a09a8c;' +
+      '#sn{font-size:clamp(.8rem,1.5vw,1.15rem);color:#a09a8c;' +
         'text-align:right;line-height:1.5;font-weight:500}' +
       '#sn b{color:#d4a647;font-weight:700}' +
       'main{flex:1;min-height:0;display:flex;flex-direction:column}' +
@@ -2861,13 +2867,17 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
       '.asb:hover{background:rgba(212,166,71,.18);border-color:#d4a647}' +
       '.asb--on{background:#d4a647;color:#0c0c0b;border-color:#d4a647}' +
       '#nt{flex:1;min-height:0;overflow-y:auto;' +
-        'padding:clamp(1rem,2.6vw,1.9rem);background:rgba(255,255,255,.05);' +
-        'border:1px solid rgba(236,231,218,.1);border-radius:14px}' +
-      '.pl{font-size:clamp(1.5rem,3.5vw,3rem);font-weight:600;line-height:1.6;' +
-        'color:#fff;margin:0 0 .5em}' +
-      '.pl.q{color:#d4a647}' +
-      '.pl.cue{color:#807a68;font-weight:400;font-style:italic;' +
-        'font-size:clamp(1rem,2.2vw,1.7rem);margin:.35em 0 .7em}' +
+        'padding:clamp(1.4rem,3vw,2.6rem) clamp(1.4rem,3vw,3rem);' +
+        'background:rgba(255,255,255,.05);' +
+        'border:1px solid rgba(236,231,218,.1);border-radius:14px;' +
+        'scroll-padding-top:2rem}' +
+      '.pl{font-size:clamp(2rem,4.1vw,3.8rem);font-weight:700;line-height:1.7;' +
+        'color:#fff;margin:0 0 .7em;letter-spacing:.003em}' +
+      '.pl.q{color:#d4a647;font-weight:700}' +
+      '.pl.cue{color:#8c8675;font-weight:500;font-style:italic;' +
+        'font-size:clamp(1.1rem,2.4vw,1.85rem);margin:.55em 0 .95em;letter-spacing:.03em}' +
+      '.pl .hi{color:#e8b94d;background:rgba(212,166,71,.14);' +
+        'padding:0 .18em;border-radius:.22em;box-shadow:0 0 0 1px rgba(212,166,71,.18) inset}' +
       'footer{flex:none;display:flex;align-items:center;gap:clamp(.6rem,1.6vw,1.1rem);' +
         'border-top:1px solid rgba(236,231,218,.13);' +
         'padding-top:clamp(.3rem,.9vh,.6rem)}' +
@@ -2910,7 +2920,7 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
       'var nt=document.getElementById("nt");' +
       'var asBtn=document.getElementById("as"),asVal=document.getElementById("asv");' +
       'var AS_SPEEDS=[7,12,20,32,48],AS_LABELS=["ช้ามาก","ช้า","ปานกลาง","เร็ว","เร็วมาก"];' +
-      'var asIdx=2,asOn=false,asPos=0,asLast=0,asRAF=0;' +
+      'var asIdx=3,asOn=false,asPos=0,asLast=0,asRAF=0;' +
       'function setAsUI(){asVal.textContent=AS_LABELS[asIdx];' +
         'asBtn.textContent=asOn?"⏸ หยุดเลื่อน":"▶ เลื่อนอัตโนมัติ";' +
         'asBtn.className=asOn?"asb asb--on":"asb";}' +
@@ -2947,6 +2957,9 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
         'else if(k==="End"){e.preventDefault();go("end");}' +
         'else if(k==="ArrowDown"){e.preventDefault();nt.scrollTop+=80;asPos=nt.scrollTop;}' +
         'else if(k==="ArrowUp"){e.preventDefault();nt.scrollTop-=80;asPos=nt.scrollTop;}});' +
+      'var HL=/(“[^”]+”|47 วัน|13,000|FMH8|SMI-V|PDPA|7 จังหวัด|12 เขต|2 นาที|2 สัปดาห์|5 ปี|4 ระดับ|100%|0 ราย|ก่อเหตุซ้ำ|ระบบที่ตาบอด|จุดบอด|ไม่ได้อยู่คนเดียว)/g;' +
+      'function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}' +
+      'function hi(s){return esc(s).replace(HL,function(m){return "<span class=\\"hi\\">"+m+"<\\/span>";});}' +
       'window.addEventListener("message",function(e){var d;' +
         'try{d=JSON.parse(e.data);}catch(x){return;}' +
         'if(d.type!=="slideChange")return;' +
@@ -2955,9 +2968,10 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
         'nt.innerHTML="";' +
         'var L=d.lines||[];' +
         'for(var i=0;i<L.length;i++){var r=L[i],p=document.createElement("div"),c="pl";' +
-          'if(r.charAt(0)==="("&&r.charAt(r.length-1)===")")c+=" cue";' +
-          'else if(r.charAt(0)==="“")c+=" q";' +
-          'p.className=c;p.textContent=r;nt.appendChild(p);}' +
+          'if(r.charAt(0)==="("&&r.charAt(r.length-1)===")"){c+=" cue";p.className=c;p.textContent=r;}' +
+          'else if(r.charAt(0)==="“"){c+=" q";p.className=c;p.textContent=r;}' +
+          'else{p.className=c;p.innerHTML=hi(r);}' +
+          'nt.appendChild(p);}' +
         'nt.scrollTop=0;asPos=0;asLast=performance.now();' +
         'document.getElementById("nx").textContent=d.nextTitle||"— จบการนำเสนอ —";' +
       '});' +
@@ -3137,7 +3151,7 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
   var prTime    = document.getElementById('prTime');
   var btnScript = document.getElementById('btnScript');
   var prompterOpen = false;
-  var PR_SIZES = [1.0, 1.16, 1.32, 1.5, 1.72];   /* rem steps */
+  var PR_SIZES = [1.15, 1.4, 1.65, 1.95, 2.3];   /* rem steps — bigger for podium reading */
   var prSizeIdx = 2;
   var prWantOpen = false;
 
@@ -3156,6 +3170,10 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
     try { localStorage.setItem('fmh8.prompter.size', String(prSizeIdx)); } catch (e) {}
   }
 
+  var PR_HL = /(“[^”]+”|47 วัน|13,000|FMH8|SMI-V|PDPA|7 จังหวัด|12 เขต|2 นาที|2 สัปดาห์|5 ปี|4 ระดับ|100%|0 ราย|ก่อเหตุซ้ำ|ระบบที่ตาบอด|จุดบอด|ไม่ได้อยู่คนเดียว)/g;
+  function prEsc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function prHi(s){ return prEsc(s).replace(PR_HL, function(m){ return '<span class="hi">' + m + '</span>'; }); }
+
   function renderPrompter(){
     var s = slideScript[current] || { act:'', time:'', lines:[] };
     prAct.textContent  = s.act || ('สไลด์ ' + (current + 1));
@@ -3167,10 +3185,13 @@ body.is-light .hud-btn{border-color:rgba(20,21,16,.22)}
       var raw = lines[i];
       var p = document.createElement('p');
       var cls = 'prompter__line';
-      if (/^\(.*\)$/.test(raw)) cls += ' prompter__line--cue';
-      else if (raw.charAt(0) === '“') cls += ' prompter__line--q';
+      var isCue = /^\(.*\)$/.test(raw);
+      var isQuote = raw.charAt(0) === '“';
+      if (isCue) cls += ' prompter__line--cue';
+      else if (isQuote) cls += ' prompter__line--q';
       p.className = cls;
-      p.textContent = raw;
+      if (isCue || isQuote) p.textContent = raw;
+      else p.innerHTML = prHi(raw);
       prBody.appendChild(p);
     }
     prBody.scrollTop = 0;
